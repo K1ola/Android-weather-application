@@ -13,15 +13,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.TAG);
-        if (mainFragment != null) {
-            return;
-        }
-        mainFragment = new MainFragment();
+        if (savedInstanceState == null) {
+            MainFragment mainFragment = new MainFragment();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, mainFragment, MainFragment.TAG)
-                .commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container, mainFragment)
+                    .commit();
+        }
     }
 }

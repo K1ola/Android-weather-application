@@ -12,13 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.R;
 
 public class MainFragment extends Fragment {
-    public static final String TAG = "MainFragment";
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
