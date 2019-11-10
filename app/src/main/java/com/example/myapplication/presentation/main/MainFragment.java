@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,8 +37,8 @@ public class MainFragment extends Fragment {
         setViewText(view, R.id.pressure, pressure);
         setViewText(view, R.id.wind, wind);
 
-        //TODO set image
-
+        ImageView imageView = view.findViewById(R.id.imageView);
+        imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
     }
 

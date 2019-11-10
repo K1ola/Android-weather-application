@@ -19,14 +19,15 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:fontFamily="sans-serif-thin"
-            android:text="+1°C"
-            android:textSize="90dp" />
+            android:text="@string/temp"
+            android:textSize="70sp" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:layout_height="90dp"
+            android:src="@drawable/morning_sun_sunrise"
+            android:contentDescription="@string/image" />
 
     </LinearLayout>
 
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/status"
-            android:textSize="18sp" />
+            android:textSize="25sp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -52,7 +53,8 @@
             android:id="@+id/wet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wet" />
+            android:text="@string/wet"
+            android:textSize="17sp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -62,7 +64,8 @@
             android:id="@+id/pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pressure" />
+            android:text="@string/pressure"
+            android:textSize="17sp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -72,7 +75,8 @@
             android:id="@+id/wind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wind" />
+            android:text="@string/wind"
+            android:textSize="17sp" />
     </LinearLayout>
 
 </LinearLayout>
