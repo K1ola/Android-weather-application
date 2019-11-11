@@ -11,10 +11,10 @@ public class DataSource {
     public DataSource(){
         mData = new ArrayList<>();
         mData.add(new MyData("Сегодня", "+10"));
-        mData.add(new MyData("Не сегодня", "+100"));
-        mData.add(new MyData("Не сегодня", "+10"));
-        mData.add(new MyData("Не сегодня", "+100"));
-        mData.add(new MyData("Не сегодня", "+10"));
+        mData.add(new MyData("Завтра", "+100"));
+        mData.add(new MyData("Среда", "+10"));
+        mData.add(new MyData("Четверг", "+100"));
+        mData.add(new MyData("Пятница", "+10"));
     }
 
     public List<MyData> getData(){
