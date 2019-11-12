@@ -37,13 +37,13 @@ public class MainFragment extends Fragment {
         setViewText(view, R.id.pressure, pressure);
         setViewText(view, R.id.wind, wind);
 
-        ImageView imageView = view.findViewById(R.id.imageView);
+        final ImageView imageView = view.findViewById(R.id.imageView);
         imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
     }
 
     private void setViewText(@NonNull View view, int viewId, String value) {
-        TextView textView = view.findViewById(viewId);
+        final TextView textView = view.findViewById(viewId);
         textView.setText(value);
     }
 }
