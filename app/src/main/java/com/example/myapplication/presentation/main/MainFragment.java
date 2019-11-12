@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.R;
 
 public class MainFragment extends Fragment {
-    private final String temperature = "+29°C";
-    private final String weatherStatus = "Солнечно";
-    private final String wet = "Влажность: 29%";
-    private final String pressure = "Давление: 27 мм. рт. ст.";
-    private final String wind = "Сила ветра: 10 м/с";
+    private static final String temperature = "+29°C";
+    private static final String weatherStatus = "Солнечно";
+    private static final String wet = "Влажность: 29%";
+    private static final String pressure = "Давление: 27 мм. рт. ст.";
+    private static final String wind = "Сила ветра: 10 м/с";
 
     @NonNull
     @Override
