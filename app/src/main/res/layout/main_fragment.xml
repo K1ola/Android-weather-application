@@ -42,12 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:text="@string/status"
             android:textSize="25sp" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
 
         <TextView
             android:id="@+id/wet"
@@ -56,20 +53,12 @@
             android:text="@string/wet"
             android:textSize="17sp" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pressure"
             android:textSize="17sp" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/wind"
