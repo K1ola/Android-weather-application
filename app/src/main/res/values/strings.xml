@@ -1,10 +1,4 @@
 <resources>
     <string name="app_name">Weather App</string>
     <string name="button">Add</string>
-    <string name="status">Солнечно</string>
-    <string name="wet">Влажность: 29%</string>
-    <string name="pressure">Давление: 27 мм. рт. ст.</string>
-    <string name="wind">Сила ветра: 10 м/с</string>
-    <string name="temp">+1°C</string>
-    <string name="image">TODO</string>
 </resources>
