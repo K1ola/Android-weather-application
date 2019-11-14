@@ -14,7 +14,7 @@ import com.example.myapplication.R;
 import java.util.List;
 
 
-public class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherHolder> {
+public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherHolder> {
 
     private WeatherHolder myViewHolder;
     private List<DataSource.DataWeather> mData;
@@ -36,7 +36,7 @@ public class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherH
     @Override
     public void onBindViewHolder(@NonNull WeatherHolder holder, int position){
         DataSource.DataWeather data = mData.get(position);
-        holder.Bind(data);
+        holder.bind(data);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherH
             mTemp = itemView.findViewById(R.id.temp);
             mImageView = itemView.findViewById(R.id.image);
         }
-        public void Bind(DataSource.DataWeather ob){
+        public void bind(DataSource.DataWeather ob){
             mDay.setText(ob.mDay);
             mTemp.setText(ob.mTemp);
         }

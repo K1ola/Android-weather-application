@@ -5,7 +5,6 @@ import java.util.List;
 
 public class DataSource {
 
-    private static DataSource sInstance;
 
     private final List<DataWeather> mData;
     public DataSource(){
@@ -21,9 +20,13 @@ public class DataSource {
         return mData;
     }
 
-    public synchronized static DataSource getInstance(){
+    private static volatile DataSource sInstance = null;
+    public static DataSource getInstance(){
         if (sInstance == null) {
-            sInstance = new DataSource();
+            synchronized (Object.class) {
+                if (sInstance == null)
+                    sInstance = new DataSource();
+            }
         }
         return sInstance;
     }
@@ -34,7 +37,7 @@ public class DataSource {
             mTemp = temp;
         }
 
-        String mDay;
-        String mTemp;
+        final String mDay;
+        final String mTemp;
     }
 }
