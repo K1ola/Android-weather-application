@@ -17,16 +17,16 @@ import com.example.myapplication.presentation.common.DataSource;
 
 public class MainFragment extends Fragment {
 
-    AdapterWeather mAdapter;
-    DataSource mDataSource = DataSource.getInstance();
+    private AdapterWeather mAdapter;
+    private DataSource mDataSource = DataSource.getInstance();
 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.main_fragment, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.list);
+        final View view = inflater.inflate(R.layout.main_fragment, container, false);
+        final RecyclerView recyclerView = view.findViewById(R.id.list);
 
         mAdapter = new AdapterWeather(mDataSource.getData());
 

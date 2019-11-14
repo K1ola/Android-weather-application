@@ -7,17 +7,17 @@ public class DataSource {
 
     private static DataSource sInstance;
 
-    private final List<MyData> mData;
+    private final List<DataWeather> mData;
     public DataSource(){
         mData = new ArrayList<>();
-        mData.add(new MyData("Сегодня", "+10"));
-        mData.add(new MyData("Завтра", "+100"));
-        mData.add(new MyData("Среда", "+10"));
-        mData.add(new MyData("Четверг", "+100"));
-        mData.add(new MyData("Пятница", "+10"));
+        mData.add(new DataWeather("Сегодня", "+10"));
+        mData.add(new DataWeather("Завтра", "+100"));
+        mData.add(new DataWeather("Среда", "+10"));
+        mData.add(new DataWeather("Четверг", "+100"));
+        mData.add(new DataWeather("Пятница", "+10"));
     }
 
-    public List<MyData> getData(){
+    public List<DataWeather> getData(){
         return mData;
     }
 
@@ -28,8 +28,8 @@ public class DataSource {
         return sInstance;
     }
 
-    public static class MyData{
-        public MyData(String day, String temp) {
+    public static class DataWeather{
+        public DataWeather(String day, String temp) {
             mDay = day;
             mTemp = temp;
         }
