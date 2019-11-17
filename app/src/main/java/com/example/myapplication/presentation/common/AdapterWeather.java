@@ -16,7 +16,6 @@ import java.util.List;
 
 public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherHolder> {
 
-    private WeatherHolder myViewHolder;
     private List<DataSource.DataWeather> mData;
 
     public AdapterWeather(List<DataSource.DataWeather> data){
@@ -29,8 +28,7 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
         View v = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.holder_item, parent,false);
-        myViewHolder = new WeatherHolder(v);
-        return myViewHolder;
+        return new WeatherHolder(v);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class DataSource {
     private static volatile DataSource sInstance = null;
     public static DataSource getInstance(){
         if (sInstance == null) {
-            synchronized (Object.class) {
+            synchronized (DataSource.class) {
                 if (sInstance == null)
                     sInstance = new DataSource();
             }
