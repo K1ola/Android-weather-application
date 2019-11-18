@@ -10,10 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.presentation.common.AdapterWeather;
+import com.example.myapplication.presentation.common.DataSource;
 
 public class MainFragment extends Fragment {
+    private AdapterWeather mAdapter;
+    private DataSource mDataSource = DataSource.getInstance();
+  
     private static final String TEMPERATURE = "+29°C";
     private static final String WEATHER_STATUS = "Солнечно";
     private static final String WET = "Влажность: 29%";
@@ -24,7 +31,18 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+
+        final View view = inflater.inflate(R.layout.main_fragment, container, false);
+        final RecyclerView recyclerView = view.findViewById(R.id.list);
+
+        mAdapter = new AdapterWeather(mDataSource.getData());
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+
+        return view;
     }
 
     @Override
