@@ -1,5 +1,7 @@
 package com.example.myapplication.presentation.main;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,7 @@ public class MainFragment extends Fragment {
     private DataSource mDataSource = DataSource.getInstance();
   
     private static final String TEMPERATURE = "+29°C";
-    private static final String WEATHER_STATUS = "Солнечно";
+    private static final String[] WEATHER_STATUS = {"Пасмурно", "Небольшая облачность", "Сильный дождь", "Туман", "Дождь", "Снег", "Облачно", "Безоблачно", "Гроза"};
     private static final String WET = "Влажность: 29%";
     private static final String PRESSURE = "Давление: 27 мм. рт. ст.";
     private static final String WIND = "Сила ветра: 10 м/с";
@@ -50,12 +52,13 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setViewText(view, R.id.temperature, TEMPERATURE);
-        setViewText(view, R.id.status, WEATHER_STATUS);
+        setViewText(view, R.id.status, WEATHER_STATUS[0]);
         setViewText(view, R.id.wet, WET);
         setViewText(view, R.id.pressure, PRESSURE);
         setViewText(view, R.id.wind, WIND);
 
         final ImageView imageView = view.findViewById(R.id.imageView);
+        imageView.setColorFilter(Color.WHITE);
         imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
     }
