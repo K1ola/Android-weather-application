@@ -21,7 +21,7 @@
             android:fontFamily="sans-serif-thin"
             tools:text="+1°C"
             android:textSize="70sp"
-            android:textColor="@color/cardview_light_background" />
+            style="@style/WhiteText" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -46,7 +46,7 @@
             android:layout_marginBottom="10dp"
             tools:text="Солнечно"
             android:textSize="25sp"
-            android:textColor="@color/cardview_light_background" />
+            style="@style/WhiteText" />
 
         <TextView
             android:id="@+id/wet"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             tools:text="Влажность: 29%"
             android:textSize="17sp"
-            android:textColor="@color/cardview_light_background" />
+            style="@style/WhiteText" />
 
         <TextView
             android:id="@+id/pressure"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             tools:text="Давление: 27 мм. рт. ст."
             android:textSize="17sp"
-            android:textColor="@color/cardview_light_background" />
+            style="@style/WhiteText" />
 
         <TextView
             android:id="@+id/wind"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             tools:text="Сила ветра: 10 м/с"
             android:textSize="17sp"
-            android:textColor="@color/cardview_light_background" />
+            style="@style/WhiteText" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
