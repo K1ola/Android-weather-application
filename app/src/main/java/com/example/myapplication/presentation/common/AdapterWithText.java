@@ -14,9 +14,9 @@ import com.example.myapplication.R;
 import java.util.List;
 
 
-public final class AdapterText extends RecyclerView.Adapter<AdapterText.TextHolder> {
+public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.TextHolder> {
     private List<DataSource.DataWeather> mData;
-    public AdapterText(List<DataSource.DataWeather> data){
+    public AdapterWithText(List<DataSource.DataWeather> data){
         mData = data;
     }
 
@@ -41,18 +41,18 @@ public final class AdapterText extends RecyclerView.Adapter<AdapterText.TextHold
     }
 
     class TextHolder extends RecyclerView.ViewHolder{
-        private final TextView mDay;
-        private final TextView mTemp;
+        private final TextView topData;
+        private final TextView bottomData;
 
         TextHolder(@NonNull View itemView){
             super(itemView);
-            mDay = itemView.findViewById(R.id.top_text);
-            mTemp = itemView.findViewById(R.id.bottom_text);
+            topData = itemView.findViewById(R.id.top_text);
+            bottomData = itemView.findViewById(R.id.bottom_text);
         }
 
         void bind(DataSource.DataWeather ob){
-            mDay.setText(ob.mDay);
-            mTemp.setText(ob.mTemp);
+            topData.setText(ob.mDay);
+            bottomData.setText(ob.mTemp);
         }
     }
 }
