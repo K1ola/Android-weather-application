@@ -16,6 +16,7 @@ import java.util.List;
 
 public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.TextHolder> {
     private List<DataSource.DataWeather> mData;
+
     public AdapterWithText(List<DataSource.DataWeather> data){
         mData = data;
     }
@@ -40,7 +41,7 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
         return mData.size();
     }
 
-    class TextHolder extends RecyclerView.ViewHolder{
+    final class TextHolder extends RecyclerView.ViewHolder{
         private final TextView topData;
         private final TextView bottomData;
 
