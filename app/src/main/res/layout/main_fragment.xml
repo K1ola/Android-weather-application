@@ -76,6 +76,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_margin="10dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/text_list"
+        android:layout_width="match_parent"
         android:layout_height="110dp" />
 
 </LinearLayout>

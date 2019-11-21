@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.AdapterWeather;
 import com.example.myapplication.presentation.common.DataSource;
 
 public class MainFragment extends Fragment {
     private AdapterWeather mAdapter;
+    private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
   
     private static final String TEMPERATURE = "+29°C";
@@ -43,6 +45,14 @@ public class MainFragment extends Fragment {
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
+
+        final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
+        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+
+        mAdapterWithText = new AdapterWithText(mDataSource.getData());
+        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewText.setLayoutManager(layoutManagerText);
+        recyclerViewText.setAdapter(mAdapterWithText);
 
         return view;
     }
