@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    android:background="@drawable/dark_sky_fon_blur">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_toolbar"
@@ -65,7 +66,8 @@
             android:layout_margin="10dp"
             android:fontFamily="sans-serif-thin"
             tools:text="+1°C"
-            android:textSize="70sp" />
+            android:textSize="70sp"
+            style="@style/WhiteText" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -89,32 +91,42 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             tools:text="Солнечно"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            style="@style/WhiteText" />
 
         <TextView
             android:id="@+id/wet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Влажность: 29%"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            style="@style/WhiteText" />
 
         <TextView
             android:id="@+id/pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Давление: 27 мм. рт. ст."
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            style="@style/WhiteText" />
 
         <TextView
             android:id="@+id/wind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Сила ветра: 10 м/с"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            style="@style/WhiteText" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_margin="10dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/text_list"
         android:layout_width="match_parent"
         android:layout_height="110dp" />
 
