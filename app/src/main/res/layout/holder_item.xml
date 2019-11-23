@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="64dp"
     android:layout_height="match_parent"
     android:paddingLeft="2dp">
     <TextView
@@ -11,8 +11,8 @@
         android:padding="2dp"/>
     <ImageView
         android:id="@+id/image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:src="@drawable/morning_sun_sunrise"/>
     <TextView
         android:id="@+id/temp"

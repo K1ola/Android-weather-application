@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.R;
 import com.example.myapplication.presentation.common.AdapterWithText;
@@ -46,6 +48,11 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
+        Toolbar mainToolBar = view.findViewById(R.id.main_toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(mainToolBar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+      
         final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
 
