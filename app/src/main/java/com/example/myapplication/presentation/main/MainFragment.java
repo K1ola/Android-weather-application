@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +29,7 @@ public class MainFragment extends Fragment {
     private AdapterWeather mAdapter;
     private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
+    private DrawerLayout mDrawerLayout;
   
     private static final String TEMPERATURE = "+29°C";
     private static final String[] WEATHER_STATUS = {"Пасмурно", "Небольшая облачность", "Сильный дождь", "Туман", "Дождь", "Снег", "Облачно", "Безоблачно", "Гроза"};
@@ -48,10 +52,17 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
+        // Toolbar
         Toolbar mainToolBar = view.findViewById(R.id.main_toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(mainToolBar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        // Draweer
+        mDrawerLayout = view.findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, mDrawerLayout, mainToolBar, R.string.Open, R.string.Close);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
       
         final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
@@ -79,6 +90,7 @@ public class MainFragment extends Fragment {
         imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
     }
+
 
     private void setViewText(@NonNull View view, int viewId, String value) {
         final TextView textView = view.findViewById(viewId);

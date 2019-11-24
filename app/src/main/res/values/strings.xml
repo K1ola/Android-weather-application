@@ -2,4 +2,6 @@
     <string name="app_name">Weather App</string>
     <string name="button">Add</string>
     <string name="town">Москва</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
 </resources>
