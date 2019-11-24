@@ -11,15 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.R;
-import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.AdapterWeather;
+import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.DataSource;
+import com.example.myapplication.presentation.settings.SettingsFragment;
 
 public class MainFragment extends Fragment implements AdapterWeather.OnItemClickListener  {
     private AdapterWeather mAdapter;
@@ -51,6 +52,16 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(mainToolBar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        ImageView settings_icon = view.findViewById(R.id.main_setting);
+        settings_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenSettingsFragment();
+            }
+        });
+
+
       
         final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
@@ -61,6 +72,16 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         recyclerViewText.setAdapter(mAdapterWithText);
 
         return view;
+    }
+
+    private void OpenSettingsFragment(){
+        SettingsFragment settingsFragment = new SettingsFragment();
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, settingsFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
