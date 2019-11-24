@@ -1,7 +1,6 @@
 package com.example.myapplication.presentation.main;
 
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +55,7 @@ public class MainFragment extends Fragment {
         final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
 
-        mAdapterWithText = new AdapterWithText(mDataSource.getData());
+        mAdapterWithText = new AdapterWithText(mDataSource.getDataWet());
         layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewText.setLayoutManager(layoutManagerText);
         recyclerViewText.setAdapter(mAdapterWithText);

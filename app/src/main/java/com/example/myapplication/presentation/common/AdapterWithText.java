@@ -15,9 +15,9 @@ import java.util.List;
 
 
 public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.TextHolder> {
-    private List<DataSource.DataWeather> mData;
+    private List<DataSource.DataText> mData;
 
-    public AdapterWithText(List<DataSource.DataWeather> data){
+    public AdapterWithText(List<DataSource.DataText> data){
         mData = data;
     }
 
@@ -32,7 +32,7 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
 
     @Override
     public void onBindViewHolder(@NonNull TextHolder holder, int position){
-        DataSource.DataWeather data = mData.get(position);
+        DataSource.DataText data = mData.get(position);
         holder.bind(data);
     }
 
@@ -51,9 +51,9 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
             bottomData = itemView.findViewById(R.id.bottom_text);
         }
 
-        void bind(DataSource.DataWeather ob){
-            topData.setText(ob.mDay);
-            bottomData.setText(ob.mTemp);
+        void bind(DataSource.DataText ob){
+            topData.setText(ob.mTopText);
+            bottomData.setText(ob.mBottomText);
         }
     }
 }
