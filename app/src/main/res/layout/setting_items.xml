@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/switch_items"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <Switch
+        android:id="@+id/switch1"
+        android:paddingLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/rectangle_thumb"
+        android:track="@drawable/rectangle_track"
+        android:text="Температура"
+        android:switchPadding="32dp"
+        android:padding="4dp"/>
+
+    <Switch
+        android:id="@+id/switch2"
+        android:paddingLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/rectangle_thumb"
+        android:track="@drawable/rectangle_track"
+        android:text="Сила ветра"
+        android:switchPadding="45dp"
+        android:padding="4dp"/>
+
+    <Switch
+        android:id="@+id/switch3"
+        android:paddingLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/rectangle_thumb"
+        android:track="@drawable/rectangle_track"
+        android:text="Давление"
+        android:switchPadding="54dp"
+        android:padding="4dp"/>
+
+</LinearLayout>

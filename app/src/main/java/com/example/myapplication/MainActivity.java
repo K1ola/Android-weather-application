@@ -6,8 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.presentation.common.AdapterWeather;
-import com.example.myapplication.presentation.main.DetailsFragment;
+import com.example.myapplication.presentation.details.DetailsFragment;
 import com.example.myapplication.presentation.main.MainFragment;
+import com.example.myapplication.presentation.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements AdapterWeather.OnItemClickListener  {
     @Override
@@ -16,13 +17,22 @@ public class MainActivity extends AppCompatActivity implements AdapterWeather.On
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            MainFragment mainFragment = new MainFragment();
+            SettingsFragment mainFragment = new SettingsFragment();
 
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.container, mainFragment)
                     .commit();
         }
+
+//        if (savedInstanceState == null) {
+//            MainFragment mainFragment = new MainFragment();
+//
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .add(R.id.container, mainFragment)
+//                    .commit();
+//        }
     }
 
     @Override

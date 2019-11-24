@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main;
+package com.example.myapplication.presentation.details;
 
 import android.graphics.Color;
 import android.os.Bundle;
