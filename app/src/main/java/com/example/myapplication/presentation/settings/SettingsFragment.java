@@ -1,5 +1,6 @@
 package com.example.myapplication.presentation.settings;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,18 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.myapplication.R;
 import com.example.myapplication.interactor.SettingsViewModel;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     private SettingsViewModel model;
     private boolean flag = false;
+    SharedPreferences sPref;
 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            flag = savedInstanceState.getBoolean("bool");
-        }
+        flag = loadData();
         final View view = inflater.inflate(R.layout.settings_fragment, container, false);
         model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
         Switch s = (Switch) view.findViewById(R.id.switch1);
@@ -46,12 +48,21 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         } else {
             model.select( "F");
         }
+
+        saveData(flag);
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle state) {
-        super.onSaveInstanceState(state);
-        state.putBoolean("bool", flag);
+    void saveData(boolean flag) {
+        sPref = getActivity().getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putBoolean("SAVED_TEXT", flag);
+        ed.commit();
+    }
+
+    boolean loadData() {
+        sPref = getActivity().getPreferences(MODE_PRIVATE);
+        boolean savedFlag = sPref.getBoolean("SAVED_TEXT", false);
+        return savedFlag;
     }
 
 //    @Override

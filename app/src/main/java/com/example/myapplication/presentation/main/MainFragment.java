@@ -29,7 +29,7 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
   
-    private static final String TEMPERATURE = "+29°C";
+    private static final String TEMPERATURE = "+29";
     private static final String[] WEATHER_STATUS = {"Пасмурно", "Небольшая облачность", "Сильный дождь", "Туман", "Дождь", "Снег", "Облачно", "Безоблачно", "Гроза"};
     private static final String WET = "Влажность: 29%";
     private static final String PRESSURE = "Давление: 27 мм. рт. ст.";
