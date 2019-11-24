@@ -1,17 +1,15 @@
 package com.example.myapplication.interactor;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SettingsViewModel extends ViewModel {
-    private final MutableLiveData<String> selected = new MutableLiveData<String>();
+    private String selected = "";
 
     public void select(String item) {
-        selected.setValue(item);
+        selected = item;
     }
 
-    public LiveData<String> getSelected() {
+    public String getSelected() {
         return selected;
     }
 }

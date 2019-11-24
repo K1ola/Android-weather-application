@@ -13,10 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.interactor.SettingsViewModel;
 import com.example.myapplication.presentation.common.AdapterWeather;
 import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.DataSource;
@@ -85,7 +87,7 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         setViewText(view, R.id.temperature, TEMPERATURE);
@@ -98,6 +100,16 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         imageView.setColorFilter(Color.WHITE);
         imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
+        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+
+        setViewText(view, R.id.temperature_measure, model.getSelected());
+//        model.getSelected().observe(this, new Observer<String>() {
+//                @Override
+//                public void onChanged(@Nullable String s) {
+//                    setViewText(view, R.id.temperature_measure, s);
+//                }
+//            }
+//        );
     }
 
     private void setViewText(@NonNull View view, int viewId, String value) {
