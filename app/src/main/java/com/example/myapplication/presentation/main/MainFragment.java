@@ -29,11 +29,11 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
   
-    private static final String TEMPERATURE = "+29";
+    private static final String TEMPERATURE = "+29 ";
     private static final String[] WEATHER_STATUS = {"Пасмурно", "Небольшая облачность", "Сильный дождь", "Туман", "Дождь", "Снег", "Облачно", "Безоблачно", "Гроза"};
     private static final String WET = "Влажность: 29%";
-    private static final String PRESSURE = "Давление: 27 мм. рт. ст.";
-    private static final String WIND = "Сила ветра: 10 м/с";
+    private static final String PRESSURE = "Давление: 27 ";
+    private static final String WIND = "Сила ветра: 10 ";
 
     @NonNull
     @Override
@@ -102,14 +102,9 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
 
         SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
 
-        setViewText(view, R.id.temperature_measure, model.getSelected());
-//        model.getSelected().observe(this, new Observer<String>() {
-//                @Override
-//                public void onChanged(@Nullable String s) {
-//                    setViewText(view, R.id.temperature_measure, s);
-//                }
-//            }
-//        );
+        setViewText(view, R.id.temperature_measure, model.getTemp());
+        setViewText(view, R.id.pressure_measure, model.getPressure());
+        setViewText(view, R.id.wind_measure, model.getWind());
     }
 
     private void setViewText(@NonNull View view, int viewId, String value) {

@@ -3,13 +3,33 @@ package com.example.myapplication.interactor;
 import androidx.lifecycle.ViewModel;
 
 public class SettingsViewModel extends ViewModel {
-    private String selected = "";
+    private String temp = "°F";
+    private String pressure = "гПа";
+    private String wind ="км/ч";
 
-    public void select(String item) {
-        selected = item;
+    public void setTemp(String item) {
+        temp = item;
     }
 
-    public String getSelected() {
-        return selected;
+    public String getTemp() {
+        return temp;
+    }
+
+
+    public void setPressure(String item) {
+        pressure = item;
+    }
+
+    public String getPressure() {
+        return pressure;
+    }
+
+
+    public void setWind(String item) {
+        wind = item;
+    }
+
+    public String getWind() {
+        return wind;
     }
 }
