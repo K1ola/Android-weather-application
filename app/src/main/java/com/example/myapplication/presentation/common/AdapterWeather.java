@@ -15,10 +15,11 @@ import java.util.List;
 
 
 public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherHolder> {
-
+    private final OnItemClickListener mListener;
     private List<DataSource.DataWeather> mData;
 
-    public AdapterWeather(List<DataSource.DataWeather> data){
+    public AdapterWeather(List<DataSource.DataWeather> data, final OnItemClickListener listener){
+        mListener = listener;
         mData = data;
     }
 
@@ -28,6 +29,14 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
         View v = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.holder_item, parent,false);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemClick();
+                }
+            }
+        });
         return new WeatherHolder(v);
     }
 
@@ -57,6 +66,10 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
             mDay.setText(ob.mDay);
             mTemp.setText(ob.mTemp);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick();
     }
 }
 

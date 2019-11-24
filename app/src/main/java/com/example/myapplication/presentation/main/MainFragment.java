@@ -21,7 +21,7 @@ import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.AdapterWeather;
 import com.example.myapplication.presentation.common.DataSource;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements AdapterWeather.OnItemClickListener  {
     private AdapterWeather mAdapter;
     private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
@@ -40,7 +40,7 @@ public class MainFragment extends Fragment {
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
         final RecyclerView recyclerView = view.findViewById(R.id.list);
 
-        mAdapter = new AdapterWeather(mDataSource.getData());
+        mAdapter = new AdapterWeather(mDataSource.getData(), this);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -82,5 +82,13 @@ public class MainFragment extends Fragment {
     private void setViewText(@NonNull View view, int viewId, String value) {
         final TextView textView = view.findViewById(viewId);
         textView.setText(value);
+    }
+
+    @Override
+    public void onItemClick() {
+        if (getActivity() == null || !(getActivity() instanceof AdapterWeather.OnItemClickListener)) {
+            return;
+        }
+        ((AdapterWeather.OnItemClickListener) getActivity()).onItemClick();
     }
 }

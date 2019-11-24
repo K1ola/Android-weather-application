@@ -62,7 +62,7 @@ public class DetailsFragment extends Fragment {
         recyclerViewTextWet.setAdapter(mWetAdapterWithText);
 
         final RecyclerView recyclerView = view.findViewById(R.id.daily_weather);
-        mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails());
+        mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails(), null);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
