@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +20,13 @@ import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.DataSource;
 
 public class DetailsFragment extends Fragment {
-    private AdapterWeather mWeatherAdapter;
-    private AdapterWithText mCalendarAdapterWithText;
-    private AdapterWithText mPressureAdapterWithText;
-    private AdapterWithText mWindAdapterWithText;
-    private AdapterWithText mWetAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
+
+    private AdapterWeather mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails(), null);
+    private AdapterWithText mCalendarAdapterWithText = new AdapterWithText(mDataSource.getDataCalendar());
+    private AdapterWithText mPressureAdapterWithText = new AdapterWithText(mDataSource.getDataPressure());
+    private AdapterWithText mWindAdapterWithText = new AdapterWithText(mDataSource.getDataWind());
+    private AdapterWithText mWetAdapterWithText = new AdapterWithText(mDataSource.getDataWet());
 
     @NonNull
     @Override
@@ -38,55 +38,32 @@ public class DetailsFragment extends Fragment {
 
         mDataSource.setMeasures(model.getTemp(), model.getPressure(), model.getWind());
 
+        createRecycler(view, R.id.calendar, null, mCalendarAdapterWithText);
+        createRecycler(view, R.id.pressure, null, mPressureAdapterWithText);
+        createRecycler(view, R.id.wind, null, mWindAdapterWithText);
+        createRecycler(view, R.id.wet, null, mWetAdapterWithText);
 
-
-
-        final RecyclerView recyclerViewTextCalendar = view.findViewById(R.id.calendar);
-        final LinearLayoutManager layoutManagerTextCalendar = new LinearLayoutManager(getContext());
-        mCalendarAdapterWithText = new AdapterWithText(mDataSource.getDataCalendar());
-        mCalendarAdapterWithText.setDataColor(Color.BLACK);
-        layoutManagerTextCalendar.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewTextCalendar.setLayoutManager(layoutManagerTextCalendar);
-        recyclerViewTextCalendar.setAdapter(mCalendarAdapterWithText);
-
-        final RecyclerView recyclerViewTextPressure = view.findViewById(R.id.pressure);
-        final LinearLayoutManager layoutManagerTextPressure = new LinearLayoutManager(getContext());
-        mPressureAdapterWithText = new AdapterWithText(mDataSource.getDataPressure());
-        mPressureAdapterWithText.setDataColor(Color.BLACK);
-        layoutManagerTextPressure.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewTextPressure.setLayoutManager(layoutManagerTextPressure);
-        recyclerViewTextPressure.setAdapter(mPressureAdapterWithText);
-
-        final RecyclerView recyclerViewTextWind = view.findViewById(R.id.wind);
-        final LinearLayoutManager layoutManagerTextWind = new LinearLayoutManager(getContext());
-        mWindAdapterWithText = new AdapterWithText(mDataSource.getDataWind());
-        mWindAdapterWithText.setDataColor(Color.BLACK);
-        layoutManagerTextWind.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewTextWind.setLayoutManager(layoutManagerTextWind);
-        recyclerViewTextWind.setAdapter(mWindAdapterWithText);
-
-        final RecyclerView recyclerViewTextWet = view.findViewById(R.id.wet);
-        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
-        mWetAdapterWithText = new AdapterWithText(mDataSource.getDataWet());
-        mWetAdapterWithText.setDataColor(Color.BLACK);
-        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewTextWet.setLayoutManager(layoutManagerText);
-        recyclerViewTextWet.setAdapter(mWetAdapterWithText);
-
-        final RecyclerView recyclerView = view.findViewById(R.id.daily_weather);
-        mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails(), null);
-        mWeatherAdapter.setDataColor(Color.BLACK);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mWeatherAdapter);
+        createRecycler(view, R.id.daily_weather, mWeatherAdapter, null);
 
         return view;
     }
 
-    private void setViewText(@NonNull View view, int viewId, String value) {
-        final TextView textView = view.findViewById(viewId);
-        textView.setText(value);
+    private void createRecycler(View view, int recyclerId, AdapterWeather adapterWeather, AdapterWithText adapterWithText) {
+        final RecyclerView recyclerView = view.findViewById(recyclerId);
+        if (adapterWeather != null) {
+            adapterWeather.setDataColor(Color.BLACK);
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapterWeather);
+        } else {
+            adapterWithText.setDataColor(Color.BLACK);
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapterWithText);
+        }
+
     }
 
 }

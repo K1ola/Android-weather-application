@@ -66,8 +66,6 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
             }
         });
 
-
-      
         final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
 

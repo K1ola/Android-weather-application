@@ -55,9 +55,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             case "switch_temperature":
                 temperatureState = isChecked;
                 if(isChecked) {
-                    model.setTemp("°C");
-                } else {
                     model.setTemp("°F");
+                } else {
+                    model.setTemp("°C");
                 }
 
                 saveData(temperatureState, "Temperature");
@@ -75,7 +75,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 if(isChecked) {
                     model.setWind("м/с");
                 } else {
-                    model.setWind("км/с");
+                    model.setWind("км/ч");
                 }
 
                 saveData(windState, "Wind");
