@@ -85,6 +85,7 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         // Draweer
         mDrawerLayout = view.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, mDrawerLayout, mainToolBar, R.string.Open, R.string.Close);
+        toggle.getDrawerArrowDrawable().setColor(Color.WHITE);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
       
