@@ -1,5 +1,6 @@
 package com.example.myapplication.presentation.details;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,9 +38,13 @@ public class DetailsFragment extends Fragment {
 
         mDataSource.setMeasures(model.getTemp(), model.getPressure(), model.getWind());
 
+
+
+
         final RecyclerView recyclerViewTextCalendar = view.findViewById(R.id.calendar);
         final LinearLayoutManager layoutManagerTextCalendar = new LinearLayoutManager(getContext());
         mCalendarAdapterWithText = new AdapterWithText(mDataSource.getDataCalendar());
+        mCalendarAdapterWithText.setDataColor(Color.BLACK);
         layoutManagerTextCalendar.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewTextCalendar.setLayoutManager(layoutManagerTextCalendar);
         recyclerViewTextCalendar.setAdapter(mCalendarAdapterWithText);
@@ -47,6 +52,7 @@ public class DetailsFragment extends Fragment {
         final RecyclerView recyclerViewTextPressure = view.findViewById(R.id.pressure);
         final LinearLayoutManager layoutManagerTextPressure = new LinearLayoutManager(getContext());
         mPressureAdapterWithText = new AdapterWithText(mDataSource.getDataPressure());
+        mPressureAdapterWithText.setDataColor(Color.BLACK);
         layoutManagerTextPressure.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewTextPressure.setLayoutManager(layoutManagerTextPressure);
         recyclerViewTextPressure.setAdapter(mPressureAdapterWithText);
@@ -54,6 +60,7 @@ public class DetailsFragment extends Fragment {
         final RecyclerView recyclerViewTextWind = view.findViewById(R.id.wind);
         final LinearLayoutManager layoutManagerTextWind = new LinearLayoutManager(getContext());
         mWindAdapterWithText = new AdapterWithText(mDataSource.getDataWind());
+        mWindAdapterWithText.setDataColor(Color.BLACK);
         layoutManagerTextWind.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewTextWind.setLayoutManager(layoutManagerTextWind);
         recyclerViewTextWind.setAdapter(mWindAdapterWithText);
@@ -61,12 +68,14 @@ public class DetailsFragment extends Fragment {
         final RecyclerView recyclerViewTextWet = view.findViewById(R.id.wet);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
         mWetAdapterWithText = new AdapterWithText(mDataSource.getDataWet());
+        mWetAdapterWithText.setDataColor(Color.BLACK);
         layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewTextWet.setLayoutManager(layoutManagerText);
         recyclerViewTextWet.setAdapter(mWetAdapterWithText);
 
         final RecyclerView recyclerView = view.findViewById(R.id.daily_weather);
         mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails(), null);
+        mWeatherAdapter.setDataColor(Color.BLACK);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);

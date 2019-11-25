@@ -1,5 +1,6 @@
 package com.example.myapplication.presentation.common;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherHolder> {
     private final OnItemClickListener mListener;
     private List<DataSource.DataWeather> mData;
+    private int dataColor = Color.WHITE;
 
     public AdapterWeather(List<DataSource.DataWeather> data, final OnItemClickListener listener){
         mListener = listener;
@@ -64,12 +66,19 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
         }
         public void bind(DataSource.DataWeather ob){
             mDay.setText(ob.mDay);
+            mDay.setTextColor(dataColor);
             mTemp.setText(ob.mTemp);
+            mTemp.setTextColor(dataColor);
+            mImageView.setColorFilter(dataColor);
         }
     }
 
     public interface OnItemClickListener {
         void onItemClick();
+    }
+
+    public void setDataColor(int color) {
+        dataColor = color;
     }
 }
 

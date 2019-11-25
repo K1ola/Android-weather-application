@@ -1,9 +1,9 @@
 package com.example.myapplication.presentation.common;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +16,7 @@ import java.util.List;
 
 public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.TextHolder> {
     private List<DataSource.DataText> mData;
+    private int dataColor = Color.WHITE;
 
     public AdapterWithText(List<DataSource.DataText> data){
         mData = data;
@@ -53,8 +54,14 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
 
         void bind(DataSource.DataText ob){
             topData.setText(ob.mTopText);
+            topData.setTextColor(dataColor);
             bottomData.setText(ob.mBottomText);
+            bottomData.setTextColor(dataColor);
         }
+    }
+
+    public void setDataColor(int color) {
+        dataColor = color;
     }
 }
 
