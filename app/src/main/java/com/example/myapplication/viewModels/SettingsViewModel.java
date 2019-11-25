@@ -1,35 +1,43 @@
 package com.example.myapplication.viewModels;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SettingsViewModel extends ViewModel {
-    private String temp = "°C";
-    private String pressure = "гПа";
-    private String wind ="км/ч";
+    private MutableLiveData<String> temp = new MutableLiveData<>();// = "°C";
+    private MutableLiveData<String> pressure = new MutableLiveData<>();;//  = "гПа";
+    private MutableLiveData<String> wind = new MutableLiveData<>();;// ="км/ч";
 
-    public void setTemp(String item) {
-        temp = item;
+    public SettingsViewModel() {
+        setTemp("°C");
+        setPressure("гПа");
+        setWind("км/ч");
     }
 
-    public String getTemp() {
+    public void setTemp(String item) {
+        temp.setValue(item);
+    }
+
+    public LiveData<String> getTemp() {
         return temp;
     }
 
 
     public void setPressure(String item) {
-        pressure = item;
+        pressure.setValue(item);
     }
 
-    public String getPressure() {
+    public  LiveData<String> getPressure() {
         return pressure;
     }
 
 
     public void setWind(String item) {
-        wind = item;
+        wind.setValue(item);
     }
 
-    public String getWind() {
+    public  LiveData<String> getWind() {
         return wind;
     }
 }

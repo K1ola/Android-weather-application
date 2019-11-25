@@ -65,4 +65,3 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
         dataColor = color;
     }
 }
-

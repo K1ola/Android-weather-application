@@ -83,4 +83,3 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
         dataColor = color;
     }
 }
-

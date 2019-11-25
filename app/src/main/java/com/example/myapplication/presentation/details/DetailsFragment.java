@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +37,27 @@ public class DetailsFragment extends Fragment {
 
         SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
 
-        mDataSource.setMeasures(model.getTemp(), model.getPressure(), model.getWind());
+
+        model.getTemp().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String value) {
+                mDataSource.setTemperatureMeasures(value);
+            }
+        });
+
+        model.getPressure().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String value) {
+                mDataSource.setPreassureMeasures(value);
+            }
+        });
+
+        model.getWind().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String value) {
+                mDataSource.setWindMeasures(value);
+            }
+        });
 
         createRecycler(view, R.id.calendar, mCalendarAdapterWithText);
         createRecycler(view, R.id.pressure, mPressureAdapterWithText);

@@ -24,9 +24,15 @@ public class DataSource {
         mWetData = DataText.CreateHardcodedWet();
     }
 
-    public void setMeasures(String temperature, String pressure, String wind) {
+    public void setTemperatureMeasures(String temperature) {
         default_temperature_measure = temperature;
+    }
+
+    public void setPreassureMeasures(String pressure) {
         default_pressure_measure = pressure;
+    }
+
+    public void setWindMeasures(String wind) {
         default_wind_measure = wind;
     }
 

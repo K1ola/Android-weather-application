@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,69 +29,18 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     private AdapterWeather mAdapter;
     private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
-  
+
     private static final String TEMPERATURE = "+29 ";
     private static final String[] WEATHER_STATUS = {"Пасмурно", "Небольшая облачность", "Сильный дождь", "Туман", "Дождь", "Снег", "Облачно", "Безоблачно", "Гроза"};
     private static final String WET = "Влажность: 29%";
     private static final String PRESSURE = "Давление: 27 ";
     private static final String WIND = "Сила ветра: 10 ";
 
-    private final static String TEMPERATURE_KEY = "Temperature";
-    private final static String PRESSURE_KEY = "Pressure";
-    private final static String WIND_KEY = "Wind";
-
-    private String temperature;
-    private String pressure;
-    private String wind;
-
-
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
-        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
-
-        if (savedInstanceState != null) {
-            temperature = savedInstanceState.getString(TEMPERATURE_KEY);
-            pressure = savedInstanceState.getString(PRESSURE_KEY);
-            wind = savedInstanceState.getString(WIND_KEY);
-        } else {
-            temperature = model.getTemp();
-            pressure = model.getPressure();
-            wind = model.getWind();
-        }
-
-        mDataSource.setMeasures(temperature, pressure, wind);
-        final RecyclerView recyclerView = view.findViewById(R.id.list);
-
-        mAdapter = new AdapterWeather(mDataSource.getData(), this, Color.WHITE);
-
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
-
-        Toolbar mainToolBar = view.findViewById(R.id.main_toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(mainToolBar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-        ImageView settings_icon = view.findViewById(R.id.main_setting);
-        settings_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OpenSettingsFragment();
-            }
-        });
-
-        final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
-        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
-
-        mAdapterWithText = new AdapterWithText(mDataSource.getDataWet(), Color.WHITE);
-        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewText.setLayoutManager(layoutManagerText);
-        recyclerViewText.setAdapter(mAdapterWithText);
 
         return view;
     }
@@ -121,9 +71,60 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
 
         final SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
 
-        setViewText(view, R.id.temperature_measure, model.getTemp());
-        setViewText(view, R.id.pressure_measure, model.getPressure());
-        setViewText(view, R.id.wind_measure, model.getWind());
+        model.getTemp().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String value) {
+                mDataSource.setTemperatureMeasures(value);
+                setViewText(view, R.id.temperature_measure, value);
+            }
+        });
+
+        model.getPressure().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String value) {
+                mDataSource.setPreassureMeasures(value);
+                setViewText(view, R.id.pressure_measure, value);
+            }
+        });
+
+        model.getWind().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String value) {
+                mDataSource.setWindMeasures(value);
+                setViewText(view, R.id.wind_measure, value);
+            }
+        });
+
+        final RecyclerView recyclerView = view.findViewById(R.id.list);
+
+        mAdapter = new AdapterWeather(mDataSource.getData(), this, Color.WHITE);
+        System.out.println(mDataSource.getData());
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+
+        Toolbar mainToolBar = view.findViewById(R.id.main_toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(mainToolBar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        ImageView settings_icon = view.findViewById(R.id.main_setting);
+        settings_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenSettingsFragment();
+            }
+        });
+
+        final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
+        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+
+        mAdapterWithText = new AdapterWithText(mDataSource.getDataWet(), Color.WHITE);
+        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewText.setLayoutManager(layoutManagerText);
+        recyclerViewText.setAdapter(mAdapterWithText);
     }
 
     private void setViewText(@NonNull View view, int viewId, String value) {
@@ -139,11 +140,4 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         ((AdapterWeather.OnItemClickListener) getActivity()).onItemClick();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(TEMPERATURE_KEY, temperature);
-        outState.putString(PRESSURE_KEY, pressure);
-        outState.putString(WIND_KEY, wind);
-    }
 }
