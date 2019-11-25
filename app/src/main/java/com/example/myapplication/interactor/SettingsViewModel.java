@@ -3,9 +3,9 @@ package com.example.myapplication.interactor;
 import androidx.lifecycle.ViewModel;
 
 public class SettingsViewModel extends ViewModel {
-    private String temp = "°C";
-    private String pressure = "гПа";
-    private String wind ="км/ч";
+    private String temp = "°F";
+    private String pressure = "мм рт.ст.";
+    private String wind ="м/с";
 
     public void setTemp(String item) {
         temp = item;
