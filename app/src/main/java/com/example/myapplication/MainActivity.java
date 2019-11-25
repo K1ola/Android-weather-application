@@ -15,21 +15,12 @@ public class MainActivity extends AppCompatActivity implements AdapterWeather.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        if (savedInstanceState == null) {
-//            SettingsFragment mainFragment = new SettingsFragment();
-//
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .add(R.id.container, mainFragment)
-//                    .commit();
-//        }
-
         if (savedInstanceState == null) {
             MainFragment mainFragment = new MainFragment();
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, mainFragment)
+                    .add(R.id.container, mainFragment, "mainFragment")
                     .commit();
         }
     }
@@ -40,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements AdapterWeather.On
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, detailsFragment)
-                .addToBackStack(null)
+                .replace(R.id.container, detailsFragment, "detailsFragment")
+                .addToBackStack("detailsFragment")
                 .commit();
     }
 }

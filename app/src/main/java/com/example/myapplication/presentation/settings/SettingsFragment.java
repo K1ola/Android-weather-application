@@ -13,6 +13,7 @@ import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
@@ -70,7 +71,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, mainFragment)
-                .addToBackStack(null)
                 .commit();
     }
 
