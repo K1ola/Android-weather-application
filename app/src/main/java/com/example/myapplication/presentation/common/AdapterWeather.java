@@ -21,9 +21,10 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
     private List<DataSource.DataWeather> mData;
     private int dataColor = Color.WHITE;
 
-    public AdapterWeather(@NonNull List<DataSource.DataWeather> data, @Nullable final OnItemClickListener listener){
+    public AdapterWeather(@NonNull List<DataSource.DataWeather> data, @Nullable final OnItemClickListener listener, int color) {
         mListener = listener;
         mData = data;
+        dataColor = color;
     }
 
     @NonNull

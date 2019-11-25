@@ -22,11 +22,11 @@ import com.example.myapplication.presentation.common.DataSource;
 public class DetailsFragment extends Fragment {
     private DataSource mDataSource = DataSource.getInstance();
 
-    private AdapterWeather mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails(), null);
-    private AdapterWithText mCalendarAdapterWithText = new AdapterWithText(mDataSource.getDataCalendar());
-    private AdapterWithText mPressureAdapterWithText = new AdapterWithText(mDataSource.getDataPressure());
-    private AdapterWithText mWindAdapterWithText = new AdapterWithText(mDataSource.getDataWind());
-    private AdapterWithText mWetAdapterWithText = new AdapterWithText(mDataSource.getDataWet());
+    private AdapterWeather mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails(), null, Color.BLACK);
+    private AdapterWithText mCalendarAdapterWithText = new AdapterWithText(mDataSource.getDataCalendar(), Color.BLACK);
+    private AdapterWithText mPressureAdapterWithText = new AdapterWithText(mDataSource.getDataPressure(), Color.BLACK);
+    private AdapterWithText mWindAdapterWithText = new AdapterWithText(mDataSource.getDataWind(), Color.BLACK);
+    private AdapterWithText mWetAdapterWithText = new AdapterWithText(mDataSource.getDataWet(), Color.BLACK);
 
     @NonNull
     @Override
@@ -38,31 +38,21 @@ public class DetailsFragment extends Fragment {
 
         mDataSource.setMeasures(model.getTemp(), model.getPressure(), model.getWind());
 
-        createRecycler(view, R.id.calendar, null, mCalendarAdapterWithText);
-        createRecycler(view, R.id.pressure, null, mPressureAdapterWithText);
-        createRecycler(view, R.id.wind, null, mWindAdapterWithText);
-        createRecycler(view, R.id.wet, null, mWetAdapterWithText);
-
-        createRecycler(view, R.id.daily_weather, mWeatherAdapter, null);
+        createRecycler(view, R.id.calendar, mCalendarAdapterWithText);
+        createRecycler(view, R.id.pressure, mPressureAdapterWithText);
+        createRecycler(view, R.id.wind,  mWindAdapterWithText);
+        createRecycler(view, R.id.wet,  mWetAdapterWithText);
+        createRecycler(view, R.id.daily_weather, mWeatherAdapter);
 
         return view;
     }
 
-    private void createRecycler(View view, int recyclerId, AdapterWeather adapterWeather, AdapterWithText adapterWithText) {
+    private void createRecycler(@NonNull View view, int recyclerId, @Nullable RecyclerView.Adapter adapter) {
         final RecyclerView recyclerView = view.findViewById(recyclerId);
-        if (adapterWeather != null) {
-            adapterWeather.setDataColor(Color.BLACK);
-            final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-            layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapterWeather);
-        } else {
-            adapterWithText.setDataColor(Color.BLACK);
-            final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-            layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapterWithText);
-        }
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
     }
 

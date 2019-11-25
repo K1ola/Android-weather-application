@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataSource {
-    private  List<DataWeather> mData;
-    private  List<DataWeather> mDataDetails;
+    private List<DataWeather> mData;
+    private List<DataWeather> mDataDetails;
     private final List<DataText> mCalendarData;
-    private  List<DataText> mWindData;
-    private  List<DataText> mPressureData;
+    private List<DataText> mWindData;
+    private List<DataText> mPressureData;
     private final List<DataText> mWetData;
 
     private String default_temperature_measure = "°C";

@@ -23,7 +23,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     private boolean temperatureState = false;
     private boolean pressureState = false;
     private boolean windState = false;
-    SharedPreferences sPref;
+    private SharedPreferences sPref;
 
     private final String CELSIUS = "°C";
     private final String FAHRENHEIT = "°F";
@@ -95,17 +95,16 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         }
     }
 
-    void saveData(boolean flag, String key) {
+    private void saveData(boolean flag, String key) {
         sPref = getActivity().getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putBoolean(key, flag);
-        ed.commit();
+        ed.apply();
     }
 
-    boolean loadData(String key) {
+    private boolean loadData(String key) {
         sPref = getActivity().getPreferences(MODE_PRIVATE);
-        boolean savedFlag = sPref.getBoolean(key, false);
-        return savedFlag;
+        return sPref.getBoolean(key, false);
     }
 
 }

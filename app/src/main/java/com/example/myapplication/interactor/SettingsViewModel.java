@@ -2,6 +2,8 @@ package com.example.myapplication.interactor;
 
 import androidx.lifecycle.ViewModel;
 
+
+//TODO onSaveInstance here
 public class SettingsViewModel extends ViewModel {
     private String temp = "°C";
     private String pressure = "гПа";

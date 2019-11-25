@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,18 +36,36 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     private static final String PRESSURE = "Давление: 27 ";
     private static final String WIND = "Сила ветра: 10 ";
 
+    private final static String TEMPERATURE_KEY = "Temperature";
+    private final static String PRESSURE_KEY = "Pressure";
+    private final static String WIND_KEY = "Wind";
+
+    private String temperature;
+    private String pressure;
+    private String wind;
+
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
         SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
 
-        mDataSource.setMeasures(model.getTemp(), model.getPressure(), model.getWind());
+        if (savedInstanceState != null) {
+            temperature = savedInstanceState.getString(TEMPERATURE_KEY);
+            pressure = savedInstanceState.getString(PRESSURE_KEY);
+            wind = savedInstanceState.getString(WIND_KEY);
+        } else {
+            temperature = model.getTemp();
+            pressure = model.getPressure();
+            wind = model.getWind();
+        }
+
+        mDataSource.setMeasures(temperature, pressure, wind);
         final RecyclerView recyclerView = view.findViewById(R.id.list);
 
-        mAdapter = new AdapterWeather(mDataSource.getData(), this);
+        mAdapter = new AdapterWeather(mDataSource.getData(), this, Color.WHITE);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -69,7 +88,7 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
 
-        mAdapterWithText = new AdapterWithText(mDataSource.getDataWet());
+        mAdapterWithText = new AdapterWithText(mDataSource.getDataWet(), Color.WHITE);
         layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewText.setLayoutManager(layoutManagerText);
         recyclerViewText.setAdapter(mAdapterWithText);
@@ -77,7 +96,7 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         return view;
     }
 
-    private void OpenSettingsFragment(){
+    private void OpenSettingsFragment() {
         SettingsFragment settingsFragment = new SettingsFragment();
 
         getActivity().getSupportFragmentManager()
@@ -101,7 +120,7 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         imageView.setColorFilter(Color.WHITE);
         imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
-        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+        final SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
 
         setViewText(view, R.id.temperature_measure, model.getTemp());
         setViewText(view, R.id.pressure_measure, model.getPressure());
@@ -119,5 +138,13 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
             return;
         }
         ((AdapterWeather.OnItemClickListener) getActivity()).onItemClick();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TEMPERATURE_KEY, temperature);
+        outState.putString(PRESSURE_KEY, pressure);
+        outState.putString(WIND_KEY, wind);
     }
 }

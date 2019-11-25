@@ -18,8 +18,9 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
     private List<DataSource.DataText> mData;
     private int dataColor = Color.WHITE;
 
-    public AdapterWithText(@NonNull List<DataSource.DataText> data){
+    public AdapterWithText(@NonNull List<DataSource.DataText> data, int color) {
         mData = data;
+        dataColor = color;
     }
 
     @NonNull
@@ -52,10 +53,10 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
             bottomData = itemView.findViewById(R.id.bottom_text);
         }
 
-        void bind(DataSource.DataText ob){
-            topData.setText(ob.mTopText);
+        void bind(DataSource.DataText dataElement){
+            topData.setText(dataElement.mTopText);
             topData.setTextColor(dataColor);
-            bottomData.setText(ob.mBottomText);
+            bottomData.setText(dataElement.mBottomText);
             bottomData.setTextColor(dataColor);
         }
     }
