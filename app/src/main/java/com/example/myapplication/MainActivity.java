@@ -15,15 +15,6 @@ public class MainActivity extends AppCompatActivity implements AdapterWeather.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        if (savedInstanceState == null) {
-//            SettingsFragment mainFragment = new SettingsFragment();
-//
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .add(R.id.container, mainFragment)
-//                    .commit();
-//        }
-
         if (savedInstanceState == null) {
             MainFragment mainFragment = new MainFragment();
 

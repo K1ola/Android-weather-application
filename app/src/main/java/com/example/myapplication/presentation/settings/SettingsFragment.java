@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
-import com.example.myapplication.interactor.SettingsViewModel;
+import com.example.myapplication.viewModels.SettingsViewModel;
 
 import static android.content.Context.MODE_PRIVATE;
 

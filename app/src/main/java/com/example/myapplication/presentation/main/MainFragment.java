@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.interactor.SettingsViewModel;
+import com.example.myapplication.viewModels.SettingsViewModel;
 import com.example.myapplication.presentation.common.AdapterWeather;
 import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.DataSource;

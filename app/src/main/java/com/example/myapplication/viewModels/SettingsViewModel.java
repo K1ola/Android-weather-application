@@ -1,4 +1,4 @@
-package com.example.myapplication.interactor;
+package com.example.myapplication.viewModels;
 
 import androidx.lifecycle.ViewModel;
 

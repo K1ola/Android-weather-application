@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.interactor.SettingsViewModel;
+import com.example.myapplication.viewModels.SettingsViewModel;
 import com.example.myapplication.presentation.common.AdapterWeather;
 import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.DataSource;
