@@ -1,7 +1,6 @@
 package com.example.myapplication.presentation.main;
 
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,39 +8,64 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.R;
-import com.example.myapplication.presentation.common.AdapterWithText;
+import com.example.myapplication.interactor.SettingsViewModel;
 import com.example.myapplication.presentation.common.AdapterWeather;
+import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.DataSource;
+import com.example.myapplication.presentation.settings.SettingsFragment;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements AdapterWeather.OnItemClickListener  {
     private AdapterWeather mAdapter;
     private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
   
-    private static final String TEMPERATURE = "+29°C";
+    private static final String TEMPERATURE = "+29 ";
     private static final String[] WEATHER_STATUS = {"Пасмурно", "Небольшая облачность", "Сильный дождь", "Туман", "Дождь", "Снег", "Облачно", "Безоблачно", "Гроза"};
     private static final String WET = "Влажность: 29%";
-    private static final String PRESSURE = "Давление: 27 мм. рт. ст.";
-    private static final String WIND = "Сила ветра: 10 м/с";
+    private static final String PRESSURE = "Давление: 27 ";
+    private static final String WIND = "Сила ветра: 10 ";
+
+    private final static String TEMPERATURE_KEY = "Temperature";
+    private final static String PRESSURE_KEY = "Pressure";
+    private final static String WIND_KEY = "Wind";
+
+    private String temperature;
+    private String pressure;
+    private String wind;
+
 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
+        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+
+        if (savedInstanceState != null) {
+            temperature = savedInstanceState.getString(TEMPERATURE_KEY);
+            pressure = savedInstanceState.getString(PRESSURE_KEY);
+            wind = savedInstanceState.getString(WIND_KEY);
+        } else {
+            temperature = model.getTemp();
+            pressure = model.getPressure();
+            wind = model.getWind();
+        }
+
+        mDataSource.setMeasures(temperature, pressure, wind);
         final RecyclerView recyclerView = view.findViewById(R.id.list);
 
-        mAdapter = new AdapterWeather(mDataSource.getData());
+        mAdapter = new AdapterWeather(mDataSource.getData(), this, Color.WHITE);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -52,11 +76,19 @@ public class MainFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(mainToolBar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-      
+
+        ImageView settings_icon = view.findViewById(R.id.main_setting);
+        settings_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenSettingsFragment();
+            }
+        });
+
         final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
 
-        mAdapterWithText = new AdapterWithText(mDataSource.getData());
+        mAdapterWithText = new AdapterWithText(mDataSource.getDataWet(), Color.WHITE);
         layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewText.setLayoutManager(layoutManagerText);
         recyclerViewText.setAdapter(mAdapterWithText);
@@ -64,8 +96,18 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    private void OpenSettingsFragment() {
+        SettingsFragment settingsFragment = new SettingsFragment();
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, settingsFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         setViewText(view, R.id.temperature, TEMPERATURE);
@@ -78,10 +120,31 @@ public class MainFragment extends Fragment {
         imageView.setColorFilter(Color.WHITE);
         imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
+        final SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+
+        setViewText(view, R.id.temperature_measure, model.getTemp());
+        setViewText(view, R.id.pressure_measure, model.getPressure());
+        setViewText(view, R.id.wind_measure, model.getWind());
     }
 
     private void setViewText(@NonNull View view, int viewId, String value) {
         final TextView textView = view.findViewById(viewId);
         textView.setText(value);
+    }
+
+    @Override
+    public void onItemClick() {
+        if (getActivity() == null || !(getActivity() instanceof AdapterWeather.OnItemClickListener)) {
+            return;
+        }
+        ((AdapterWeather.OnItemClickListener) getActivity()).onItemClick();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TEMPERATURE_KEY, temperature);
+        outState.putString(PRESSURE_KEY, pressure);
+        outState.putString(WIND_KEY, wind);
     }
 }
