@@ -18,7 +18,7 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
     private List<DataSource.DataText> mData;
     private int dataColor = Color.WHITE;
 
-    public AdapterWithText(List<DataSource.DataText> data){
+    public AdapterWithText(@NonNull List<DataSource.DataText> data){
         mData = data;
     }
 

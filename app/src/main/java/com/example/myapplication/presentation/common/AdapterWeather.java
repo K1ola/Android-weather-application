@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -20,7 +21,7 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
     private List<DataSource.DataWeather> mData;
     private int dataColor = Color.WHITE;
 
-    public AdapterWeather(List<DataSource.DataWeather> data, final OnItemClickListener listener){
+    public AdapterWeather(@NonNull List<DataSource.DataWeather> data, @Nullable final OnItemClickListener listener){
         mListener = listener;
         mData = data;
     }
