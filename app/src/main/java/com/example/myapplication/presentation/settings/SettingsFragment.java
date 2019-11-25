@@ -25,13 +25,26 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     private boolean windState = false;
     SharedPreferences sPref;
 
+    private final String CELSIUS = "°C";
+    private final String FAHRENHEIT = "°F";
+
+    private final String MM_HG = "мм рт.ст.";
+    private final String HPA = "гПа";
+
+    private final String METERS_PER_SECOND ="м/с";
+    private final String HOURS_PER_SECOND ="км/ч";
+
+    private final String temperatureKey = "Temperature";
+    private final String pressureKey = "Pressure";
+    private final String windKey = "Wind";
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        temperatureState = loadData("Temperature");
-        pressureState = loadData("Pressure");
-        windState = loadData("Wind");
+        temperatureState = loadData(temperatureKey);
+        pressureState = loadData(pressureKey);
+        windState = loadData(windKey);
         final View view = inflater.inflate(R.layout.settings_fragment, container, false);
         model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
         setSwitchHandler(view, R.id.switch_temperature, temperatureState);
@@ -55,30 +68,30 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             case "switch_temperature":
                 temperatureState = isChecked;
                 if(isChecked) {
-                    model.setTemp("°F");
+                    model.setTemp(FAHRENHEIT);
                 } else {
-                    model.setTemp("°C");
+                    model.setTemp(CELSIUS);
                 }
 
-                saveData(temperatureState, "Temperature");
+                saveData(temperatureState, temperatureKey);
             case "switch_pressure":
                 pressureState = isChecked;
                 if(isChecked) {
-                    model.setPressure("мм рт.ст.");
+                    model.setPressure(MM_HG);
                 } else {
-                    model.setPressure("гПа");
+                    model.setPressure(HPA);
                 }
 
-                saveData(pressureState, "Pressure");
+                saveData(pressureState, pressureKey);
             case "switch_wind":
                 windState = isChecked;
                 if(isChecked) {
-                    model.setWind("м/с");
+                    model.setWind(METERS_PER_SECOND);
                 } else {
-                    model.setWind("км/ч");
+                    model.setWind(HOURS_PER_SECOND);
                 }
 
-                saveData(windState, "Wind");
+                saveData(windState, windKey);
         }
     }
 
