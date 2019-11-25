@@ -1,9 +1,9 @@
 package com.example.myapplication.presentation.common;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,10 +15,12 @@ import java.util.List;
 
 
 public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.TextHolder> {
-    private List<DataSource.DataWeather> mData;
+    private List<DataSource.DataText> mData;
+    private int dataColor = Color.WHITE;
 
-    public AdapterWithText(List<DataSource.DataWeather> data){
+    public AdapterWithText(@NonNull List<DataSource.DataText> data, int color) {
         mData = data;
+        dataColor = color;
     }
 
     @NonNull
@@ -32,7 +34,7 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
 
     @Override
     public void onBindViewHolder(@NonNull TextHolder holder, int position){
-        DataSource.DataWeather data = mData.get(position);
+        DataSource.DataText data = mData.get(position);
         holder.bind(data);
     }
 
@@ -51,10 +53,16 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
             bottomData = itemView.findViewById(R.id.bottom_text);
         }
 
-        void bind(DataSource.DataWeather ob){
-            topData.setText(ob.mDay);
-            bottomData.setText(ob.mTemp);
+        void bind(DataSource.DataText dataElement){
+            topData.setText(dataElement.mTopText);
+            topData.setTextColor(dataColor);
+            bottomData.setText(dataElement.mBottomText);
+            bottomData.setTextColor(dataColor);
         }
+    }
+
+    public void setDataColor(int color) {
+        dataColor = color;
     }
 }
 

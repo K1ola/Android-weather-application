@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -16,11 +17,14 @@ import java.util.List;
 
 
 public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherHolder> {
-
+    private final OnItemClickListener mListener;
     private List<DataSource.DataWeather> mData;
+    private int dataColor = Color.WHITE;
 
-    public AdapterWeather(List<DataSource.DataWeather> data){
+    public AdapterWeather(@NonNull List<DataSource.DataWeather> data, @Nullable final OnItemClickListener listener, int color) {
+        mListener = listener;
         mData = data;
+        dataColor = color;
     }
 
     @NonNull
@@ -29,6 +33,14 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
         View v = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.holder_item, parent,false);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemClick();
+                }
+            }
+        });
         return new WeatherHolder(v);
     }
 
@@ -56,8 +68,19 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
         }
         public void bind(DataSource.DataWeather ob){
             mDay.setText(ob.mDay);
+            mDay.setTextColor(dataColor);
             mTemp.setText(ob.mTemp);
+            mTemp.setTextColor(dataColor);
+            mImageView.setColorFilter(dataColor);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick();
+    }
+
+    public void setDataColor(int color) {
+        dataColor = color;
     }
 }
 

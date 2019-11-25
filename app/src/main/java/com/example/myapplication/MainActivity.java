@@ -4,11 +4,12 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import com.example.myapplication.presentation.common.AdapterWeather;
+import com.example.myapplication.presentation.details.DetailsFragment;
 import com.example.myapplication.presentation.main.MainFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterWeather.OnItemClickListener  {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +20,19 @@ public class MainActivity extends AppCompatActivity {
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, mainFragment)
+                    .add(R.id.container, mainFragment, "mainFragment")
                     .commit();
         }
+    }
+
+    @Override
+    public void onItemClick() {
+        DetailsFragment detailsFragment = new DetailsFragment();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, detailsFragment, "detailsFragment")
+                .addToBackStack("detailsFragment")
+                .commit();
     }
 }
