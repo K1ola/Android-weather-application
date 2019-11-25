@@ -41,6 +41,9 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
                              @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
+        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+
+        mDataSource.setMeasures(model.getTemp(), model.getPressure(), model.getWind());
         final RecyclerView recyclerView = view.findViewById(R.id.list);
 
         mAdapter = new AdapterWeather(mDataSource.getData(), this);

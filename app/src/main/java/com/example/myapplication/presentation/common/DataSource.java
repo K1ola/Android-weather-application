@@ -4,38 +4,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataSource {
-    private final List<DataWeather> mData;
-    private final List<DataWeather> mDataDetails;
+    private  List<DataWeather> mData;
+    private  List<DataWeather> mDataDetails;
     private final List<DataText> mCalendarData;
-    private final List<DataText> mWindData;
-    private final List<DataText> mPressureData;
+    private  List<DataText> mWindData;
+    private  List<DataText> mPressureData;
     private final List<DataText> mWetData;
+
+    private String temperature_measure = "°F";
+    private String pressure_measure = "гПа";
+    private String wind_measure = "км/ч";
 
     public DataSource(){
         mData = new ArrayList<>();
-        mData.add(new DataWeather("Сегодня", "+10"));
-        mData.add(new DataWeather("Завтра", "+100"));
-        mData.add(new DataWeather("Среда", "+10"));
-        mData.add(new DataWeather("Четверг", "+100"));
-        mData.add(new DataWeather("Пятница", "+10"));
+        mData.add(new DataWeather("Сегодня", "+10 " + temperature_measure));
+        mData.add(new DataWeather("Завтра", "+100 " + temperature_measure));
+        mData.add(new DataWeather("Среда", "+10 " + temperature_measure));
+        mData.add(new DataWeather("Четверг", "+100 " + temperature_measure));
+        mData.add(new DataWeather("Пятница", "+10 " + temperature_measure));
 
         mDataDetails = new ArrayList<>();
-        mDataDetails.add(new DataWeather("Утром", "+10"));
-        mDataDetails.add(new DataWeather("Днем", "+100"));
-        mDataDetails.add(new DataWeather("Вечером", "+10"));
-        mDataDetails.add(new DataWeather("Ночью", "+100"));
+        mDataDetails.add(new DataWeather("Утром", "+10" + temperature_measure));
+        mDataDetails.add(new DataWeather("Днем", "+100" + temperature_measure));
+        mDataDetails.add(new DataWeather("Вечером", "+10" + temperature_measure));
+        mDataDetails.add(new DataWeather("Ночью", "+100" + temperature_measure));
 
         mCalendarData = DataText.CreateHardcodedCalendar();
-        mWindData = DataText.CreateHardcodedWind();
-        mPressureData = DataText.CreateHardcodedPressure();
+        mWindData = DataText.CreateHardcodedWind(wind_measure);
+        mPressureData = DataText.CreateHardcodedPressure(pressure_measure);
         mWetData = DataText.CreateHardcodedWet();
     }
 
+    public void setMeasures(String temperature, String pressure, String wind) {
+        temperature_measure = temperature;
+        pressure_measure = pressure;
+        wind_measure = wind;
+    }
+
     public List<DataWeather> getData(){
+        mData = new ArrayList<>();
+        mData.add(new DataWeather("Сегодня", "+10 " + temperature_measure));
+        mData.add(new DataWeather("Завтра", "+100 " + temperature_measure));
+        mData.add(new DataWeather("Среда", "+10 " + temperature_measure));
+        mData.add(new DataWeather("Четверг", "+100 " + temperature_measure));
+        mData.add(new DataWeather("Пятница", "+10 " + temperature_measure));
         return mData;
     }
 
     public List<DataWeather> getDataDetails(){
+        mDataDetails = new ArrayList<>();
+        mDataDetails.add(new DataWeather("Утром", "+10" + temperature_measure));
+        mDataDetails.add(new DataWeather("Днем", "+100" + temperature_measure));
+        mDataDetails.add(new DataWeather("Вечером", "+10" + temperature_measure));
+        mDataDetails.add(new DataWeather("Ночью", "+100" + temperature_measure));
         return mDataDetails;
     }
 
@@ -44,10 +65,12 @@ public class DataSource {
     }
 
     public List<DataText> getDataWind(){
+        mWindData = DataText.CreateHardcodedWind(wind_measure);
         return mWindData;
     }
 
     public List<DataText> getDataPressure(){
+        mPressureData = DataText.CreateHardcodedPressure(pressure_measure);
         return mPressureData;
     }
 
@@ -93,23 +116,23 @@ public class DataSource {
             return data;
         }
 
-        static List<DataText> CreateHardcodedWind() {
+        static List<DataText> CreateHardcodedWind(String measure) {
             final List<DataText> data;
             data = new ArrayList<>();
-            data.add(new DataText("Утром", "5 м/с"));
-            data.add(new DataText("Днем", "5 м/с"));
-            data.add(new DataText("Вечером", "5 м/с"));
-            data.add(new DataText("Ночью", "5 м/с"));
+            data.add(new DataText("Утром", "5 " + measure));
+            data.add(new DataText("Днем", "5 " + measure));
+            data.add(new DataText("Вечером", "5 " + measure));
+            data.add(new DataText("Ночью", "5 " + measure));
             return data;
         }
 
-        static List<DataText> CreateHardcodedPressure() {
+        static List<DataText> CreateHardcodedPressure(String measure) {
             final List<DataText> data;
             data = new ArrayList<>();
-            data.add(new DataText("Утром", "743 мм рт. ст."));
-            data.add(new DataText("Днем", "743 мм рт. ст."));
-            data.add(new DataText("Вечером", "743 мм рт. ст."));
-            data.add(new DataText("Ночью", "743 мм рт. ст."));
+            data.add(new DataText("Утром", "743 " + measure));
+            data.add(new DataText("Днем", "743 " + measure));
+            data.add(new DataText("Вечером", "743 " + measure));
+            data.add(new DataText("Ночью", "743 " + measure));
             return data;
         }
 

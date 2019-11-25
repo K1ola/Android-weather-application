@@ -1,22 +1,22 @@
 package com.example.myapplication.presentation.details;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.presentation.common.AdapterWithText;
+import com.example.myapplication.interactor.SettingsViewModel;
 import com.example.myapplication.presentation.common.AdapterWeather;
+import com.example.myapplication.presentation.common.AdapterWithText;
 import com.example.myapplication.presentation.common.DataSource;
 
 public class DetailsFragment extends Fragment {
@@ -32,6 +32,10 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.details_fragment, container, false);
+
+        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+
+        mDataSource.setMeasures(model.getTemp(), model.getPressure(), model.getWind());
 
         final RecyclerView recyclerViewTextCalendar = view.findViewById(R.id.calendar);
         final LinearLayoutManager layoutManagerTextCalendar = new LinearLayoutManager(getContext());
@@ -69,6 +73,11 @@ public class DetailsFragment extends Fragment {
         recyclerView.setAdapter(mWeatherAdapter);
 
         return view;
+    }
+
+    private void setViewText(@NonNull View view, int viewId, String value) {
+        final TextView textView = view.findViewById(viewId);
+        textView.setText(value);
     }
 
 }

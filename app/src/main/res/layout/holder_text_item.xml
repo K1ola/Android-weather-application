@@ -12,11 +12,24 @@
         android:padding="2dp"
         tools:text="Солнечно" />
 
-    <TextView
-        android:id="@+id/bottom_text"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        tools:text="+1°C" />
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp">
+        <TextView
+            android:id="@+id/bottom_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            tools:text="+1" />
+
+        <TextView
+            android:id="@+id/bottom_text_measure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            tools:text="°C" />
+    </LinearLayout>
 
 </LinearLayout>
