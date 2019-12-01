@@ -10,7 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -29,6 +32,8 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     private AdapterWeather mAdapter;
     private AdapterWithText mAdapterWithText;
     private DataSource mDataSource = DataSource.getInstance();
+    private DrawerLayout mDrawerLayout;
+
 
     private static final String TEMPERATURE = "+29 ";
     private static final String[] WEATHER_STATUS = {"Пасмурно", "Небольшая облачность", "Сильный дождь", "Туман", "Дождь", "Снег", "Облачно", "Безоблачно", "Гроза"};
@@ -41,6 +46,46 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
+        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+
+        final RecyclerView recyclerView = view.findViewById(R.id.list);
+
+        mAdapter = new AdapterWeather(mDataSource.getData(), this, Color.WHITE);
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+
+        // Toolbar
+        Toolbar mainToolBar = view.findViewById(R.id.main_toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(mainToolBar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        // Draweer
+        mDrawerLayout = view.findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, mDrawerLayout, mainToolBar, R.string.Open, R.string.Close);
+        toggle.getDrawerArrowDrawable().setColor(Color.WHITE);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+      
+        ImageView settings_icon = view.findViewById(R.id.main_setting);
+        settings_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenSettingsFragment();
+            }
+        });
+
+        final RecyclerView recyclerViewText = view.findViewById(R.id.text_list);
+        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+
+        mAdapterWithText = new AdapterWithText(mDataSource.getDataWet(), Color.WHITE);
+        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewText.setLayoutManager(layoutManagerText);
+        recyclerViewText.setAdapter(mAdapterWithText);
+
 
         return view;
     }
@@ -126,6 +171,7 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         recyclerViewText.setLayoutManager(layoutManagerText);
         recyclerViewText.setAdapter(mAdapterWithText);
     }
+
 
     private void setViewText(@NonNull View view, int viewId, String value) {
         final TextView textView = view.findViewById(viewId);

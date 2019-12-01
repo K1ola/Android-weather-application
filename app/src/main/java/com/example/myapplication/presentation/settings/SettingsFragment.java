@@ -6,14 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
+import com.example.myapplication.presentation.main.MainFragment;
 import com.example.myapplication.viewModels.SettingsViewModel;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -51,7 +55,23 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         setSwitchHandler(view, R.id.switch_pressure, pressureState);
         setSwitchHandler(view, R.id.switch_wind, windState);
 
+        ImageButton arrow_back = view.findViewById(R.id.arrow_back);
+        arrow_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenMainFragment();
+            }
+        });
+
         return view;
+    }
+
+    private void OpenMainFragment(){
+        MainFragment mainFragment = new MainFragment();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, mainFragment)
+                .commit();
     }
 
     private void setSwitchHandler(View view, int idSwitch, boolean state) {

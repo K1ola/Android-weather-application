@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements AdapterWeather.On
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, mainFragment)
+                    .add(R.id.container, mainFragment, "mainFragment")
                     .commit();
         }
     }
@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements AdapterWeather.On
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, detailsFragment)
-                .addToBackStack(null)
+                .replace(R.id.container, detailsFragment, "detailsFragment")
+                .addToBackStack("detailsFragment")
                 .commit();
     }
 }

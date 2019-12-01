@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/field_searchx"
+            android:icon="@drawable/menu"
+            android:title="Search" />
+    </group>
+
+    <item android:title="Town">
+        <menu>
+            <item android:id="@+id/field_town"
+                android:icon="@drawable/menu"
+                android:title="Town"/>
+        </menu>
+    </item>
+
+</menu>
