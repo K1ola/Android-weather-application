@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="settingsViewModel"
+            type="com.example.myapplication.viewModel.SettingsViewModel" />
+
+
+        <variable
+            name="dataTextViewModel"
+            type="com.example.myapplication.viewModel.DataTextViewModel" />
+
+
+        <variable
+            name="dataWeatherViewModel"
+            type="com.example.myapplication.viewModel.DataWeatherViewModel" />
+    </data>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -159,6 +177,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        bind:adapter="@{dataTextViewModel.}"
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="110dp"
@@ -179,3 +198,4 @@
         app:headerLayout="@layout/main_header"
         app:menu="@menu/drawer_menu"/>
 </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

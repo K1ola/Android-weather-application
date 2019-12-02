@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:paddingLeft="2dp">
-    <TextView
-        android:id="@+id/top_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        tools:text="Солнечно"
-        style="@style/WhiteText" />
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="dataTextViewModel"
+            type="com.example.myapplication.viewModel.DataTextViewModel" />
+    </data>
 
     <LinearLayout
-        android:orientation="horizontal"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingLeft="2dp">
         <TextView
-            android:id="@+id/bottom_text"
+            android:id="@+id/top_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            tools:text="+1"
+            tools:text="@{dataTextViewModel.topData}"
             style="@style/WhiteText" />
 
-        <TextView
-            android:id="@+id/bottom_text_measure"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            tools:text="°C"
-            style="@style/WhiteText" />
+            android:layout_height="match_parent"
+            android:paddingLeft="2dp">
+            <TextView
+                android:id="@+id/bottom_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                tools:text="@{dataTextViewModel.bottomData}"
+                style="@style/WhiteText" />
+
+            <TextView
+                android:id="@+id/bottom_text_measure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                tools:text="@{dataTextViewModel.bottomDataMeasure}"
+                style="@style/WhiteText" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</layout>

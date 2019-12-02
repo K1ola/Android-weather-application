@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.common;
+package com.example.myapplication.adapter;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -12,16 +12,17 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.model.DataWeather;
 
 import java.util.List;
 
 
 public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.WeatherHolder> {
     private final OnItemClickListener mListener;
-    private List<DataSource.DataWeather> mData;
+    private List<DataWeather> mData;
     private int dataColor = Color.WHITE;
 
-    public AdapterWeather(@NonNull List<DataSource.DataWeather> data, @Nullable final OnItemClickListener listener, int color) {
+    public AdapterWeather(@NonNull List<DataWeather> data, @Nullable final OnItemClickListener listener, int color) {
         mListener = listener;
         mData = data;
         dataColor = color;
@@ -46,7 +47,7 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
 
     @Override
     public void onBindViewHolder(@NonNull WeatherHolder holder, int position){
-        DataSource.DataWeather data = mData.get(position);
+        DataWeather data = mData.get(position);
         holder.bind(data);
     }
 
@@ -66,7 +67,7 @@ public final class AdapterWeather extends RecyclerView.Adapter<AdapterWeather.We
             mTemp = itemView.findViewById(R.id.temp);
             mImageView = itemView.findViewById(R.id.image);
         }
-        public void bind(DataSource.DataWeather ob){
+        public void bind(DataWeather ob){
             mDay.setText(ob.mDay);
             mDay.setTextColor(dataColor);
             mTemp.setText(ob.mTemp);

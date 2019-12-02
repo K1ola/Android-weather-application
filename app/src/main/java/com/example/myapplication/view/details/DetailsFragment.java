@@ -1,6 +1,5 @@
-package com.example.myapplication.presentation.details;
+package com.example.myapplication.view.details;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,27 +9,26 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.viewModels.SettingsViewModel;
-import com.example.myapplication.presentation.common.AdapterWeather;
-import com.example.myapplication.presentation.common.AdapterWithText;
-import com.example.myapplication.presentation.common.DataSource;
-import com.example.myapplication.presentation.main.MainFragment;
+import com.example.myapplication.viewModel.SettingsViewModel;
+import com.example.myapplication.adapter.AdapterWeather;
+import com.example.myapplication.adapter.AdapterWithText;
+//import com.example.myapplication.model.DataSource;
+import com.example.myapplication.view.main.MainFragment;
 
 public class DetailsFragment extends Fragment {
-    private DataSource mDataSource = DataSource.getInstance();
+//    private DataSource mDataSource = DataSource.getInstance();
 
-    private AdapterWeather mWeatherAdapter = new AdapterWeather(mDataSource.getDataDetails(), null, Color.BLACK);
-    private AdapterWithText mCalendarAdapterWithText = new AdapterWithText(mDataSource.getDataCalendar(), Color.BLACK);
-    private AdapterWithText mPressureAdapterWithText = new AdapterWithText(mDataSource.getDataPressure(), Color.BLACK);
-    private AdapterWithText mWindAdapterWithText = new AdapterWithText(mDataSource.getDataWind(), Color.BLACK);
-    private AdapterWithText mWetAdapterWithText = new AdapterWithText(mDataSource.getDataWet(), Color.BLACK);
+    private AdapterWeather mWeatherAdapter;// = new AdapterWeather(mDataSource.getDataDetails(), null, Color.BLACK);
+    private AdapterWithText mCalendarAdapterWithText;// = new AdapterWithText(mDataSource.getDataCalendar(), Color.BLACK);
+    private AdapterWithText mPressureAdapterWithText;// = new AdapterWithText(mDataSource.getDataPressure(), Color.BLACK);
+    private AdapterWithText mWindAdapterWithText;// = new AdapterWithText(mDataSource.getDataWind(), Color.BLACK);
+    private AdapterWithText mWetAdapterWithText;// = new AdapterWithText(mDataSource.getDataWet(), Color.BLACK);
 
     @NonNull
     @Override
@@ -44,21 +42,21 @@ public class DetailsFragment extends Fragment {
         model.getTemp().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String value) {
-                mDataSource.setTemperatureMeasures(value);
+//                mDataSource.setTemperatureMeasures(value);
             }
         });
 
         model.getPressure().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String value) {
-                mDataSource.setPreassureMeasures(value);
+//                mDataSource.setPressureMeasures(value);
             }
         });
 
         model.getWind().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String value) {
-                mDataSource.setWindMeasures(value);
+//                mDataSource.setWindMeasures(value);
             }
         });
 
