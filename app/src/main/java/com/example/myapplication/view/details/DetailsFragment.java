@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.details;
+package com.example.myapplication.view.details;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,17 +10,16 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.interactor.SettingsViewModel;
-import com.example.myapplication.presentation.common.AdapterWeather;
-import com.example.myapplication.presentation.common.AdapterWithText;
-import com.example.myapplication.presentation.common.DataSource;
-import com.example.myapplication.presentation.main.MainFragment;
+import com.example.myapplication.viewModel.SettingsViewModel;
+import com.example.myapplication.model.AdapterWeather;
+import com.example.myapplication.model.AdapterWithText;
+import com.example.myapplication.model.DataSource;
+import com.example.myapplication.view.main.MainFragment;
 
 public class DetailsFragment extends Fragment {
     private DataSource mDataSource = DataSource.getInstance();

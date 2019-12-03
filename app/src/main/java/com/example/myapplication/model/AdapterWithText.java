@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.common;
+package com.example.myapplication.model;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;

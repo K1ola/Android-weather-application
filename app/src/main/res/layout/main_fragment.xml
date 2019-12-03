@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable
+            name="settingsViewModel"
+            type="com.example.myapplication.viewModel.SettingsViewModel" />
+    </data>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,10 +13,10 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dark_sky_fon_blur"
-
+    android:background="@drawable/dark_sky_fon_blur">
+<!--
     tools:openDrawer="start">
-
+-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-thin"
-            tools:text="+1"
+            tools:text="@{settingsViewModel.temp}"
             android:textSize="70sp"
             style="@style/WhiteText" />
 
@@ -179,3 +186,4 @@
         app:headerLayout="@layout/main_header"
         app:menu="@menu/drawer_menu"/>
 </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

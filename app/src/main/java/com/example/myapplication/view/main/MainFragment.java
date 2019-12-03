@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main;
+package com.example.myapplication.view.main;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,11 +20,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.interactor.SettingsViewModel;
-import com.example.myapplication.presentation.common.AdapterWeather;
-import com.example.myapplication.presentation.common.AdapterWithText;
-import com.example.myapplication.presentation.common.DataSource;
-import com.example.myapplication.presentation.settings.SettingsFragment;
+import com.example.myapplication.viewModel.SettingsViewModel;
+import com.example.myapplication.model.AdapterWeather;
+import com.example.myapplication.model.AdapterWithText;
+import com.example.myapplication.model.DataSource;
+import com.example.myapplication.view.settings.SettingsFragment;
+import com.example.myapplication.databinding.MainFragmentBinding;
 
 public class MainFragment extends Fragment implements AdapterWeather.OnItemClickListener  {
     private AdapterWeather mAdapter;
@@ -53,17 +52,26 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.main_fragment, container, false);
-        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+
+        SettingsViewModel settingsViewModel = new SettingsViewModel(1,"°C");
+        MainFragmentBinding mainFragmentBinding = MainFragmentBinding.inflate(inflater,
+                container,
+                false);
+
+        mainFragmentBinding.setSettingsViewModel(settingsViewModel);
+        View view = mainFragmentBinding.getRoot();
+
+//        final View view = inflater.inflate(R.layout.main_fragment, container, false);
+//        SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
 
         if (savedInstanceState != null) {
             temperature = savedInstanceState.getString(TEMPERATURE_KEY);
             pressure = savedInstanceState.getString(PRESSURE_KEY);
             wind = savedInstanceState.getString(WIND_KEY);
         } else {
-            temperature = model.getTemp();
-            pressure = model.getPressure();
-            wind = model.getWind();
+            temperature = "1";//model.getTemp();
+            pressure = "1"; //model.getPressure();
+            wind = "1";//model.getWind();
         }
 
         mDataSource.setMeasures(temperature, pressure, wind);
@@ -132,11 +140,11 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
         imageView.setColorFilter(Color.WHITE);
         imageView.setImageResource(R.drawable.cold_snow_snowflake);
 
-        final SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+//        final SettingsViewModel model = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
 
-        setViewText(view, R.id.temperature_measure, model.getTemp());
-        setViewText(view, R.id.pressure_measure, model.getPressure());
-        setViewText(view, R.id.wind_measure, model.getWind());
+        setViewText(view, R.id.temperature_measure, "1"/*model.getTemp()*/);
+        setViewText(view, R.id.pressure_measure, "1"/*model.getPressure()*/);
+        setViewText(view, R.id.wind_measure, "1"/*model.getWind()*/);
     }
 
 

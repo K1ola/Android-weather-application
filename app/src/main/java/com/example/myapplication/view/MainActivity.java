@@ -1,13 +1,14 @@
-package com.example.myapplication;
+package com.example.myapplication.view;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.presentation.common.AdapterWeather;
-import com.example.myapplication.presentation.details.DetailsFragment;
-import com.example.myapplication.presentation.main.MainFragment;
+import com.example.myapplication.R;
+import com.example.myapplication.model.AdapterWeather;
+import com.example.myapplication.view.details.DetailsFragment;
+import com.example.myapplication.view.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity implements AdapterWeather.OnItemClickListener  {
     @Override

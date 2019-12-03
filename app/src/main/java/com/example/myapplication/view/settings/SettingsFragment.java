@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.settings;
+package com.example.myapplication.view.settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,18 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
-import com.example.myapplication.interactor.SettingsViewModel;
-import com.example.myapplication.presentation.main.MainFragment;
+import com.example.myapplication.viewModel.SettingsViewModel;
+import com.example.myapplication.view.main.MainFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
