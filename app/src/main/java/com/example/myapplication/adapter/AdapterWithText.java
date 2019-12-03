@@ -51,7 +51,7 @@ public final class AdapterWithText extends RecyclerView.Adapter<AdapterWithText.
     private int layoutId;
     private List<DataText> dataTexts;
 
-    public AdapterWithText(@LayoutRes int layoutId, DataTextViewModel viewModel) {
+    public AdapterWithText(int layoutId, DataTextViewModel viewModel) {
         this.layoutId = layoutId;
         this.dataTextViewModel = viewModel;
     }
