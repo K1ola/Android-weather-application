@@ -15,6 +15,11 @@ public class DataSource {
     private String default_pressure_measure = "мм рт.ст.";
     private String default_wind_measure = "м/с";
 
+    // попытка вытащить данные
+    public String getTest(){
+        return default_pressure_measure;
+    }
+
     public DataSource(){
         mData = DataWeather.CreateHardcodedData(default_temperature_measure);
         mDataDetails = DataWeather.CreateHardcodedDetails(default_temperature_measure);

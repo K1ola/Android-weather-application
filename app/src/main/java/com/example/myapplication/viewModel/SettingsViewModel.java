@@ -1,9 +1,37 @@
 package com.example.myapplication.viewModel;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.ViewModel;
 
 
 public class SettingsViewModel extends ViewModel {
+
+    public class TestViewModel extends BaseObservable{
+
+        private String temp;
+
+        @Nullable
+        private TestViewModel mTestViewModel;
+
+        private final LifecycleObserver mLifecycleObserver;
+
+        public TestViewModel(LifecycleObserver lifecycleObserver) {
+            mLifecycleObserver = lifecycleObserver;
+        }
+
+        // Чтобы указать, что значение может меняться и что эти изменения нужно отслеживать,
+        // используется аннотация Bindable
+        @Bindable
+        @NonNull
+        public String getTemp() {
+            return temp;
+        }
+    }
+
     private String temp; //= "°C";
     private String pressure = "гПа";
     private String wind ="км/ч";
@@ -20,9 +48,9 @@ public class SettingsViewModel extends ViewModel {
         temp = item;
     }
 
-    public String getTemp() {
-        return temp;
-    }
+//    public String getTemp() {
+//        return temp;
+//    }
 
 
     public void setPressure(String item) {

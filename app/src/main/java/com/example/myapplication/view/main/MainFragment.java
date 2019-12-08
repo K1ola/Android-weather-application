@@ -15,7 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,7 +54,9 @@ public class MainFragment extends Fragment implements AdapterWeather.OnItemClick
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        LifecycleObserver observer = Lif
         SettingsViewModel settingsViewModel = new SettingsViewModel(1,"°C");
+        //..................      Binding
         MainFragmentBinding mainFragmentBinding = MainFragmentBinding.inflate(inflater,
                 container,
                 false);
