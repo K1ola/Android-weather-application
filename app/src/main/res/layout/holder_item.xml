@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="@={viewModel.getHolderItemAt(position).settings.currentPressureMeasure}"
+            android:text="@={viewModel.getHolderItemAt(position).topData}"
             style="@style/WhiteText"/>
         <ImageView
             android:id="@+id/image"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:textSize="7dp"
-            android:text="@={viewModel.getHolderItemAt(position).todayWeather.temperature}"
+            android:text="@={viewModel.getHolderItemAt(position).bottomData}"
             style="@style/WhiteText"/>
 
     </LinearLayout>

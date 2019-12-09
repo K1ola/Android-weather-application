@@ -15,16 +15,35 @@ public class HolderItem {
 
     public HolderItem() {}
 
-    public HolderItem(Settings settings, TodayWeather todayWeather) {
-        this.settings = settings;
-        this.todayWeather = todayWeather;
-    }
+//    public HolderItem setHolderItemData(String topData, String bottomData, Image image) {
+//        HolderItem result = new HolderItem();
+//        result.topData = topData;
+//        result.bottomData = bottomData;
+//        result.image = image;
+//        return result;
+//
+//    }
+//
+//    public HolderItem setHolderItem(Settings settings, TodayWeather todayWeather) {
+//        HolderItem result = new HolderItem();
+//        result.settings = settings;
+//        result.todayWeather = todayWeather;
+//        return result;
+//    }
 
     public HolderItem(String topData, String bottomData, Image image) {
         this.topData = topData;
         this.bottomData = bottomData;
         this.image = image;
+
     }
+
+    public HolderItem(Settings settings, TodayWeather todayWeather) {
+        this.settings = settings;
+        this.todayWeather = todayWeather;
+    }
+
+
 
     public static HolderItem getInstance() {
         return new HolderItem();
@@ -35,12 +54,15 @@ public class HolderItem {
         TodayWeather t = new TodayWeather("some temp","some press",
                 "some wet",
                 "some wind");
+        String topData, bottomData;
+        topData = s.currentTemperatureMeasure;
+        bottomData = t.wet;
         HolderItem[] array = new HolderItem[] {
-                new HolderItem(s, t),
-                new HolderItem(s, t),
-                new HolderItem(s, t),
-                new HolderItem(s, t),
-                new HolderItem(s, t),
+                new HolderItem(topData, bottomData, null),
+                new HolderItem(topData, bottomData, null),
+                new HolderItem(topData, bottomData, null),
+                new HolderItem(topData, bottomData, null),
+                new HolderItem(topData, bottomData, null),
         };
 
         List<HolderItem> list = Arrays.asList(array);
