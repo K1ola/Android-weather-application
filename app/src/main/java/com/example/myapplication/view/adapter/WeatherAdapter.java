@@ -41,6 +41,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
         }
 
         public void bind(DataViewModel dataViewModel, Integer position) {
+            binding.setViewModel(dataViewModel);
+
             binding.setVariable(BR.dataViewModel, dataViewModel);
             binding.setVariable(BR.position, position);
             binding.executePendingBindings();

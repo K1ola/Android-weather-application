@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -82,7 +83,10 @@ public class MainFragment extends Fragment implements LifecycleOwner {
             }
         });
 
-        viewModel.getHolderItem().observe(this, new Observer<List<HolderItem>>() {
+
+        viewModel.fetchList();
+        LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable();
+        a.observe(this, new Observer<List<HolderItem>>() {
             @Override
             public void onChanged(List<HolderItem> holderItemList) {
                 viewModel.setHolderItemsInAdapter(holderItemList);

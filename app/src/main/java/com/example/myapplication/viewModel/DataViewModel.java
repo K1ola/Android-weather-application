@@ -88,21 +88,7 @@ public class DataViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<HolderItem>> getHolderItem() {
         MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
-
-        Settings s = new Settings();
-        TodayWeather t = new TodayWeather("some temp","some press",
-                "some wet",
-                "some wind");
-        HolderItem[] array = new HolderItem[] {
-                new HolderItem(s, t),
-                new HolderItem(s, todayWeather.get()),
-                new HolderItem(s, todayWeather.get()),
-                new HolderItem(s, todayWeather.get()),
-                new HolderItem(s, todayWeather.get())
-        };
-
-        List<HolderItem> list = Arrays.asList(array);
-        data.setValue(list);
+        data.setValue(HolderItem.fetchList());
         return data;
     }
 
@@ -118,22 +104,13 @@ public class DataViewModel extends AndroidViewModel {
 
     public void setHolderItemsInAdapter(List<HolderItem> holderItems) {
 
-        Settings s = new Settings();
-        TodayWeather t = new TodayWeather("some temp","some press",
-                "some wet",
-                "some wind");
-        HolderItem[] array = new HolderItem[] {
-                new HolderItem(s, t),
-                new HolderItem(s, todayWeather.get()),
-                new HolderItem(s, todayWeather.get()),
-                new HolderItem(s, todayWeather.get()),
-                new HolderItem(s, todayWeather.get())
-        };
 
-        List<HolderItem> list = Arrays.asList(array);
-
-        this.weatherAdapter.setHolderItems(list);
+        this.weatherAdapter.setHolderItems(holderItems);
         this.weatherAdapter.notifyDataSetChanged();
+    }
+
+    public void fetchList() {
+        setHolderItem(HolderItem.fetchList());
     }
 
 }
