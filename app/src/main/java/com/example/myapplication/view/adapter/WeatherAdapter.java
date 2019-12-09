@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.BR;
 import com.example.myapplication.databinding.HolderItemBinding;
 import com.example.myapplication.model.HolderItem;
+import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.viewModel.DataViewModel;
 
 import java.util.List;
@@ -22,9 +24,17 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     private List<HolderItem> items;
     private int layoutId;
 
-    public WeatherAdapter(@LayoutRes int layoutId, DataViewModel data) {
+    @Nullable
+    public ItemClickCallback itemClickCallback;
+
+    public WeatherAdapter(@LayoutRes int layoutId, DataViewModel data, @Nullable ItemClickCallback itemClickCallback) {
         this.layoutId = layoutId;
         this.dataViewModel = data;
+        this.itemClickCallback = itemClickCallback;
+    }
+
+    public void setItemClickCallback(ItemClickCallback itemClickCallback) {
+        this.itemClickCallback = itemClickCallback;
     }
 
     public void setHolderItems(List<HolderItem> items) {
@@ -64,6 +74,9 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     public WeatherHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         HolderItemBinding binding = DataBindingUtil.inflate(inflater, viewType, parent, false);
+
+        binding.setCallback(itemClickCallback);
+
         return new WeatherHolder(binding);
     }
 
@@ -76,4 +89,5 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     public int getItemCount() {
         return items == null ? 0 : items.size();
     }
+
 }

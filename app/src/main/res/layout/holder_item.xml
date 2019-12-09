@@ -10,12 +10,17 @@
         <variable
             name="viewModel"
             type="com.example.myapplication.viewModel.DataViewModel"/>
+
+        <variable
+            name="callback"
+            type="com.example.myapplication.view.callback.ItemClickCallback" />
     </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="64dp"
         android:layout_height="match_parent"
-        android:paddingLeft="2dp">
+        android:paddingLeft="2dp"
+        android:onClick="@{() -> callback.onClick(viewModel.getHolderItemAt(position))}">
         <TextView
             android:id="@+id/top_text"
             android:layout_width="wrap_content"

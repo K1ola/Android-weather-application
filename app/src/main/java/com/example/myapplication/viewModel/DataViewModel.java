@@ -1,10 +1,13 @@
 package com.example.myapplication.viewModel;
 
 import android.app.Application;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -12,7 +15,10 @@ import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.model.TodayWeather;
+import com.example.myapplication.view.MainActivity;
 import com.example.myapplication.view.adapter.WeatherAdapter;
+import com.example.myapplication.view.callback.ItemClickCallback;
+import com.example.myapplication.view.details.DetailsFragment;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +41,7 @@ public class DataViewModel extends AndroidViewModel {
         todayWeatherObservable = getTodayWeather();
         holderItemObservable = getHolderItem();
 
-        weatherAdapter = new WeatherAdapter(R.layout.holder_item, this);
+        weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
     }
 
     public WeatherAdapter getWeatherAdapter() {
@@ -64,7 +70,7 @@ public class DataViewModel extends AndroidViewModel {
 
     public MutableLiveData<Settings> getSettings() {
         MutableLiveData<Settings> data = new MutableLiveData<>();
-        data.setValue(Settings.currentMeasure());
+        data.setValue(currentMeasure());
         return data;
     }
 
@@ -75,9 +81,9 @@ public class DataViewModel extends AndroidViewModel {
 
     public MutableLiveData<TodayWeather> getTodayWeather() {
         MutableLiveData<TodayWeather> data = new MutableLiveData<>();
-        data.setValue(new TodayWeather("some temp","some press",
-                "some wet",
-                "some wind"));
+        data.setValue(new TodayWeather("10 ","10 ",
+                "10 %",
+                "10 "));
         return data;
     }
 
@@ -113,4 +119,26 @@ public class DataViewModel extends AndroidViewModel {
         setHolderItem(HolderItem.fetchList());
     }
 
+    public static Settings currentMeasure() {
+        Settings settings = new Settings();
+        settings.currentTemperatureMeasure = Settings.isCelsius ? Settings.CELSIUS : Settings.FAHRENHEIT;
+        settings.currentPressureMeasure = Settings.isHpa ? Settings.HPA : Settings.MM_HG;
+        settings.currentWindMeasure = Settings.isMeters ? Settings.METERS_PER_SECOND : Settings.HOURS_PER_SECOND;
+        return settings;
+    }
+
+    public void setOnClickItemListener(final FragmentActivity fragmentActivity) {
+        weatherAdapter.setItemClickCallback(new ItemClickCallback() {
+            @Override
+            public void onClick(HolderItem holderItem) {
+                DetailsFragment detailsFragment = new DetailsFragment();
+
+                fragmentActivity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, detailsFragment, "detailsFragment")
+                        .addToBackStack("detailsFragment")
+                        .commit();
+            }
+        });
+    }
 }

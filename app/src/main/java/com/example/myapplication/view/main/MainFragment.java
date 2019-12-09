@@ -52,6 +52,8 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         final RecyclerView recyclerViewText = view.findViewById(R.id.list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
 
+        viewModel.setOnClickItemListener(getActivity());
+
         layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewText.setLayoutManager(layoutManagerText);
         recyclerViewText.setAdapter(viewModel.getWeatherAdapter());

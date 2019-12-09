@@ -2,6 +2,8 @@ package com.example.myapplication.model;
 
 import android.media.Image;
 
+import com.example.myapplication.viewModel.DataViewModel;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,22 +16,6 @@ public class HolderItem {
     public Image image;
 
     public HolderItem() {}
-
-//    public HolderItem setHolderItemData(String topData, String bottomData, Image image) {
-//        HolderItem result = new HolderItem();
-//        result.topData = topData;
-//        result.bottomData = bottomData;
-//        result.image = image;
-//        return result;
-//
-//    }
-//
-//    public HolderItem setHolderItem(Settings settings, TodayWeather todayWeather) {
-//        HolderItem result = new HolderItem();
-//        result.settings = settings;
-//        result.todayWeather = todayWeather;
-//        return result;
-//    }
 
     public HolderItem(String topData, String bottomData, Image image) {
         this.topData = topData;
@@ -50,10 +36,10 @@ public class HolderItem {
     }
 
     public static List<HolderItem> fetchList() {
-        Settings s = new Settings(Settings.CELSIUS, Settings.HPA, Settings.METERS_PER_SECOND);
-        TodayWeather t = new TodayWeather("some temp","some press",
-                "some wet",
-                "some wind");
+        Settings s = DataViewModel.currentMeasure();
+        TodayWeather t = new TodayWeather("10 ","10 ",
+                "10 ",
+                "10 ");
         String topData, bottomData;
         topData = s.currentTemperatureMeasure;
         bottomData = t.wet;

@@ -44,12 +44,4 @@ public class Settings {
 //        data.setValue(currentMeasure());
 //        return data;
 //    }
-
-    public static Settings currentMeasure() {
-        Settings settings = new Settings();
-        settings.currentTemperatureMeasure = isCelsius ? CELSIUS : FAHRENHEIT;
-        settings.currentPressureMeasure = isHpa ? HPA : MM_HG;
-        settings.currentWindMeasure = isMeters ? METERS_PER_SECOND : HOURS_PER_SECOND;
-        return settings;
-    }
 }
