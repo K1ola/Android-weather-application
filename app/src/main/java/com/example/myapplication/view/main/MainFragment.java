@@ -82,8 +82,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
 
 
         viewModel.getConstDataList();
-        LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable();
-        a.observe(this, new Observer<List<HolderItem>>() {
+        viewModel.getHolderItemObservable().observe(this, new Observer<List<HolderItem>>() {
             @Override
             public void onChanged(List<HolderItem> holderItemList) {
                 viewModel.setHolderItemsInAdapter(holderItemList);
