@@ -41,7 +41,7 @@ public class HolderItem {
         return new HolderItem();
     }
 
-    public static List<HolderItem> fetchList() {
+    public static List<HolderItem> getConstDataList() {
         Settings s = DataViewModel.currentMeasure();
         TodayWeather t = new TodayWeather("10 ","10 ",
                 "10 ",

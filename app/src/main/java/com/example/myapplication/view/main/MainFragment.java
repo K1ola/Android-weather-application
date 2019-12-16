@@ -62,14 +62,11 @@ public class MainFragment extends Fragment implements LifecycleOwner {
     }
 
     private void observeViewModel(final DataViewModel viewModel) {
-        // Update the list when the data changes
         viewModel.getTodayWeatherObservable().observe(this, new Observer<TodayWeather>() {
             @Override
             public void onChanged(@Nullable TodayWeather todayWeather) {
                 if (todayWeather != null) {
-                    //…
                     viewModel.setTodayWeather(todayWeather);
-                    //projectAdapter.setProjectList(projects);
                 }
             }
         });
@@ -78,15 +75,13 @@ public class MainFragment extends Fragment implements LifecycleOwner {
             @Override
             public void onChanged(@Nullable Settings settings) {
                 if (settings != null) {
-                    //…
                     viewModel.setSettings(settings);
-                    //projectAdapter.setProjectList(projects);
                 }
             }
         });
 
 
-        viewModel.fetchList();
+        viewModel.getConstDataList();
         LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable();
         a.observe(this, new Observer<List<HolderItem>>() {
             @Override
@@ -100,11 +95,11 @@ public class MainFragment extends Fragment implements LifecycleOwner {
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-        ImageView settings_icon = view.findViewById(R.id.main_setting);
-        settings_icon.setOnClickListener(new View.OnClickListener() {
+        ImageView settingsIcon = view.findViewById(R.id.main_setting);
+        settingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenSettingsFragment();
+                openSettingsFragment();
             }
         });
 
@@ -113,8 +108,8 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         observeViewModel(viewModel);
     }
 
-    private void OpenSettingsFragment() {
-        SettingsFragment settingsFragment = new SettingsFragment();
+    private void openSettingsFragment() {
+        final SettingsFragment settingsFragment = new SettingsFragment();
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()

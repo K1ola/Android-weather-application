@@ -89,9 +89,9 @@ public class DataViewModel extends AndroidViewModel {
         this.holderItems.set(holderItem);
     }
 
-    public MutableLiveData<List<HolderItem>> getHolderItem() {
+    private MutableLiveData<List<HolderItem>> getHolderItem() {
         MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
-        data.setValue(HolderItem.fetchList());
+        data.setValue(HolderItem.getConstDataList());
         return data;
     }
 
@@ -112,8 +112,8 @@ public class DataViewModel extends AndroidViewModel {
         this.weatherAdapter.notifyDataSetChanged();
     }
 
-    public void fetchList() {
-        setHolderItem(HolderItem.fetchList());
+    public void getConstDataList() {
+        setHolderItem(HolderItem.getConstDataList());
     }
 
     public static Settings currentMeasure() {

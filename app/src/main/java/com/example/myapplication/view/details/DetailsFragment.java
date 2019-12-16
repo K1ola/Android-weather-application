@@ -1,12 +1,10 @@
 package com.example.myapplication.view.details;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,14 +56,6 @@ public class DetailsFragment extends Fragment {
                 .commit();
     }
 
-    private void createRecycler(@NonNull View view, int recyclerId, @Nullable RecyclerView.Adapter adapter) {
-        final RecyclerView recyclerView = view.findViewById(recyclerId);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-    }
-
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final DataViewModel viewModel =
@@ -88,14 +78,11 @@ public class DetailsFragment extends Fragment {
     }
 
     private void observeViewModel(final DataViewModel viewModel) {
-        // Update the list when the data changes
         viewModel.getTodayWeatherObservable().observe(this, new Observer<TodayWeather>() {
             @Override
             public void onChanged(@Nullable TodayWeather todayWeather) {
                 if (todayWeather != null) {
-                    //…
                     viewModel.setTodayWeather(todayWeather);
-                    //projectAdapter.setProjectList(projects);
                 }
             }
         });
@@ -104,15 +91,13 @@ public class DetailsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Settings settings) {
                 if (settings != null) {
-                    //…
                     viewModel.setSettings(settings);
-                    //projectAdapter.setProjectList(projects);
                 }
             }
         });
 
 
-        viewModel.fetchList();
+        viewModel.getConstDataList();
         LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable();
         a.observe(this, new Observer<List<HolderItem>>() {
             @Override

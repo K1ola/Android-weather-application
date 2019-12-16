@@ -38,10 +38,4 @@ public class Settings {
     public static Settings getInstance() {
         return new Settings();
     }
-
-//    public MutableLiveData<Settings> getSettings() {
-//        MutableLiveData<Settings> data = new MutableLiveData<>();
-//        data.setValue(currentMeasure());
-//        return data;
-//    }
 }

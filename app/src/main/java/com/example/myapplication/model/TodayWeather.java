@@ -1,8 +1,5 @@
 package com.example.myapplication.model;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 public class TodayWeather {
     public String temperature;
     public String pressure;
