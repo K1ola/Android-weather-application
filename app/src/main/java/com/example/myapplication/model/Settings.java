@@ -1,8 +1,5 @@
 package com.example.myapplication.model;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 public class Settings {
     public final static String CELSIUS = "°C";
     public final static String FAHRENHEIT = "°F";
