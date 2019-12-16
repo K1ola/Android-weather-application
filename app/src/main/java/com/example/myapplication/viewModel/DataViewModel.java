@@ -64,7 +64,6 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void setSettings(Settings settings) {
-//        settingsObservable.setValue(settings);
         this.settings.set(settings);
     }
 
@@ -75,7 +74,6 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void setTodayWeather(TodayWeather todayWeather) {
-//        todayWeatherObservable.setValue(todayWeather);
         this.todayWeather.set(todayWeather);
     }
 
@@ -88,7 +86,6 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void setHolderItem(List<HolderItem> holderItem) {
-//        todayWeatherObservable.setValue(todayWeather);
         this.holderItems.set(holderItem);
     }
 
@@ -140,5 +137,9 @@ public class DataViewModel extends AndroidViewModel {
                         .commit();
             }
         });
+    }
+
+    public void SetTextColor(int color) {
+
     }
 }

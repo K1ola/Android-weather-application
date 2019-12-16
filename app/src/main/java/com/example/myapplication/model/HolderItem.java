@@ -1,5 +1,6 @@
 package com.example.myapplication.model;
 
+import android.graphics.Color;
 import android.media.Image;
 
 import com.example.myapplication.viewModel.DataViewModel;
@@ -15,12 +16,15 @@ public class HolderItem {
     public String bottomData;
     public Image image;
 
+    public int color;
+
     public HolderItem() {}
 
-    public HolderItem(String topData, String bottomData, Image image) {
+    public HolderItem(String topData, String bottomData, Image image, int color) {
         this.topData = topData;
         this.bottomData = bottomData;
         this.image = image;
+        this.color = color;
 
     }
 
@@ -29,7 +33,9 @@ public class HolderItem {
         this.todayWeather = todayWeather;
     }
 
-
+    public void setColor(int color) {
+        this.color = color;
+    }
 
     public static HolderItem getInstance() {
         return new HolderItem();
@@ -44,11 +50,11 @@ public class HolderItem {
         topData = s.currentTemperatureMeasure;
         bottomData = t.wet;
         HolderItem[] array = new HolderItem[] {
-                new HolderItem(topData, bottomData, null),
-                new HolderItem(topData, bottomData, null),
-                new HolderItem(topData, bottomData, null),
-                new HolderItem(topData, bottomData, null),
-                new HolderItem(topData, bottomData, null),
+                new HolderItem(topData, bottomData, null, Color.GRAY),
+                new HolderItem(topData, bottomData, null, Color.WHITE),
+                new HolderItem(topData, bottomData, null, Color.WHITE),
+                new HolderItem(topData, bottomData, null, Color.WHITE),
+                new HolderItem(topData, bottomData, null, Color.WHITE),
         };
 
         List<HolderItem> list = Arrays.asList(array);

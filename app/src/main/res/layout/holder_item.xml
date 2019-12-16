@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
+            android:textColor="@color/cardview_shadow_start_color"
             android:text="@={viewModel.getHolderItemAt(position).topData}"
             style="@style/WhiteText"/>
         <ImageView
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:textSize="7dp"
+            android:textColor="@color/cardview_shadow_start_color"
             android:text="@={viewModel.getHolderItemAt(position).bottomData}"
             style="@style/WhiteText"/>
 
