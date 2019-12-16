@@ -1,15 +1,20 @@
-package com.example.myapplication;
+package com.example.myapplication.view;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.presentation.common.AdapterWeather;
-import com.example.myapplication.presentation.details.DetailsFragment;
-import com.example.myapplication.presentation.main.MainFragment;
+import com.example.myapplication.R;
+//import com.example.myapplication.model.AdapterWeather;
+//import com.example.myapplication.view.details.DetailsFragment;
+import com.example.myapplication.model.HolderItem;
+import com.example.myapplication.view.adapter.WeatherAdapter;
+import com.example.myapplication.view.callback.ItemClickCallback;
+import com.example.myapplication.view.details.DetailsFragment;
+import com.example.myapplication.view.main.MainFragment;
 
-public class MainActivity extends AppCompatActivity implements AdapterWeather.OnItemClickListener  {
+public class MainActivity extends AppCompatActivity implements ItemClickCallback  {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +25,13 @@ public class MainActivity extends AppCompatActivity implements AdapterWeather.On
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, mainFragment, "mainFragment")
+                    .add(R.id.container, mainFragment)
                     .commit();
         }
     }
 
     @Override
-    public void onItemClick() {
+    public void onClick(HolderItem holderItem) {
         DetailsFragment detailsFragment = new DetailsFragment();
 
         getSupportFragmentManager()

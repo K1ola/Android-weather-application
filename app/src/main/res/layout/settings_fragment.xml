@@ -1,47 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-  <androidx.appcompat.widget.Toolbar
-      android:id="@+id/setting_toolbar"
+<layout>
+  <data>
+    <variable
+        name="dataViewModel"
+        type="com.example.myapplication.viewModel.DataViewModel" />
+  </data>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:orientation="vertical"
       android:layout_width="match_parent"
-      android:layout_height="56dp"
-      android:background="@color/cardview_light_background"
-      app:contentInsetLeft="0dp"
-      app:contentInsetStart="0dp">
+      android:layout_height="match_parent">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/setting_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <ImageButton
-        android:id="@+id/arrow_back"
+        android:layout_height="56dp"
         android:background="@color/cardview_light_background"
-        android:padding="4dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+      <ImageButton
+          android:id="@+id/arrow_back"
+          android:background="@color/cardview_light_background"
+          android:padding="4dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          android:src="@drawable/baseline_arrow_left_alt_black_18dp"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:text="Настройки"
+          android:textColor="@color/cardview_dark_background"/>
+
+      </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/switch_items"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/baseline_arrow_left_alt_black_18dp"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Настройки"
-        android:textColor="@color/cardview_dark_background"/>
+      <Switch
+          android:id="@+id/switch_temperature"
+          android:paddingLeft="8dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:thumb="@drawable/rectangle_thumb"
+          android:track="@drawable/rectangle_track"
+          android:text="Температура"
+          android:textOn="°C"
+          android:textOff="°F"
+          android:checked="@={dataViewModel.settings.isCelsius}"
+          android:showText="true"
+          android:switchPadding="32dp"
+          android:padding="4dp"/>
 
-    </RelativeLayout>
+      <Switch
+          android:id="@+id/switch_pressure"
+          android:paddingLeft="8dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:thumb="@drawable/rectangle_thumb"
+          android:track="@drawable/rectangle_track"
+          android:text="Давление"
+          android:textOn="гПа"
+          android:textOff="мм рт.ст."
+          android:checked="@={dataViewModel.settings.isHpa}"
+          android:showText="true"
+          android:switchPadding="45dp"
+          android:padding="4dp"/>
 
-  </androidx.appcompat.widget.Toolbar>
+      <Switch
+          android:id="@+id/switch_wind"
+          android:paddingLeft="8dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:thumb="@drawable/rectangle_thumb"
+          android:track="@drawable/rectangle_track"
+          android:text="Сила Ветра"
+          android:textOn="м/с"
+          android:textOff="км/ч"
+          android:checked="@={dataViewModel.settings.isMeters}"
+          android:showText="true"
+          android:switchPadding="54dp"
+          android:padding="4dp"/>
 
-  <include
-      layout="@layout/setting_items"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent" />
+    </LinearLayout>
 
-</LinearLayout>
+  </LinearLayout>
+</layout>

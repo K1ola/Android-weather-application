@@ -1,0 +1,15 @@
+package com.example.myapplication.model;
+
+public class TodayWeather {
+    public String temperature;
+    public String pressure;
+    public String wet;
+    public String wind;
+
+    public TodayWeather(String temperature, String pressure, String wet, String wind) {
+        this.temperature = temperature;
+        this.pressure = pressure;
+        this.wet = wet;
+        this.wind =wind;
+    }
+}

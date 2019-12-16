@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="dataViewModel"
+            type="com.example.myapplication.viewModel.DataViewModel" />
+    </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -49,6 +55,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendar"
+            app:setAdapter="@{dataViewModel.getWeatherAdapter()}"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_margin="10dp" />
@@ -76,3 +83,4 @@
     </LinearLayout>
 </ScrollView>
 </LinearLayout>
+</layout>
