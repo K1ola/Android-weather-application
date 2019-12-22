@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -62,6 +63,11 @@ public class API {
 //        }
 
         return weather;
+    }
+
+    @SuppressLint("DefaultLocale")
+    public List<Weather> get5DaysWeather(String location) {
+        return null;
     }
 
     private class Coordinates {
