@@ -6,10 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-//import com.example.myapplication.model.AdapterWeather;
-//import com.example.myapplication.view.details.DetailsFragment;
 import com.example.myapplication.model.HolderItem;
-import com.example.myapplication.view.adapter.WeatherAdapter;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.view.details.DetailsFragment;
 import com.example.myapplication.view.main.MainFragment;
@@ -41,3 +38,4 @@ public class MainActivity extends AppCompatActivity implements ItemClickCallback
                 .commit();
     }
 }
+

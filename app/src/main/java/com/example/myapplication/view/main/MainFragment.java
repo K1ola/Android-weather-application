@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +20,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.databinding.MainFragmentBinding;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
-import com.example.myapplication.model.TodayWeather;
+import com.example.myapplication.model.Weather;
 import com.example.myapplication.view.settings.SettingsFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
@@ -62,11 +61,11 @@ public class MainFragment extends Fragment implements LifecycleOwner {
     }
 
     private void observeViewModel(final DataViewModel viewModel) {
-        viewModel.getTodayWeatherObservable().observe(this, new Observer<TodayWeather>() {
+        viewModel.getTodayWeatherObservable().observe(this, new Observer<Weather>() {
             @Override
-            public void onChanged(@Nullable TodayWeather todayWeather) {
-                if (todayWeather != null) {
-                    viewModel.setTodayWeather(todayWeather);
+            public void onChanged(@Nullable Weather weather) {
+                if (weather != null) {
+                    viewModel.setTodayWeather(weather);
                 }
             }
         });

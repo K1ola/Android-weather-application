@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-thin"
-                android:text="@={dataViewModel.todayWeather.temperature}"
+                android:text="@={dataViewModel.weather.temperature}"
                 android:textSize="20sp"
                 style="@style/WhiteText" />
 
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                tools:text="Солнечно"
+                android:text="@{dataViewModel.weather.summary}"
                 android:textSize="25sp"
                 style="@style/WhiteText" />
 
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/Wet"
-                    android:text="@{String.format(@string/Wet, dataViewModel.todayWeather.wet)}"
+                    android:text="@{String.format(@string/Wet, dataViewModel.weather.wet)}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
 
@@ -141,7 +141,7 @@
                     android:id="@+id/wet_measure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="%"
+                    android:text="%"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
             </LinearLayout>
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/Pressure"
-                    android:text="@{String.format(@string/Pressure, dataViewModel.todayWeather.pressure)}"
+                    android:text="@{String.format(@string/Pressure, dataViewModel.weather.pressure)}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
 
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/Wind"
-                    android:text="@{String.format(@string/Wind, dataViewModel.todayWeather.wind)}"
+                    android:text="@{String.format(@string/Wind, dataViewModel.weather.wind)}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
 

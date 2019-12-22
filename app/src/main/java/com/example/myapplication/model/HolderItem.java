@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HolderItem {
     public Settings settings;
-    public TodayWeather todayWeather;
+    public Weather weather;
 
     public String topData;
     public String bottomData;
@@ -28,9 +28,9 @@ public class HolderItem {
 
     }
 
-    public HolderItem(Settings settings, TodayWeather todayWeather) {
+    public HolderItem(Settings settings, Weather weather) {
         this.settings = settings;
-        this.todayWeather = todayWeather;
+        this.weather = weather;
     }
 
     public void setColor(int color) {
@@ -43,9 +43,10 @@ public class HolderItem {
 
     public static List<HolderItem> getConstDataList() {
         Settings s = DataViewModel.currentMeasure();
-        TodayWeather t = new TodayWeather("10 ","10 ",
+        Weather t = new Weather("10 ","10 ",
                 "10 ",
-                "10 ");
+                "10 ",
+                "10", "10", "10");
         String topData, bottomData;
         topData = s.currentTemperatureMeasure;
         bottomData = t.wet;

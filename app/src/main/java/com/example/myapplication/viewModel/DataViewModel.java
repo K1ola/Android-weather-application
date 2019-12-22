@@ -1,34 +1,33 @@
 package com.example.myapplication.viewModel;
 
 import android.app.Application;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
-import com.example.myapplication.model.TodayWeather;
-import com.example.myapplication.view.MainActivity;
+import com.example.myapplication.model.Weather;
+import com.example.myapplication.repository.API;
 import com.example.myapplication.view.adapter.WeatherAdapter;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.view.details.DetailsFragment;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class DataViewModel extends AndroidViewModel {
+    private API api;
+
     private final MutableLiveData<Settings> settingsObservable;
     public ObservableField<Settings> settings = new ObservableField<>();
 
-    private final MutableLiveData<TodayWeather> todayWeatherObservable;
-    public ObservableField<TodayWeather> todayWeather = new ObservableField<>();
+    private final MutableLiveData<Weather> weatherObservable;
+    public ObservableField<Weather> weather = new ObservableField<>();
 
     private final MutableLiveData<List<HolderItem>> holderItemObservable;
     public ObservableField<List<HolderItem>> holderItems = new ObservableField<>();
@@ -37,8 +36,10 @@ public class DataViewModel extends AndroidViewModel {
     public DataViewModel(@NonNull Application application) {
         super(application);
 
+        api = new API(application.getApplicationContext());
+
         settingsObservable = getSettings();
-        todayWeatherObservable = getTodayWeather();
+        weatherObservable = getTodayWeather();
         holderItemObservable = getHolderItem();
 
         weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
@@ -56,8 +57,8 @@ public class DataViewModel extends AndroidViewModel {
     public LiveData<Settings> getSettingsObservable() {
         return settingsObservable;
     }
-    public LiveData<TodayWeather> getTodayWeatherObservable() {
-        return todayWeatherObservable;
+    public LiveData<Weather> getTodayWeatherObservable() {
+        return weatherObservable;
     }
     public LiveData<List<HolderItem>> getHolderItemObservable() {
         return holderItemObservable;
@@ -73,15 +74,15 @@ public class DataViewModel extends AndroidViewModel {
         return data;
     }
 
-    public void setTodayWeather(TodayWeather todayWeather) {
-        this.todayWeather.set(todayWeather);
+    public void setTodayWeather(Weather weather) {
+        this.weather.set(weather);
     }
 
-    public MutableLiveData<TodayWeather> getTodayWeather() {
-        MutableLiveData<TodayWeather> data = new MutableLiveData<>();
-        data.setValue(new TodayWeather("10 ","10 ",
-                "10 %",
-                "10 "));
+    public MutableLiveData<Weather> getTodayWeather() {
+        MutableLiveData<Weather> data = new MutableLiveData<>();
+        //TODO remove hardcode
+        Weather weather = api.getCurrentWeather("Moscow");
+        data.setValue(weather);
         return data;
     }
 
@@ -106,8 +107,6 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void setHolderItemsInAdapter(List<HolderItem> holderItems) {
-
-
         this.weatherAdapter.setHolderItems(holderItems);
         this.weatherAdapter.notifyDataSetChanged();
     }
@@ -142,4 +141,26 @@ public class DataViewModel extends AndroidViewModel {
     public void SetTextColor(int color) {
 
     }
+
+//    private void getCity(Context context, String location) {
+//        if (Geocoder.isPresent()) {
+//            try {
+////                String location = "Moscow";
+//                Geocoder gc = new Geocoder(context);
+//                List<Address> addresses = gc.getFromLocationName(location, 5); // get the found Address Objects
+//
+//                //                List<LatLng> ll = new ArrayList<LatLng>(addresses.size()); // A list to save the coordinates if they are available
+//                //                for(Address a : addresses){
+//                //                    if(a.hasLatitude() && a.hasLongitude()){
+//                //                        ll.add(new LatLng(a.getLatitude(), a.getLongitude()));
+//                //                    }
+//                //                }
+//
+//                Logger LOGGER = Logger.getGlobal();
+//                LOGGER.info(addresses.toString());
+//            } catch (IOException e) {
+//                // handle the exception
+//            }
+//        }
+//    }
 }

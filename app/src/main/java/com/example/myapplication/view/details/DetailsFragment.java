@@ -20,7 +20,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.databinding.DetailsFragmentBinding;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
-import com.example.myapplication.model.TodayWeather;
+import com.example.myapplication.model.Weather;
 import com.example.myapplication.view.main.MainFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
@@ -78,11 +78,11 @@ public class DetailsFragment extends Fragment {
     }
 
     private void observeViewModel(final DataViewModel viewModel) {
-        viewModel.getTodayWeatherObservable().observe(this, new Observer<TodayWeather>() {
+        viewModel.getTodayWeatherObservable().observe(this, new Observer<Weather>() {
             @Override
-            public void onChanged(@Nullable TodayWeather todayWeather) {
-                if (todayWeather != null) {
-                    viewModel.setTodayWeather(todayWeather);
+            public void onChanged(@Nullable Weather weather) {
+                if (weather != null) {
+                    viewModel.setTodayWeather(weather);
                 }
             }
         });
