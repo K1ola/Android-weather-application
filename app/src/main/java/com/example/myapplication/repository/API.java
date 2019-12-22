@@ -1,5 +1,6 @@
 package com.example.myapplication.repository;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,6 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -22,6 +25,7 @@ public class API {
         this.context = context;
     }
 
+    @SuppressLint("DefaultLocale")
     public Weather getCurrentWeather(String location) {
         Weather weather = null;
         Coordinates coordinates = getCity(context, location);
@@ -34,12 +38,18 @@ public class API {
 
             currently = root.getJSONObject("currently");
 
+            double pressure = currently.getDouble("pressure") * 1;  //HPA
+            double humidity = currently.getDouble("humidity") * 100;
+            double windSpeed = currently.getDouble("windSpeed") * 1.609;  //HOURS_PER_SECOND
+            Timestamp stamp = new Timestamp(currently.getLong("time"));
+            Date date = new Date(stamp.getTime());
+
             weather = new Weather(
                     currently.getString("temperature"),
-                    currently.getString("pressure"),
-                    currently.getString("humidity"),
-                    currently.getString("windSpeed"),
-                    currently.getString("time"),
+                    String.format("%.2f", pressure),
+                    String.format ("%.0f", humidity),
+                    String.format("%.0f", windSpeed),
+                    String.valueOf(date),
                     currently.getString("summary"),
                     currently.getString("icon")
             );

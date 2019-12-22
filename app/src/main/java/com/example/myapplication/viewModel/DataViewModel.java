@@ -3,6 +3,8 @@ package com.example.myapplication.viewModel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
@@ -35,24 +37,26 @@ public class DataViewModel extends AndroidViewModel {
 
     public DataViewModel(@NonNull Application application) {
         super(application);
-
         api = new API(application.getApplicationContext());
 
-        settingsObservable = getSettings();
-        weatherObservable = getTodayWeather();
-        holderItemObservable = getHolderItem();
+        setSettings(new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND));
+        setWeather(api.getCurrentWeather("Moscow"));
 
         weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
+
+        settingsObservable = getSettings();
+        weatherObservable = getWeather();
+        holderItemObservable = getHolderItem();
     }
 
     public WeatherAdapter getWeatherAdapter() {
         return weatherAdapter;
     }
 
-    public void setWeatherAdapter(List<HolderItem> items) {
-        this.weatherAdapter.setHolderItems(items);
-        this.weatherAdapter.notifyDataSetChanged();
-    }
+//    public void setWeatherAdapter(List<HolderItem> items) {
+//        this.weatherAdapter.setHolderItems(items);
+//        this.weatherAdapter.notifyDataSetChanged();
+//    }
 
     public LiveData<Settings> getSettingsObservable() {
         return settingsObservable;
@@ -74,15 +78,16 @@ public class DataViewModel extends AndroidViewModel {
         return data;
     }
 
-    public void setTodayWeather(Weather weather) {
+    public void setWeather(Weather weather) {
         this.weather.set(weather);
     }
 
-    public MutableLiveData<Weather> getTodayWeather() {
+    public MutableLiveData<Weather> getWeather() {
         MutableLiveData<Weather> data = new MutableLiveData<>();
         //TODO remove hardcode
-        Weather weather = api.getCurrentWeather("Moscow");
-        data.setValue(weather);
+        this.weather.set(api.getCurrentWeather("Moscow"));
+        currentMeasure();
+        data.setValue(weather.get());
         return data;
     }
 
@@ -92,7 +97,7 @@ public class DataViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<HolderItem>> getHolderItem() {
         MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
-        data.setValue(HolderItem.getConstDataList());
+        data.setValue(HolderItem.getDataList(settings.get(), weather.get()));
         return data;
     }
 
@@ -112,15 +117,40 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void getConstDataList() {
-        setHolderItem(HolderItem.getConstDataList());
+        setHolderItem(HolderItem.getDataList(settings.get(), weather.get()));
     }
 
-    public static Settings currentMeasure() {
-        Settings settings = new Settings();
-        settings.currentTemperatureMeasure = Settings.isCelsius ? Settings.CELSIUS : Settings.FAHRENHEIT;
-        settings.currentPressureMeasure = Settings.isHpa ? Settings.HPA : Settings.MM_HG;
-        settings.currentWindMeasure = Settings.isMeters ? Settings.METERS_PER_SECOND : Settings.HOURS_PER_SECOND;
-        return settings;
+    public Settings currentMeasure() {
+        if (Settings.isCelsius) {
+            this.settings.get().currentTemperatureMeasure = Settings.CELSIUS;
+            this.weather.get().toCelsius();
+        } else {
+            this.settings.get().currentTemperatureMeasure = Settings.FAHRENHEIT;
+            this.weather.get().toFahrenheit();
+        }
+
+        if (Settings.isHpa) {
+            this.settings.get().currentPressureMeasure = Settings.HPA;
+            this.weather.get().toHPA();
+        } else {
+            this.settings.get().currentPressureMeasure = Settings.MM_HG;
+            this.weather.get().toMmHg();
+        }
+
+        if (Settings.isMeters) {
+            this.settings.get().currentWindMeasure = Settings.METERS_PER_SECOND;
+            this.weather.get().toMeters();
+        } else {
+            this.settings.get().currentWindMeasure = Settings.HOURS_PER_SECOND;
+            this.weather.get().toHours();
+        }
+
+        setWeather(this.weather.get());
+
+//        settings.get().currentTemperatureMeasure = Settings.isCelsius ? Settings.CELSIUS : Settings.FAHRENHEIT;
+//        settings.get().currentPressureMeasure = Settings.isHpa ? Settings.HPA : Settings.MM_HG;
+//        settings.get().currentWindMeasure = Settings.isMeters ? Settings.METERS_PER_SECOND : Settings.HOURS_PER_SECOND;
+        return this.settings.get();
     }
 
     public void setOnClickItemListener(final FragmentActivity fragmentActivity) {
@@ -141,26 +171,4 @@ public class DataViewModel extends AndroidViewModel {
     public void SetTextColor(int color) {
 
     }
-
-//    private void getCity(Context context, String location) {
-//        if (Geocoder.isPresent()) {
-//            try {
-////                String location = "Moscow";
-//                Geocoder gc = new Geocoder(context);
-//                List<Address> addresses = gc.getFromLocationName(location, 5); // get the found Address Objects
-//
-//                //                List<LatLng> ll = new ArrayList<LatLng>(addresses.size()); // A list to save the coordinates if they are available
-//                //                for(Address a : addresses){
-//                //                    if(a.hasLatitude() && a.hasLongitude()){
-//                //                        ll.add(new LatLng(a.getLatitude(), a.getLongitude()));
-//                //                    }
-//                //                }
-//
-//                Logger LOGGER = Logger.getGlobal();
-//                LOGGER.info(addresses.toString());
-//            } catch (IOException e) {
-//                // handle the exception
-//            }
-//        }
-//    }
 }

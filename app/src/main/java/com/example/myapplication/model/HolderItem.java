@@ -25,7 +25,6 @@ public class HolderItem {
         this.bottomData = bottomData;
         this.image = image;
         this.color = color;
-
     }
 
     public HolderItem(Settings settings, Weather weather) {
@@ -41,15 +40,15 @@ public class HolderItem {
         return new HolderItem();
     }
 
-    public static List<HolderItem> getConstDataList() {
-        Settings s = DataViewModel.currentMeasure();
-        Weather t = new Weather("10 ","10 ",
-                "10 ",
-                "10 ",
-                "10", "10", "10");
+    public static List<HolderItem> getDataList(Settings s, Weather w) {
+//        Settings s = DataViewModel.currentMeasure();
+//        Weather t = new Weather("10 ","10 ",
+//                "10 ",
+//                "10 ",
+//                "10", "10", "10");
         String topData, bottomData;
         topData = s.currentTemperatureMeasure;
-        bottomData = t.wet;
+        bottomData = w.wet;
         HolderItem[] array = new HolderItem[] {
                 new HolderItem(topData, bottomData, null, Color.GRAY),
                 new HolderItem(topData, bottomData, null, Color.WHITE),

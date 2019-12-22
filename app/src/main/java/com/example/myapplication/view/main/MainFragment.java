@@ -45,7 +45,6 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                 ViewModelProviders.of(this).get(DataViewModel.class);
         mainFragmentBinding.setDataViewModel(viewModel);
 
-
         View view = mainFragmentBinding.getRoot();
 
         final RecyclerView recyclerViewText = view.findViewById(R.id.list);
@@ -65,7 +64,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
             @Override
             public void onChanged(@Nullable Weather weather) {
                 if (weather != null) {
-                    viewModel.setTodayWeather(weather);
+                    viewModel.setWeather(weather);
                 }
             }
         });

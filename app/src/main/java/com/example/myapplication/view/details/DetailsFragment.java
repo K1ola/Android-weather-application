@@ -58,8 +58,7 @@ public class DetailsFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final DataViewModel viewModel =
-                ViewModelProviders.of(this).get(DataViewModel.class);
+        final DataViewModel viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         detailsFragmentBinding.setDataViewModel(viewModel);
 
 
@@ -82,7 +81,7 @@ public class DetailsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Weather weather) {
                 if (weather != null) {
-                    viewModel.setTodayWeather(weather);
+                    viewModel.setWeather(weather);
                 }
             }
         });
