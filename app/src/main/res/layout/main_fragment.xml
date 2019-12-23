@@ -219,13 +219,14 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_margin="10dp"
-            app:setAdapter="@{dataViewModel.getWeatherAdapter()}"
+            app:setAdapter="@{dataViewModel.weatherAdapter2}"
             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hourly_list"
             android:layout_width="match_parent"
-            android:layout_height="110dp" />
+            android:layout_height="110dp"
+            app:setAdapter="@{dataViewModel.weatherAdapter1}"/>
 
         </LinearLayout>
 

@@ -54,14 +54,14 @@ public class MainFragment extends Fragment implements LifecycleOwner {
 
         layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewText.setLayoutManager(layoutManagerText);
-        recyclerViewText.setAdapter(viewModel.getWeatherAdapter(viewModel.get5DaysDataList()));
+        recyclerViewText.setAdapter(viewModel.weatherAdapter1);
 
 
         final RecyclerView recyclerViewHour = view.findViewById(R.id.hourly_list);
         final LinearLayoutManager layoutManagerHour = new LinearLayoutManager(getContext());
         layoutManagerHour.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewHour.setLayoutManager(layoutManagerHour);
-        recyclerViewHour.setAdapter(viewModel.getWeatherAdapter(viewModel.getHourlyDataList()));
+        recyclerViewHour.setAdapter(viewModel.weatherAdapter2);
 
         viewModel.setOnClickItemListener(getActivity());
 
@@ -91,7 +91,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         viewModel.getHolderItemObservable1().observe(this, new Observer<List<HolderItem>>() {
             @Override
             public void onChanged(List<HolderItem> holderItemList) {
-                viewModel.setHolderItemsInAdapter(holderItemList);
+                viewModel.setHolderItemsInAdapter1(holderItemList);
             }
         });
 
@@ -99,7 +99,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         viewModel.getHolderItemObservable2().observe(this, new Observer<List<HolderItem>>() {
             @Override
             public void onChanged(List<HolderItem> holderItemList) {
-                viewModel.setHolderItemsInAdapter(holderItemList);
+                viewModel.setHolderItemsInAdapter2(holderItemList);
             }
         });
     }

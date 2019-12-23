@@ -22,6 +22,7 @@ import com.example.myapplication.repository.AppDatabase;
 import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
 import com.example.myapplication.view.adapter.WeatherAdapter;
+import com.example.myapplication.view.adapter.WeatherAdapter2;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.view.details.DetailsFragment;
 
@@ -38,9 +39,11 @@ public class DataViewModel extends AndroidViewModel {
     private final MutableLiveData<Weather> weatherObservable;
     public ObservableField<Weather> weather = new ObservableField<>();
 
-    private final MutableLiveData<List<HolderItem>> holderItemObservable;
-    public ObservableField<List<HolderItem>> holderItems = new ObservableField<>();
-    private WeatherAdapter weatherAdapter;
+//    private final MutableLiveData<List<HolderItem>> holderItemObservable;
+    public ObservableField<List<HolderItem>> holderItems1 = new ObservableField<>();
+    public ObservableField<List<HolderItem>> holderItems2 = new ObservableField<>();
+    public WeatherAdapter weatherAdapter1;
+    public WeatherAdapter2 weatherAdapter2;
 
     public DataViewModel(@NonNull Application application) {
         super(application);
@@ -56,28 +59,29 @@ public class DataViewModel extends AndroidViewModel {
         WeatherDao wd = appDatabase.weatherDao();
         new insertAsyncTaskWeather(wd).execute(this.weather.get());
 
-        weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
+        weatherAdapter1 = new WeatherAdapter(R.layout.holder_item, this, null);
+        weatherAdapter2 = new WeatherAdapter2(R.layout.holder_item2, this, null);
 
         settingsObservable = getSettings();
         weatherObservable = getWeather();
-        holderItemObservable = getHolderItem();
+//        holderItemObservable = getHolderItem();
     }
 
-    public WeatherAdapter getWeatherAdapter() {
-        return weatherAdapter;
-    }
-
-    public WeatherAdapter getWeatherAdapter(List<HolderItem> items) {
-        weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
-        this.weatherAdapter.setHolderItems(items);
-        this.weatherAdapter.notifyDataSetChanged();
-        return this.weatherAdapter;
-    }
-
-    public void setWeatherAdapter(List<HolderItem> items) {
-        this.weatherAdapter.setHolderItems(items);
-        this.weatherAdapter.notifyDataSetChanged();
-    }
+//    public WeatherAdapter getWeatherAdapter() {
+//        return weatherAdapter;
+//    }
+//
+//    public WeatherAdapter getWeatherAdapter(List<HolderItem> items) {
+//        weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
+//        this.weatherAdapter.setHolderItems(items);
+//        this.weatherAdapter.notifyDataSetChanged();
+//        return this.weatherAdapter;
+//    }
+//
+//    public void setWeatherAdapter(List<HolderItem> items) {
+//        this.weatherAdapter.setHolderItems(items);
+//        this.weatherAdapter.notifyDataSetChanged();
+//    }
 
     public LiveData<Settings> getSettingsObservable() {
         return settingsObservable;
@@ -131,8 +135,12 @@ public class DataViewModel extends AndroidViewModel {
         return data;
     }
 
-    public void setHolderItem(List<HolderItem> holderItem) {
-        this.holderItems.set(holderItem);
+    public void setHolderItem1(List<HolderItem> holderItem) {
+        this.holderItems1.set(holderItem);
+    }
+
+    public void setHolderItem2(List<HolderItem> holderItem) {
+        this.holderItems2.set(holderItem);
     }
 
     private MutableLiveData<List<HolderItem>> getHolderItem() {
@@ -143,33 +151,47 @@ public class DataViewModel extends AndroidViewModel {
     }
 
 
-    public HolderItem getHolderItemAt(Integer index) {
-        if (holderItems.get().get(index) != null &&
+    public HolderItem getHolderItemAt1(Integer index) {
+        if (holderItems1.get().get(index) != null &&
                 index != null &&
-                holderItems.get().size() > index) {
-            return holderItems.get().get(index);
+                holderItems1.get().size() > index) {
+            return holderItems1.get().get(index);
         }
         return null;
     }
 
-    public void setHolderItemsInAdapter(List<HolderItem> holderItems) {
-        this.weatherAdapter.setHolderItems(holderItems);
-        this.weatherAdapter.notifyDataSetChanged();
+    public HolderItem getHolderItemAt2(Integer index) {
+        if (holderItems2.get().get(index) != null &&
+                index != null &&
+                holderItems2.get().size() > index) {
+            return holderItems2.get().get(index);
+        }
+        return null;
+    }
+
+    public void setHolderItemsInAdapter1(List<HolderItem> holderItems) {
+        this.weatherAdapter1.setHolderItems(holderItems);
+        this.weatherAdapter1.notifyDataSetChanged();
+    }
+
+    public void setHolderItemsInAdapter2(List<HolderItem> holderItems) {
+        this.weatherAdapter2.setHolderItems(holderItems);
+        this.weatherAdapter2.notifyDataSetChanged();
     }
 
     public void getConstDataList() {
-        setHolderItem(HolderItem.getDataList(settings.get(), weather.get()));
+        setHolderItem1(HolderItem.getDataList(settings.get(), weather.get()));
     }
 
     public List<HolderItem> getHourlyDataList() {
         List<Weather> w = api.getHourlyWeather("Moscow");
-        setHolderItem(HolderItem.getHourlyDataList(settings.get(), w));
+        setHolderItem1(HolderItem.getHourlyDataList(settings.get(), w));
         return HolderItem.getHourlyDataList(settings.get(), w);
     }
 
     public List<HolderItem> get5DaysDataList() {
         List<Weather> w = api.get5DaysWeather("Moscow");
-        setHolderItem(HolderItem.get5DaysDataList(settings.get(), w));
+        setHolderItem2(HolderItem.get5DaysDataList(settings.get(), w));
         return HolderItem.get5DaysDataList(settings.get(), w);
     }
 
@@ -206,7 +228,7 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void setOnClickItemListener(final FragmentActivity fragmentActivity) {
-        weatherAdapter.setItemClickCallback(new ItemClickCallback() {
+        weatherAdapter2.setItemClickCallback(new ItemClickCallback() {
             @Override
             public void onClick(HolderItem holderItem) {
                 DetailsFragment detailsFragment = new DetailsFragment();

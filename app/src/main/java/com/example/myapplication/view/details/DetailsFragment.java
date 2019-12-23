@@ -72,7 +72,7 @@ public class DetailsFragment extends Fragment {
 
         layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewText.setLayoutManager(layoutManagerText);
-        recyclerViewText.setAdapter(viewModel.getWeatherAdapter());
+        recyclerViewText.setAdapter(viewModel.weatherAdapter1);
 
         observeViewModel(viewModel);
     }
@@ -102,7 +102,7 @@ public class DetailsFragment extends Fragment {
         a.observe(this, new Observer<List<HolderItem>>() {
             @Override
             public void onChanged(List<HolderItem> holderItemList) {
-                viewModel.setHolderItemsInAdapter(holderItemList);
+                viewModel.setHolderItemsInAdapter1(holderItemList);
             }
         });
     }

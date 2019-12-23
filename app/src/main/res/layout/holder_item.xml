@@ -20,12 +20,12 @@
         android:layout_width="64dp"
         android:layout_height="match_parent"
         android:paddingLeft="2dp"
-        android:onClick="@{() -> callback.onClick(viewModel.getHolderItemAt(position))}">
+        >
         <TextView
             android:id="@+id/top_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@={viewModel.getHolderItemAt(position).topData}"
+            android:text="@={viewModel.getHolderItemAt1(position).topData}"
             android:textColor="@color/colorAccent"/>
         <ImageView
             android:id="@+id/image"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:textSize="7dp"
-            android:text="@={viewModel.getHolderItemAt(position).bottomData}"
+            android:text="@={viewModel.getHolderItemAt1(position).bottomData}"
             android:textColor="@color/colorAccent"/>
     </LinearLayout>
 </layout>
