@@ -26,6 +26,7 @@ import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.view.details.DetailsFragment;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class DataViewModel extends AndroidViewModel {
     private static AppDatabase appDatabase;
@@ -101,8 +102,13 @@ public class DataViewModel extends AndroidViewModel {
         Weather w = api.getCurrentWeather("Moscow");
         if (w == null) {
             System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAA");
-            System.out.println(appDatabase.weatherDao().getAll().getValue());
-            w = appDatabase.weatherDao().getAll().getValue().get(0);
+            WeatherDao wd = appDatabase.weatherDao();
+            try {
+                w = new getLastAsyncTaskWeather(wd).execute().get();
+            } catch (ExecutionException | NullPointerException | InterruptedException e) {
+                e.printStackTrace();
+            }
+//            w = appDatabase.weatherDao().getAll().getValue().get(0);
         }
         this.weather.set(w);
         WeatherDao wd = appDatabase.weatherDao();
@@ -190,6 +196,21 @@ public class DataViewModel extends AndroidViewModel {
 
     public void SetTextColor(int color) {
 
+    }
+
+    private static class getLastAsyncTaskWeather extends AsyncTask<Weather, Void, Weather> {
+        private WeatherDao mAsyncTaskDao;
+        getLastAsyncTaskWeather(WeatherDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Weather doInBackground(final Weather... params) {
+            return mAsyncTaskDao.getLast();
+        }
+
+        @Override
+        protected void onPostExecute(Weather result) {}
     }
 
     private static class insertAsyncTaskWeather extends AsyncTask<Weather, Void, Void> {

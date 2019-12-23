@@ -14,10 +14,13 @@ import java.util.List;
 @Dao
 public interface WeatherDao {
     @Query("SELECT * FROM weather")
-    LiveData<List<Weather>> getAll();
+    List<Weather> getAll();
 
     @Query("SELECT * FROM weather WHERE id = :id")
-    LiveData<Weather> getById(long id);
+    Weather getById(long id);
+
+    @Query("SELECT * FROM weather ORDER BY ID DESC LIMIT 1")
+    Weather getLast();
 
     @Insert
     void insert(Weather weather);
