@@ -19,8 +19,7 @@
         android:orientation="vertical"
         android:layout_width="64dp"
         android:layout_height="match_parent"
-        android:paddingLeft="2dp"
-        android:onClick="@{() -> callback.onClick(viewModel.getHolderItemAt(position))}">
+        android:paddingLeft="2dp">
         <TextView
             android:id="@+id/top_text"
             android:layout_width="wrap_content"

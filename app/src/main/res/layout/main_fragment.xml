@@ -215,14 +215,15 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+            android:id="@+id/daily_list"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_margin="10dp"
-            app:setAdapter="@{dataViewModel.getWeatherAdapter()}"/>
+            app:setAdapter="@{dataViewModel.getWeatherAdapter()}"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/text_list"
+            android:id="@+id/hourly_list"
             android:layout_width="match_parent"
             android:layout_height="110dp" />
 

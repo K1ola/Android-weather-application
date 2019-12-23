@@ -98,7 +98,7 @@ public class DetailsFragment extends Fragment {
 
 
         viewModel.getConstDataList();
-        LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable();
+        LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable1();
         a.observe(this, new Observer<List<HolderItem>>() {
             @Override
             public void onChanged(List<HolderItem> holderItemList) {

@@ -3,8 +3,7 @@ package com.example.myapplication.model;
 import android.graphics.Color;
 import android.media.Image;
 
-import com.example.myapplication.viewModel.DataViewModel;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,12 +39,8 @@ public class HolderItem {
         return new HolderItem();
     }
 
+    // EXAMPLE
     public static List<HolderItem> getDataList(Settings s, Weather w) {
-//        Settings s = DataViewModel.currentMeasure();
-//        Weather t = new Weather("10 ","10 ",
-//                "10 ",
-//                "10 ",
-//                "10", "10", "10");
         String topData, bottomData;
         topData = s.currentTemperatureMeasure;
         bottomData = w.wet;
@@ -56,6 +51,36 @@ public class HolderItem {
                 new HolderItem(topData, bottomData, null, Color.WHITE),
                 new HolderItem(topData, bottomData, null, Color.WHITE),
         };
+
+        List<HolderItem> list = Arrays.asList(array);
+        return list;
+    }
+
+    public static List<HolderItem> getHourlyDataList(Settings s, List<Weather> w) {
+        List<String> topData = new ArrayList<String>();
+        List<String> bottomData = new ArrayList<String>();
+        HolderItem[] array = new HolderItem[5];
+
+        for (int i = 0; i < w.size(); i++) {
+            topData.add(w.get(i).time);
+            bottomData.add(w.get(i).temperature + s.currentTemperatureMeasure);
+            array[i] = new HolderItem(topData.get(i), bottomData.get(i), null, Color.WHITE);
+        }
+
+        List<HolderItem> list = Arrays.asList(array);
+        return list;
+    }
+
+    public static List<HolderItem> get5DaysDataList(Settings s, List<Weather> w) {
+        List<String> topData = new ArrayList<String>();
+        List<String> bottomData = new ArrayList<String>();
+        HolderItem[] array = new HolderItem[5];
+
+        for (int i = 0; i < w.size(); i++) {
+            topData.add(w.get(i).time);
+            bottomData.add(w.get(i).temperature + s.currentTemperatureMeasure);
+            array[i] = new HolderItem(topData.get(i), bottomData.get(i), null, Color.WHITE);
+        }
 
         List<HolderItem> list = Arrays.asList(array);
         return list;

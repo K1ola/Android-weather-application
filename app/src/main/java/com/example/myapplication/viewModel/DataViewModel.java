@@ -67,10 +67,17 @@ public class DataViewModel extends AndroidViewModel {
         return weatherAdapter;
     }
 
-//    public void setWeatherAdapter(List<HolderItem> items) {
-//        this.weatherAdapter.setHolderItems(items);
-//        this.weatherAdapter.notifyDataSetChanged();
-//    }
+    public WeatherAdapter getWeatherAdapter(List<HolderItem> items) {
+        weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
+        this.weatherAdapter.setHolderItems(items);
+        this.weatherAdapter.notifyDataSetChanged();
+        return this.weatherAdapter;
+    }
+
+    public void setWeatherAdapter(List<HolderItem> items) {
+        this.weatherAdapter.setHolderItems(items);
+        this.weatherAdapter.notifyDataSetChanged();
+    }
 
     public LiveData<Settings> getSettingsObservable() {
         return settingsObservable;
@@ -78,8 +85,16 @@ public class DataViewModel extends AndroidViewModel {
     public LiveData<Weather> getTodayWeatherObservable() {
         return weatherObservable;
     }
-    public LiveData<List<HolderItem>> getHolderItemObservable() {
-        return holderItemObservable;
+
+    public LiveData<List<HolderItem>> getHolderItemObservable1() {
+        MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
+        data.setValue(get5DaysDataList());
+        return data;
+    }
+    public LiveData<List<HolderItem>> getHolderItemObservable2() {
+        MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
+        data.setValue(getHourlyDataList());
+        return data;
     }
 
     public void setSettings(Settings settings) {
@@ -101,14 +116,12 @@ public class DataViewModel extends AndroidViewModel {
         //TODO remove hardcode
         Weather w = api.getCurrentWeather("Moscow");
         if (w == null) {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAA");
             WeatherDao wd = appDatabase.weatherDao();
             try {
                 w = new getLastAsyncTaskWeather(wd).execute().get();
             } catch (ExecutionException | NullPointerException | InterruptedException e) {
                 e.printStackTrace();
             }
-//            w = appDatabase.weatherDao().getAll().getValue().get(0);
         }
         this.weather.set(w);
         WeatherDao wd = appDatabase.weatherDao();
@@ -124,6 +137,7 @@ public class DataViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<HolderItem>> getHolderItem() {
         MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
+//        setWeatherAdapter(data.getValue());
         data.setValue(HolderItem.getDataList(settings.get(), weather.get()));
         return data;
     }
@@ -145,6 +159,18 @@ public class DataViewModel extends AndroidViewModel {
 
     public void getConstDataList() {
         setHolderItem(HolderItem.getDataList(settings.get(), weather.get()));
+    }
+
+    public List<HolderItem> getHourlyDataList() {
+        List<Weather> w = api.getHourlyWeather("Moscow");
+        setHolderItem(HolderItem.getHourlyDataList(settings.get(), w));
+        return HolderItem.getHourlyDataList(settings.get(), w);
+    }
+
+    public List<HolderItem> get5DaysDataList() {
+        List<Weather> w = api.get5DaysWeather("Moscow");
+        setHolderItem(HolderItem.get5DaysDataList(settings.get(), w));
+        return HolderItem.get5DaysDataList(settings.get(), w);
     }
 
     public Settings currentMeasure() {

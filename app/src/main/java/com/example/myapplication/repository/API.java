@@ -7,16 +7,19 @@ import android.location.Geocoder;
 
 import com.example.myapplication.model.Weather;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class API {
     private Network network;
@@ -67,9 +70,116 @@ public class API {
     }
 
     @SuppressLint("DefaultLocale")
-    public List<Weather> get5DaysWeather(String location) {
-        return null;
+    public List<Weather> getHourlyWeather(String location) {
+        ArrayList<Weather> weeklyForecast = new ArrayList<Weather>();
+        weeklyForecast.clear();
+        Coordinates coordinates = getCity(context, location);
+        network = new Network(coordinates.latitude, coordinates.longitude);
+        try {
+            String result = network.execute().get();
+
+            JSONObject root = new JSONObject(result);
+            JSONObject daily;
+
+            daily = root.getJSONObject("hourly");
+            JSONArray forecasts = daily.getJSONArray("data");
+
+            for (int i = 0; i < 5; i++) {
+                JSONObject dayObject = forecasts.getJSONObject(i);
+
+                double pressure = dayObject.getDouble("pressure") * 1;  //HPA
+                double humidity = dayObject.getDouble("humidity") * 100;
+                double windSpeed = dayObject.getDouble("windSpeed") * 1.609;  //HOURS_PER_SECOND
+
+//                Timestamp stamp = new Timestamp(dayObject.getLong("time"));
+//                Date date = new Date(stamp.getTime());
+                Date date = new Date(dayObject.getLong("time")*1000L);
+                // format of the date
+                SimpleDateFormat jdf = new SimpleDateFormat("H:mm");
+                jdf.setTimeZone(TimeZone.getTimeZone("GMT-4"));
+                String java_date = jdf.format(date);
+
+                Weather w = new Weather(
+                        dayObject.getString("temperature"),
+                        String.format("%.2f", pressure),
+                        String.format ("%.0f", humidity),
+                        String.format("%.0f", windSpeed),
+                        java_date,
+                        dayObject.getString("summary"),
+                        dayObject.getString("icon")
+                );
+                w.id = dayObject.getLong("time");
+
+                weeklyForecast.add(w);
+            }
+        }
+        catch (JSONException |  NullPointerException | InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return weeklyForecast;
     }
+
+    @SuppressLint("DefaultLocale")
+    public List<Weather> get5DaysWeather(String location) {
+        ArrayList<Weather> weeklyForecast = new ArrayList<Weather>();
+        weeklyForecast.clear();
+        Coordinates coordinates = getCity(context, location);
+        network = new Network(coordinates.latitude, coordinates.longitude);
+        try {
+            String result = network.execute().get();
+
+            JSONObject root = new JSONObject(result);
+            JSONObject daily;
+
+            daily = root.getJSONObject("daily");
+            JSONArray forecasts = daily.getJSONArray("data");
+
+            for (int i = 0; i < 5; i++) {
+                JSONObject dayObject = forecasts.getJSONObject(i);
+
+                double pressure = dayObject.getDouble("pressure") * 1;  //HPA
+                double humidity = dayObject.getDouble("humidity") * 100;
+                double windSpeed = dayObject.getDouble("windSpeed") * 1.609;  //HOURS_PER_SECOND
+
+//                Timestamp stamp = new Timestamp(dayObject.getLong("time"));
+//                Date date = new Date(stamp.getTime());
+                Date date = new Date(dayObject.getLong("time")*1000L);
+                // format of the date
+                SimpleDateFormat jdf = new SimpleDateFormat("dd MMMM", myDateFormatSymbols);
+                jdf.setTimeZone(TimeZone.getTimeZone("GMT-4"));
+                String java_date = jdf.format(date);
+
+                Weather w = new Weather(
+                        dayObject.getString("temperatureLow"),
+                        String.format("%.2f", pressure),
+                        String.format ("%.0f", humidity),
+                        String.format("%.0f", windSpeed),
+                        java_date,
+                        dayObject.getString("summary"),
+                        dayObject.getString("icon")
+                );
+                w.id = dayObject.getLong("time");
+
+                weeklyForecast.add(w);
+            }
+        }
+        catch (JSONException |  NullPointerException | InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return weeklyForecast;
+    }
+
+    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols(){
+
+        @Override
+        public String[] getMonths() {
+            return new String[]{"января", "февраля", "марта", "апреля", "мая", "июня",
+                    "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+        }
+
+    };
 
     private class Coordinates {
         // Location data
