@@ -28,6 +28,7 @@ import java.util.List;
 
 public class MainFragment extends Fragment implements LifecycleOwner {
     private MainFragmentBinding mainFragmentBinding;
+    private DataViewModel viewModel;
 
     @Nullable
     @Override
@@ -41,8 +42,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final DataViewModel viewModel =
-                ViewModelProviders.of(this).get(DataViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
         mainFragmentBinding.setDataViewModel(viewModel);
 
         View view = mainFragmentBinding.getRoot();
@@ -100,8 +100,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
             }
         });
 
-        final DataViewModel viewModel =
-                ViewModelProviders.of(this).get(DataViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
         observeViewModel(viewModel);
     }
 

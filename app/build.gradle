@@ -34,4 +34,9 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:1.1.0"
     implementation 'com.github.androdocs:Simple-HTTP-Request:v1.0'
     implementation 'com.loopj.android:android-async-http:1.4.5'
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
+    implementation 'com.facebook.stetho:stetho:1.5.1'
 }

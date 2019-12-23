@@ -1,6 +1,7 @@
 package com.example.myapplication.viewModel;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -10,12 +11,16 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.room.Room;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.model.Weather;
 import com.example.myapplication.repository.API;
+import com.example.myapplication.repository.AppDatabase;
+import com.example.myapplication.repository.SettingsDao;
+import com.example.myapplication.repository.WeatherDao;
 import com.example.myapplication.view.adapter.WeatherAdapter;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.view.details.DetailsFragment;
@@ -23,6 +28,7 @@ import com.example.myapplication.view.details.DetailsFragment;
 import java.util.List;
 
 public class DataViewModel extends AndroidViewModel {
+    private static AppDatabase appDatabase;
     private API api;
 
     private final MutableLiveData<Settings> settingsObservable;
@@ -37,10 +43,17 @@ public class DataViewModel extends AndroidViewModel {
 
     public DataViewModel(@NonNull Application application) {
         super(application);
+        if (appDatabase == null) appDatabase = Room.databaseBuilder(application.getApplicationContext(),
+                AppDatabase.class, "database").build();
         api = new API(application.getApplicationContext());
 
         setSettings(new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND));
-        setWeather(api.getCurrentWeather("Moscow"));
+        Weather w = api.getCurrentWeather("Moscow");
+        //TODO 1st value default, not from db;
+        if (w == null) w = new Weather("10", "10", "10", "10", "10", "10", "10");
+        setWeather(w);
+        WeatherDao wd = appDatabase.weatherDao();
+        new insertAsyncTaskWeather(wd).execute(this.weather.get());
 
         weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
 
@@ -85,7 +98,15 @@ public class DataViewModel extends AndroidViewModel {
     public MutableLiveData<Weather> getWeather() {
         MutableLiveData<Weather> data = new MutableLiveData<>();
         //TODO remove hardcode
-        this.weather.set(api.getCurrentWeather("Moscow"));
+        Weather w = api.getCurrentWeather("Moscow");
+        if (w == null) {
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAA");
+            System.out.println(appDatabase.weatherDao().getAll().getValue());
+            w = appDatabase.weatherDao().getAll().getValue().get(0);
+        }
+        this.weather.set(w);
+        WeatherDao wd = appDatabase.weatherDao();
+        new updateAsyncTaskWeather(wd).execute(this.weather.get());
         currentMeasure();
         data.setValue(weather.get());
         return data;
@@ -146,10 +167,9 @@ public class DataViewModel extends AndroidViewModel {
         }
 
         setWeather(this.weather.get());
+        SettingsDao s = appDatabase.settingsDao();
+        new updateAsyncTaskSettings(s).execute(this.settings.get());
 
-//        settings.get().currentTemperatureMeasure = Settings.isCelsius ? Settings.CELSIUS : Settings.FAHRENHEIT;
-//        settings.get().currentPressureMeasure = Settings.isHpa ? Settings.HPA : Settings.MM_HG;
-//        settings.get().currentWindMeasure = Settings.isMeters ? Settings.METERS_PER_SECOND : Settings.HOURS_PER_SECOND;
         return this.settings.get();
     }
 
@@ -170,5 +190,44 @@ public class DataViewModel extends AndroidViewModel {
 
     public void SetTextColor(int color) {
 
+    }
+
+    private static class insertAsyncTaskWeather extends AsyncTask<Weather, Void, Void> {
+        private WeatherDao mAsyncTaskDao;
+        insertAsyncTaskWeather(WeatherDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Weather... params) {
+            mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTaskWeather extends AsyncTask<Weather, Void, Void> {
+        private WeatherDao mAsyncTaskDao;
+        updateAsyncTaskWeather(WeatherDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Weather... params) {
+            mAsyncTaskDao.update(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTaskSettings extends AsyncTask<Settings, Void, Void> {
+        private SettingsDao mAsyncTaskDao;
+        updateAsyncTaskSettings(SettingsDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Settings... params) {
+            mAsyncTaskDao.update(params[0]);
+            return null;
+        }
     }
 }

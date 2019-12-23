@@ -54,8 +54,9 @@ public class API {
                     currently.getString("summary"),
                     currently.getString("icon")
             );
+            weather.id = currently.getLong("time");
         }
-        catch (JSONException | InterruptedException | ExecutionException e) {
+        catch (JSONException |  NullPointerException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 //        catch (TimeoutException e) {

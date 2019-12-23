@@ -2,7 +2,14 @@ package com.example.myapplication.model;
 
 import android.annotation.SuppressLint;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Weather {
+    @PrimaryKey
+    public long id;
+
     public String temperature;
     public String pressure;
     public String wet;

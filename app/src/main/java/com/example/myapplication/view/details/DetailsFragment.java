@@ -28,6 +28,7 @@ import java.util.List;
 
 public class DetailsFragment extends Fragment {
     private DetailsFragmentBinding detailsFragmentBinding;
+    private DataViewModel viewModel;
 
     @NonNull
     @Override
@@ -58,7 +59,7 @@ public class DetailsFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final DataViewModel viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         detailsFragmentBinding.setDataViewModel(viewModel);
 
 

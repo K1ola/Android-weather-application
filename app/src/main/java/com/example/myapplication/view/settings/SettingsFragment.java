@@ -24,6 +24,7 @@ import com.example.myapplication.viewModel.DataViewModel;
 
 public class SettingsFragment extends Fragment {
     private SettingsFragmentBinding settingsFragmentBinding;
+    private DataViewModel viewModel;
 
     @NonNull
     @Override
@@ -57,8 +58,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final DataViewModel viewModel =
-                ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
 
         settingsFragmentBinding.setDataViewModel(viewModel);
 
@@ -98,9 +98,6 @@ public class SettingsFragment extends Fragment {
                         currentWindMeasure = isChecked;
                     }
 
-
-                    final DataViewModel viewModel =
-                            ViewModelProviders.of(getActivity()).get(DataViewModel.class);
                     final Boolean finalCurrentTemperatureMeasure = currentTemperatureMeasure;
                     final Boolean finalCurrentPressureMeasure = currentPressureMeasure;
                     final Boolean finalCurrentWindMeasure = currentWindMeasure;

@@ -10,11 +10,13 @@ import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.view.details.DetailsFragment;
 import com.example.myapplication.view.main.MainFragment;
+import com.facebook.stetho.Stetho;
 
 public class MainActivity extends AppCompatActivity implements ItemClickCallback  {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
