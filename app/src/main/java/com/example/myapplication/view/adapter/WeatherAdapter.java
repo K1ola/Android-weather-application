@@ -1,7 +1,10 @@
 package com.example.myapplication.view.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -11,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.myapplication.BR;
-import com.example.myapplication.databinding.HolderItemBinding;
+import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.viewModel.DataViewModel;
@@ -42,20 +45,24 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     }
 
     class WeatherHolder extends RecyclerView.ViewHolder {
+        private final TextView mDay;
+        private final TextView mTemp;
+        private final ImageView mImageView;
 
-        final HolderItemBinding binding;
-
-        public WeatherHolder(HolderItemBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public WeatherHolder(@NonNull View itemView) {
+            super(itemView);
+            mDay = itemView.findViewById(R.id.top_text);
+            mTemp = itemView.findViewById(R.id.bottom_text);
+            mImageView = itemView.findViewById(R.id.image);
         }
 
-        public void bind(DataViewModel dataViewModel, Integer position) {
-            binding.setViewModel(dataViewModel);
 
-            binding.setVariable(BR.dataViewModel, dataViewModel);
-            binding.setVariable(BR.position, position);
-            binding.executePendingBindings();
+        public void bind(DataViewModel dataViewModel, Integer position) {
+            mDay.setText("13"); //mDay.setText(dataViewModel.обращение к livedata);
+
+            //binding.setVariable(BR.dataViewModel, dataViewModel);
+            //binding.setVariable(BR.position, position);
+            //binding.executePendingBindings();
         }
 
     }
@@ -72,12 +79,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     @NonNull
     @Override
     public WeatherHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        HolderItemBinding binding = DataBindingUtil.inflate(inflater, viewType, parent, false);
+        View v = LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.holder_item, parent,false);
 
-        binding.setCallback(itemClickCallback);
-
-        return new WeatherHolder(binding);
+        return new WeatherHolder(v);
     }
 
     @Override

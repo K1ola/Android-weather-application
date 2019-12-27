@@ -39,6 +39,10 @@ public class DataViewModel extends AndroidViewModel {
     private final MutableLiveData<Weather> weatherObservable;
     public ObservableField<Weather> weather = new ObservableField<>();
 
+    //test
+    //private final MutableLiveData<Weather> weatherObservableTest;
+    //public ObservableField<Weather> weatherTest = new ObservableField<>();
+
 //    private final MutableLiveData<List<HolderItem>> holderItemObservable;
     public ObservableField<List<HolderItem>> holderItems1 = new ObservableField<>();
     public ObservableField<List<HolderItem>> holderItems2 = new ObservableField<>();
