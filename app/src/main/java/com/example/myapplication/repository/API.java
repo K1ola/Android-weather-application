@@ -32,9 +32,9 @@ public class API {
     @SuppressLint("DefaultLocale")
     public Weather getCurrentWeather(String location) {
         Weather weather = null;
+        try {
         Coordinates coordinates = getCity(context, location);
         network = new Network(coordinates.latitude, coordinates.longitude);
-        try {
             String result = network.execute().get();
 
             JSONObject root = new JSONObject(result);

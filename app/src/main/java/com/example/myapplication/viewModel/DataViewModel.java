@@ -26,6 +26,7 @@ import com.example.myapplication.view.adapter.WeatherAdapter2;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.view.details.DetailsFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -39,11 +40,15 @@ public class DataViewModel extends AndroidViewModel {
     private final MutableLiveData<Weather> weatherObservable;
     public ObservableField<Weather> weather = new ObservableField<>();
 
-//    private final MutableLiveData<List<HolderItem>> holderItemObservable;
-    public ObservableField<List<HolderItem>> holderItems1 = new ObservableField<>();
+    private final MutableLiveData<List<HolderItem>> holderItemObservable;
+    public ObservableField<List<HolderItem>> holderItems = new ObservableField<>();
     public ObservableField<List<HolderItem>> holderItems2 = new ObservableField<>();
     public WeatherAdapter weatherAdapter1;
     public WeatherAdapter2 weatherAdapter2;
+
+
+    public MutableLiveData<List<Weather>> weathersObservable;
+    private final ObservableField<List<Weather>> weathers = new ObservableField<>();
 
     public DataViewModel(@NonNull Application application) {
         super(application);
@@ -57,14 +62,22 @@ public class DataViewModel extends AndroidViewModel {
         if (w == null) w = new Weather("10", "10", "10", "10", "10", "10", "10");
         setWeather(w);
         WeatherDao wd = appDatabase.weatherDao();
-        new insertAsyncTaskWeather(wd).execute(this.weather.get());
+        //new insertAsyncTaskWeather(wd).execute(this.weather.get());
 
-        weatherAdapter1 = new WeatherAdapter(R.layout.holder_item, this, null);
-        weatherAdapter2 = new WeatherAdapter2(R.layout.holder_item2, this, null);
+        //weatherAdapter1 = new WeatherAdapter(R.layout.holder_item, this, null);
+        //weatherAdapter2 = new WeatherAdapter2(R.layout.holder_item2, this, null);
 
         settingsObservable = getSettings();
         weatherObservable = getWeather();
-//        holderItemObservable = getHolderItem();
+        holderItemObservable = getHolderItemObservable1();
+        List<Weather> www = new ArrayList<>();
+        for (int i =0; i<5; i++) {
+            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
+        }
+        setWeathersObservable(www);
+        setWeathers(www);
+
+        weathersObservable = getWeathers();
     }
 
 //    public WeatherAdapter getWeatherAdapter() {
@@ -90,16 +103,54 @@ public class DataViewModel extends AndroidViewModel {
         return weatherObservable;
     }
 
-    public LiveData<List<HolderItem>> getHolderItemObservable1() {
-        MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
-        data.setValue(get5DaysDataList());
+    public MutableLiveData<List<HolderItem>> getHolderItemObservable1() {
+        return holderItemObservable;
+    }
+
+
+    public LiveData<List<Weather>> getTodayWeathersObservable() {
+        return weathersObservable;
+    }
+
+    public void setWeathersObservable(List<Weather> we) {
+        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
+//        List<Weather> w = null;
+//        for (int i =0; i<5; i++) {
+//            w.add(getHourlyDataList().get(i).weather);
+//        }
+        List<Weather> www = new ArrayList<>();
+        for (int i =0; i<5; i++) {
+            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
+        }
+        data.setValue(www);
+        this.weathers.set(www);
+    }
+
+//    public void setWeathers(List<Weather> we) {
+//        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
+////        List<Weather> w = null;
+////        for (int i =0; i<5; i++) {
+////            w.add(getHourlyDataList().get(i).weather);
+////        }
+//
+//        data.setValue(we);
+//    }
+
+    public void setWeathers(List<Weather> w) {
+        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
+        data.setValue(w);
+    }
+
+    public MutableLiveData<List<Weather>> getWeathers() {
+        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
+        List<Weather> www = new ArrayList<>();
+        for (int i =0; i<5; i++) {
+            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
+        }
+        data.setValue(www);
         return data;
     }
-    public LiveData<List<HolderItem>> getHolderItemObservable2() {
-        MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
-        data.setValue(getHourlyDataList());
-        return data;
-    }
+
 
     public void setSettings(Settings settings) {
         this.settings.set(settings);
@@ -135,15 +186,15 @@ public class DataViewModel extends AndroidViewModel {
         return data;
     }
 
-    public void setHolderItem1(List<HolderItem> holderItem) {
-        this.holderItems1.set(holderItem);
+    public void setHolderItem(List<HolderItem> holderItem) {
+        this.holderItems.set(holderItem);
     }
 
     public void setHolderItem2(List<HolderItem> holderItem) {
         this.holderItems2.set(holderItem);
     }
 
-    private MutableLiveData<List<HolderItem>> getHolderItem() {
+    private MutableLiveData<List<HolderItem>> getHolderItems() {
         MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
 //        setWeatherAdapter(data.getValue());
         data.setValue(HolderItem.getDataList(settings.get(), weather.get()));
@@ -152,10 +203,10 @@ public class DataViewModel extends AndroidViewModel {
 
 
     public HolderItem getHolderItemAt1(Integer index) {
-        if (holderItems1.get().get(index) != null &&
+        if (holderItems.get().get(index) != null &&
                 index != null &&
-                holderItems1.get().size() > index) {
-            return holderItems1.get().get(index);
+                holderItems.get().size() > index) {
+            return holderItems.get().get(index);
         }
         return null;
     }
@@ -180,12 +231,12 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void getConstDataList() {
-        setHolderItem1(HolderItem.getDataList(settings.get(), weather.get()));
+        setHolderItem(HolderItem.getDataList(settings.get(), weather.get()));
     }
 
     public List<HolderItem> getHourlyDataList() {
         List<Weather> w = api.getHourlyWeather("Moscow");
-        setHolderItem1(HolderItem.getHourlyDataList(settings.get(), w));
+        setHolderItem(HolderItem.getHourlyDataList(settings.get(), w));
         return HolderItem.getHourlyDataList(settings.get(), w);
     }
 

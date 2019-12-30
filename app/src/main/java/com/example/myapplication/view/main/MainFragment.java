@@ -47,23 +47,23 @@ public class MainFragment extends Fragment implements LifecycleOwner {
 
         View view = mainFragmentBinding.getRoot();
 
-        final RecyclerView recyclerViewText = view.findViewById(R.id.daily_list);
-        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
-
-
-
-        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewText.setLayoutManager(layoutManagerText);
-        recyclerViewText.setAdapter(viewModel.weatherAdapter1);
-
-
-        final RecyclerView recyclerViewHour = view.findViewById(R.id.hourly_list);
-        final LinearLayoutManager layoutManagerHour = new LinearLayoutManager(getContext());
-        layoutManagerHour.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewHour.setLayoutManager(layoutManagerHour);
-        recyclerViewHour.setAdapter(viewModel.weatherAdapter2);
-
-        viewModel.setOnClickItemListener(getActivity());
+//        final RecyclerView recyclerViewText = view.findViewById(R.id.daily_list);
+//        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+//
+//
+//
+//        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
+//        recyclerViewText.setLayoutManager(layoutManagerText);
+//        recyclerViewText.setAdapter(viewModel.weatherAdapter1);
+//
+//
+//        final RecyclerView recyclerViewHour = view.findViewById(R.id.hourly_list);
+//        final LinearLayoutManager layoutManagerHour = new LinearLayoutManager(getContext());
+//        layoutManagerHour.setOrientation(RecyclerView.HORIZONTAL);
+//        recyclerViewHour.setLayoutManager(layoutManagerHour);
+//        recyclerViewHour.setAdapter(viewModel.weatherAdapter2);
+//
+//        viewModel.setOnClickItemListener(getActivity());
 
         observeViewModel(viewModel);
     }
@@ -88,20 +88,20 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         });
 
         //viewModel.get5DaysDataList();
-        viewModel.getHolderItemObservable1().observe(this, new Observer<List<HolderItem>>() {
+        viewModel.getTodayWeathersObservable().observe(this, new Observer<List<Weather>>() {
             @Override
-            public void onChanged(List<HolderItem> holderItemList) {
-                viewModel.setHolderItemsInAdapter1(holderItemList);
+            public void onChanged(List<Weather> holderItemList) {
+                viewModel.setWeathersObservable(holderItemList);
             }
         });
 
 //        viewModel.getHourlyDataList();
-        viewModel.getHolderItemObservable2().observe(this, new Observer<List<HolderItem>>() {
-            @Override
-            public void onChanged(List<HolderItem> holderItemList) {
-                viewModel.setHolderItemsInAdapter2(holderItemList);
-            }
-        });
+//        viewModel.getHolderItemObservable2().observe(this, new Observer<List<HolderItem>>() {
+//            @Override
+//            public void onChanged(List<HolderItem> holderItemList) {
+//                viewModel.setHolderItemsInAdapter2(holderItemList);
+//            }
+//        });
     }
 
 

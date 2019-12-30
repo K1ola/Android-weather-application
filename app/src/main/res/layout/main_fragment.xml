@@ -214,19 +214,36 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/daily_list"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_margin="10dp"
-            app:setAdapter="@{dataViewModel.weatherAdapter2}"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hourly_list"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            app:setAdapter="@{dataViewModel.weatherAdapter1}"/>
+                <TextView
+                    android:id="@+id/temperature_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-thin"
+                    android:text="gr"
+                    android:textSize="20sp"
+                    style="@style/WhiteText" />
+
+                <TextView
+                    android:id="@+id/temperature_2"
+                    style="@style/WhiteText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-thin"
+                    android:text="@{dataViewModel.weathersObservable.get(1).wet}"
+                    android:textSize="40sp" />
+
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
