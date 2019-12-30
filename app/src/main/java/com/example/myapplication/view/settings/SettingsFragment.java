@@ -32,9 +32,6 @@ public class SettingsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         settingsFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.settings_fragment, container, false);
         final View view = settingsFragmentBinding.getRoot();
-        setSwitchHandler(view, R.id.switch_temperature);
-        setSwitchHandler(view, R.id.switch_pressure);
-        setSwitchHandler(view, R.id.switch_wind);
 
         ImageButton arrowBack = view.findViewById(R.id.arrow_back);
         arrowBack.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +40,6 @@ public class SettingsFragment extends Fragment {
                 openMainFragment();
             }
         });
-
         return view;
     }
 
@@ -59,62 +55,6 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-
         settingsFragmentBinding.setDataViewModel(viewModel);
-
-        observeViewModel(viewModel);
-    }
-
-    private void observeViewModel(final DataViewModel viewModel) {
-//        viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
-//            @Override
-//            public void onChanged(@Nullable Settings settings) {
-//                if (settings != null) {
-//                    //…
-//                    viewModel.setSettings(settings);
-//                }
-//            }
-//        });
-    }
-
-    private void setSwitchHandler(View view, int idSwitch) {
-        Switch s = view.findViewById(idSwitch);
-        if (s != null) {
-            s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    String switchElem = getResources().getResourceEntryName(buttonView.getId());
-
-                    Boolean currentTemperatureMeasure = false;
-                    Boolean currentPressureMeasure = false;
-                    Boolean currentWindMeasure = false;
-
-                    if (switchElem == "switch_temperature") {
-                        currentTemperatureMeasure = isChecked;
-                    }
-                    if (switchElem == "switch_pressure") {
-                        currentPressureMeasure = isChecked;
-                    }
-                    if (switchElem == "switch_wind") {
-                        currentWindMeasure = isChecked;
-                    }
-
-                    final Boolean finalCurrentTemperatureMeasure = currentTemperatureMeasure;
-                    final Boolean finalCurrentPressureMeasure = currentPressureMeasure;
-                    final Boolean finalCurrentWindMeasure = currentWindMeasure;
-//                    viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
-//                        @Override
-//                        public void onChanged(@Nullable Settings settings) {
-//                            if (settings != null) {
-//                                settings.isCelsius = finalCurrentTemperatureMeasure;
-//                                settings.isHpa = finalCurrentPressureMeasure;
-//                                settings.isMeters = finalCurrentWindMeasure;
-//
-//                                viewModel.setSettings(settings);
-//                            }
-//                        }
-//                    });
-                }
-            });
-        }
     }
 }
