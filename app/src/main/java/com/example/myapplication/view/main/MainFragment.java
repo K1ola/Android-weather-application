@@ -24,8 +24,6 @@ import com.example.myapplication.model.Weather;
 import com.example.myapplication.view.settings.SettingsFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
-import java.util.List;
-
 public class MainFragment extends Fragment implements LifecycleOwner {
     private MainFragmentBinding mainFragmentBinding;
     private DataViewModel viewModel;
@@ -44,67 +42,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
         mainFragmentBinding.setDataViewModel(viewModel);
-
-        View view = mainFragmentBinding.getRoot();
-
-//        final RecyclerView recyclerViewText = view.findViewById(R.id.daily_list);
-//        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
-//
-//
-//
-//        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
-//        recyclerViewText.setLayoutManager(layoutManagerText);
-//        recyclerViewText.setAdapter(viewModel.weatherAdapter1);
-//
-//
-//        final RecyclerView recyclerViewHour = view.findViewById(R.id.hourly_list);
-//        final LinearLayoutManager layoutManagerHour = new LinearLayoutManager(getContext());
-//        layoutManagerHour.setOrientation(RecyclerView.HORIZONTAL);
-//        recyclerViewHour.setLayoutManager(layoutManagerHour);
-//        recyclerViewHour.setAdapter(viewModel.weatherAdapter2);
-//
-//        viewModel.setOnClickItemListener(getActivity());
-
-        observeViewModel(viewModel);
     }
-
-    private void observeViewModel(final DataViewModel viewModel) {
-        viewModel.getTodayWeatherObservable().observe(this, new Observer<Weather>() {
-            @Override
-            public void onChanged(@Nullable Weather weather) {
-                if (weather != null) {
-                    viewModel.setWeather(weather);
-                }
-            }
-        });
-
-        viewModel.getSettingsObservable().observe(this, new Observer<Settings>() {
-            @Override
-            public void onChanged(@Nullable Settings settings) {
-                if (settings != null) {
-                    viewModel.setSettings(settings);
-                }
-            }
-        });
-
-        //viewModel.get5DaysDataList();
-        viewModel.getTodayWeathersObservable().observe(this, new Observer<List<Weather>>() {
-            @Override
-            public void onChanged(List<Weather> holderItemList) {
-                viewModel.setWeathersObservable(holderItemList);
-            }
-        });
-
-//        viewModel.getHourlyDataList();
-//        viewModel.getHolderItemObservable2().observe(this, new Observer<List<HolderItem>>() {
-//            @Override
-//            public void onChanged(List<HolderItem> holderItemList) {
-//                viewModel.setHolderItemsInAdapter2(holderItemList);
-//            }
-//        });
-    }
-
-
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
@@ -115,9 +53,6 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                 openSettingsFragment();
             }
         });
-
-        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-        observeViewModel(viewModel);
     }
 
     private void openSettingsFragment() {

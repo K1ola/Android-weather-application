@@ -65,45 +65,37 @@ public class DetailsFragment extends Fragment {
 
         View view = detailsFragmentBinding.getRoot();
 
-        final RecyclerView recyclerViewText = view.findViewById(R.id.calendar);
-        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
 
-        viewModel.setOnClickItemListener(getActivity());
-
-        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewText.setLayoutManager(layoutManagerText);
-        recyclerViewText.setAdapter(viewModel.weatherAdapter1);
-
-        observeViewModel(viewModel);
+        //observeViewModel(viewModel);
     }
 
     private void observeViewModel(final DataViewModel viewModel) {
-        viewModel.getTodayWeatherObservable().observe(this, new Observer<Weather>() {
-            @Override
-            public void onChanged(@Nullable Weather weather) {
-                if (weather != null) {
-                    viewModel.setWeather(weather);
-                }
-            }
-        });
-
-        viewModel.getSettingsObservable().observe(this, new Observer<Settings>() {
-            @Override
-            public void onChanged(@Nullable Settings settings) {
-                if (settings != null) {
-                    viewModel.setSettings(settings);
-                }
-            }
-        });
-
-
-        viewModel.getConstDataList();
-        LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable1();
-        a.observe(this, new Observer<List<HolderItem>>() {
-            @Override
-            public void onChanged(List<HolderItem> holderItemList) {
-                viewModel.setHolderItemsInAdapter1(holderItemList);
-            }
-        });
+//        viewModel.getTodayWeatherObservable().observe(this, new Observer<Weather>() {
+//            @Override
+//            public void onChanged(@Nullable Weather weather) {
+//                if (weather != null) {
+//                    viewModel.setWeather(weather);
+//                }
+//            }
+//        });
+//
+//        viewModel.getSettingsObservable().observe(this, new Observer<Settings>() {
+//            @Override
+//            public void onChanged(@Nullable Settings settings) {
+//                if (settings != null) {
+//                    viewModel.setSettings(settings);
+//                }
+//            }
+//        });
+//
+//
+//        viewModel.getConstDataList();
+//        LiveData<List<HolderItem>> a = viewModel.getHolderItemObservable1();
+//        a.observe(this, new Observer<List<HolderItem>>() {
+//            @Override
+//            public void onChanged(List<HolderItem> holderItemList) {
+//                viewModel.setHolderItemsInAdapter1(holderItemList);
+//            }
+//        });
     }
 }

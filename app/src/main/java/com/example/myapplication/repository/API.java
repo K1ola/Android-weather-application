@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class API {
     private Network network;
@@ -35,7 +37,7 @@ public class API {
         try {
         Coordinates coordinates = getCity(context, location);
         network = new Network(coordinates.latitude, coordinates.longitude);
-            String result = network.execute().get();
+            String result = network.execute().get(1000, TimeUnit.MILLISECONDS);
 
             JSONObject root = new JSONObject(result);
             JSONObject currently;
@@ -59,12 +61,9 @@ public class API {
             );
             weather.id = currently.getLong("time");
         }
-        catch (JSONException |  NullPointerException | InterruptedException | ExecutionException e) {
+        catch (JSONException | NullPointerException | InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();
         }
-//        catch (TimeoutException e) {
-//            e.printStackTrace();
-//        }
 
         return weather;
     }

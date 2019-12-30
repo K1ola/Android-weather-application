@@ -217,28 +217,100 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
                 <TextView
-                    android:id="@+id/temperature_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:fontFamily="sans-serif-thin"
-                    android:text="gr"
-                    android:textSize="20sp"
+                    android:text="@{dataViewModel.weathers.get(0).time}"
+                    android:textSize="17sp"
                     style="@style/WhiteText" />
 
                 <TextView
-                    android:id="@+id/temperature_2"
                     style="@style/WhiteText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:fontFamily="sans-serif-thin"
-                    android:text="@{dataViewModel.weathersObservable.get(1).wet}"
-                    android:textSize="40sp" />
+                    android:text="@{dataViewModel.weathers.get(0).icon}"
+                    android:textSize="17sp" />
+                <TextView
+                    style="@style/WhiteText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-thin"
+                    android:text="@{dataViewModel.weathers.get(0).temperature}"
+                    android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:text="@{dataViewModel.weathers.get(1).time}"
+                        android:textSize="17sp"
+                        style="@style/WhiteText" />
+
+                    <TextView
+                        style="@style/WhiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:text="@{dataViewModel.weathers.get(1).icon}"
+                        android:textSize="17sp" />
+                    <TextView
+                        style="@style/WhiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:text="@{dataViewModel.weathers.get(1).temperature}"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:text="@{dataViewModel.weathers.get(2).time}"
+                        android:textSize="17sp"
+                        style="@style/WhiteText" />
+
+                    <TextView
+                        style="@style/WhiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:text="@{dataViewModel.weathers.get(2).icon}"
+                        android:textSize="17sp" />
+                    <TextView
+                        style="@style/WhiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:text="@{dataViewModel.weathers.get(2).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+
+
+
+
+
 
 
 

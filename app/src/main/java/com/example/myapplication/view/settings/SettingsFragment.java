@@ -66,15 +66,15 @@ public class SettingsFragment extends Fragment {
     }
 
     private void observeViewModel(final DataViewModel viewModel) {
-        viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
-            @Override
-            public void onChanged(@Nullable Settings settings) {
-                if (settings != null) {
-                    //…
-                    viewModel.setSettings(settings);
-                }
-            }
-        });
+//        viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
+//            @Override
+//            public void onChanged(@Nullable Settings settings) {
+//                if (settings != null) {
+//                    //…
+//                    viewModel.setSettings(settings);
+//                }
+//            }
+//        });
     }
 
     private void setSwitchHandler(View view, int idSwitch) {
@@ -101,18 +101,18 @@ public class SettingsFragment extends Fragment {
                     final Boolean finalCurrentTemperatureMeasure = currentTemperatureMeasure;
                     final Boolean finalCurrentPressureMeasure = currentPressureMeasure;
                     final Boolean finalCurrentWindMeasure = currentWindMeasure;
-                    viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
-                        @Override
-                        public void onChanged(@Nullable Settings settings) {
-                            if (settings != null) {
-                                settings.isCelsius = finalCurrentTemperatureMeasure;
-                                settings.isHpa = finalCurrentPressureMeasure;
-                                settings.isMeters = finalCurrentWindMeasure;
-
-                                viewModel.setSettings(settings);
-                            }
-                        }
-                    });
+//                    viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
+//                        @Override
+//                        public void onChanged(@Nullable Settings settings) {
+//                            if (settings != null) {
+//                                settings.isCelsius = finalCurrentTemperatureMeasure;
+//                                settings.isHpa = finalCurrentPressureMeasure;
+//                                settings.isMeters = finalCurrentWindMeasure;
+//
+//                                viewModel.setSettings(settings);
+//                            }
+//                        }
+//                    });
                 }
             });
         }

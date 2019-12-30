@@ -4,29 +4,18 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
-import com.example.myapplication.R;
-import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.model.Weather;
 import com.example.myapplication.repository.API;
 import com.example.myapplication.repository.AppDatabase;
 import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
-import com.example.myapplication.view.adapter.WeatherAdapter;
-import com.example.myapplication.view.adapter.WeatherAdapter2;
-import com.example.myapplication.view.callback.ItemClickCallback;
-import com.example.myapplication.view.details.DetailsFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -34,21 +23,10 @@ public class DataViewModel extends AndroidViewModel {
     private static AppDatabase appDatabase;
     private API api;
 
-    private final MutableLiveData<Settings> settingsObservable;
     public ObservableField<Settings> settings = new ObservableField<>();
-
-    private final MutableLiveData<Weather> weatherObservable;
     public ObservableField<Weather> weather = new ObservableField<>();
 
-    private final MutableLiveData<List<HolderItem>> holderItemObservable;
-    public ObservableField<List<HolderItem>> holderItems = new ObservableField<>();
-    public ObservableField<List<HolderItem>> holderItems2 = new ObservableField<>();
-    public WeatherAdapter weatherAdapter1;
-    public WeatherAdapter2 weatherAdapter2;
-
-
-    public MutableLiveData<List<Weather>> weathersObservable;
-    private final ObservableField<List<Weather>> weathers = new ObservableField<>();
+    private final ObservableField<List<Weather>> weatherList = new ObservableField<>();
 
     public DataViewModel(@NonNull Application application) {
         super(application);
@@ -58,193 +36,71 @@ public class DataViewModel extends AndroidViewModel {
 
         setSettings(new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND));
         Weather w = api.getCurrentWeather("Moscow");
-        //TODO 1st value default, not from db;
+//        //TODO 1st value default, not from db;
         if (w == null) w = new Weather("10", "10", "10", "10", "10", "10", "10");
         setWeather(w);
-        WeatherDao wd = appDatabase.weatherDao();
-        //new insertAsyncTaskWeather(wd).execute(this.weather.get());
-
-        //weatherAdapter1 = new WeatherAdapter(R.layout.holder_item, this, null);
-        //weatherAdapter2 = new WeatherAdapter2(R.layout.holder_item2, this, null);
-
-        settingsObservable = getSettings();
-        weatherObservable = getWeather();
-        holderItemObservable = getHolderItemObservable1();
-        List<Weather> www = new ArrayList<>();
-        for (int i =0; i<5; i++) {
-            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
-        }
-        setWeathersObservable(www);
-        setWeathers(www);
-
-        weathersObservable = getWeathers();
-    }
-
-//    public WeatherAdapter getWeatherAdapter() {
-//        return weatherAdapter;
-//    }
+//        //WeatherDao wd = appDatabase.weatherDao();
+//        //new insertAsyncTaskWeather(wd).execute(this.weather.get());
 //
-//    public WeatherAdapter getWeatherAdapter(List<HolderItem> items) {
-//        weatherAdapter = new WeatherAdapter(R.layout.holder_item, this, null);
-//        this.weatherAdapter.setHolderItems(items);
-//        this.weatherAdapter.notifyDataSetChanged();
-//        return this.weatherAdapter;
-//    }
-//
-//    public void setWeatherAdapter(List<HolderItem> items) {
-//        this.weatherAdapter.setHolderItems(items);
-//        this.weatherAdapter.notifyDataSetChanged();
-//    }
-
-    public LiveData<Settings> getSettingsObservable() {
-        return settingsObservable;
-    }
-    public LiveData<Weather> getTodayWeatherObservable() {
-        return weatherObservable;
-    }
-
-    public MutableLiveData<List<HolderItem>> getHolderItemObservable1() {
-        return holderItemObservable;
-    }
-
-
-    public LiveData<List<Weather>> getTodayWeathersObservable() {
-        return weathersObservable;
-    }
-
-    public void setWeathersObservable(List<Weather> we) {
-        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
-//        List<Weather> w = null;
+//        List<Weather> www = new ArrayList<>();
 //        for (int i =0; i<5; i++) {
-//            w.add(getHourlyDataList().get(i).weather);
+//            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
 //        }
-        List<Weather> www = new ArrayList<>();
-        for (int i =0; i<5; i++) {
-            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
-        }
-        data.setValue(www);
-        this.weathers.set(www);
+//        setWeathersObservable(www);
+//        setWeathers(www);
     }
 
-//    public void setWeathers(List<Weather> we) {
+//    public void setWeathersObservable(List<Weather> we) {
 //        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
 ////        List<Weather> w = null;
 ////        for (int i =0; i<5; i++) {
 ////            w.add(getHourlyDataList().get(i).weather);
 ////        }
-//
-//        data.setValue(we);
+//        List<Weather> www = new ArrayList<>();
+//        for (int i =0; i<5; i++) {
+//            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
+//        }
+//        data.setValue(www);
+//        this.weatherList.set(www);
 //    }
 
     public void setWeathers(List<Weather> w) {
-        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
-        data.setValue(w);
+        this.weatherList.set(w);
     }
-
-    public MutableLiveData<List<Weather>> getWeathers() {
-        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
-        List<Weather> www = new ArrayList<>();
-        for (int i =0; i<5; i++) {
-            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
-        }
-        data.setValue(www);
-        return data;
+    public ObservableField<List<Weather>> getWeathers() {
+        setWeathers(api.get5DaysWeather("Moscow"));
+        return this.weatherList;
     }
 
 
     public void setSettings(Settings settings) {
         this.settings.set(settings);
     }
-
-    public MutableLiveData<Settings> getSettings() {
-        MutableLiveData<Settings> data = new MutableLiveData<>();
-        data.setValue(currentMeasure());
-        return data;
+    public ObservableField<Settings> getSettings() {
+        setSettings(currentMeasure());
+        return this.settings;
     }
+
 
     public void setWeather(Weather weather) {
         this.weather.set(weather);
     }
-
-    public MutableLiveData<Weather> getWeather() {
-        MutableLiveData<Weather> data = new MutableLiveData<>();
-        //TODO remove hardcode
-        Weather w = api.getCurrentWeather("Moscow");
-        if (w == null) {
-            WeatherDao wd = appDatabase.weatherDao();
-            try {
-                w = new getLastAsyncTaskWeather(wd).execute().get();
-            } catch (ExecutionException | NullPointerException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        this.weather.set(w);
-        WeatherDao wd = appDatabase.weatherDao();
-        new updateAsyncTaskWeather(wd).execute(this.weather.get());
-        currentMeasure();
-        data.setValue(weather.get());
-        return data;
+    public ObservableField<Weather> getWeather() {
+        setWeather(api.getCurrentWeather("Moscow"));
+        return this.weather;
     }
 
-    public void setHolderItem(List<HolderItem> holderItem) {
-        this.holderItems.set(holderItem);
-    }
-
-    public void setHolderItem2(List<HolderItem> holderItem) {
-        this.holderItems2.set(holderItem);
-    }
-
-    private MutableLiveData<List<HolderItem>> getHolderItems() {
-        MutableLiveData<List<HolderItem>> data = new MutableLiveData<>();
-//        setWeatherAdapter(data.getValue());
-        data.setValue(HolderItem.getDataList(settings.get(), weather.get()));
-        return data;
-    }
-
-
-    public HolderItem getHolderItemAt1(Integer index) {
-        if (holderItems.get().get(index) != null &&
-                index != null &&
-                holderItems.get().size() > index) {
-            return holderItems.get().get(index);
-        }
-        return null;
-    }
-
-    public HolderItem getHolderItemAt2(Integer index) {
-        if (holderItems2.get().get(index) != null &&
-                index != null &&
-                holderItems2.get().size() > index) {
-            return holderItems2.get().get(index);
-        }
-        return null;
-    }
-
-    public void setHolderItemsInAdapter1(List<HolderItem> holderItems) {
-        this.weatherAdapter1.setHolderItems(holderItems);
-        this.weatherAdapter1.notifyDataSetChanged();
-    }
-
-    public void setHolderItemsInAdapter2(List<HolderItem> holderItems) {
-        this.weatherAdapter2.setHolderItems(holderItems);
-        this.weatherAdapter2.notifyDataSetChanged();
-    }
-
-    public void getConstDataList() {
-        setHolderItem(HolderItem.getDataList(settings.get(), weather.get()));
-    }
-
-    public List<HolderItem> getHourlyDataList() {
-        List<Weather> w = api.getHourlyWeather("Moscow");
-        setHolderItem(HolderItem.getHourlyDataList(settings.get(), w));
-        return HolderItem.getHourlyDataList(settings.get(), w);
-    }
-
-    public List<HolderItem> get5DaysDataList() {
-        List<Weather> w = api.get5DaysWeather("Moscow");
-        setHolderItem2(HolderItem.get5DaysDataList(settings.get(), w));
-        return HolderItem.get5DaysDataList(settings.get(), w);
-    }
+//    public List<HolderItem> getHourlyDataList() {
+//        List<Weather> w = api.getHourlyWeather("Moscow");
+//        setHolderItem(HolderItem.getHourlyDataList(settings.get(), w));
+//        return HolderItem.getHourlyDataList(settings.get(), w);
+//    }
+//
+//    public List<HolderItem> get5DaysDataList() {
+//        List<Weather> w = api.get5DaysWeather("Moscow");
+//        setHolderItem2(HolderItem.get5DaysDataList(settings.get(), w));
+//        return HolderItem.get5DaysDataList(settings.get(), w);
+//    }
 
     public Settings currentMeasure() {
         if (Settings.isCelsius) {
@@ -278,20 +134,20 @@ public class DataViewModel extends AndroidViewModel {
         return this.settings.get();
     }
 
-    public void setOnClickItemListener(final FragmentActivity fragmentActivity) {
-        weatherAdapter2.setItemClickCallback(new ItemClickCallback() {
-            @Override
-            public void onClick(HolderItem holderItem) {
-                DetailsFragment detailsFragment = new DetailsFragment();
-
-                fragmentActivity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, detailsFragment, "detailsFragment")
-                        .addToBackStack("detailsFragment")
-                        .commit();
-            }
-        });
-    }
+//    public void setOnClickItemListener(final FragmentActivity fragmentActivity) {
+//        weatherAdapter2.setItemClickCallback(new ItemClickCallback() {
+//            @Override
+//            public void onClick(HolderItem holderItem) {
+//                DetailsFragment detailsFragment = new DetailsFragment();
+//
+//                fragmentActivity.getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.container, detailsFragment, "detailsFragment")
+//                        .addToBackStack("detailsFragment")
+//                        .commit();
+//            }
+//        });
+//    }
 
     public void SetTextColor(int color) {
 
