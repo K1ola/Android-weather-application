@@ -35,9 +35,9 @@ public class API {
     public Weather getCurrentWeather(String location) {
         Weather weather = null;
         try {
-        Coordinates coordinates = getCity(context, location);
-        network = new Network(coordinates.latitude, coordinates.longitude);
-            String result = network.execute().get(1000, TimeUnit.MILLISECONDS);
+            Coordinates coordinates = getCity(context, location);
+            network = new Network(coordinates.latitude, coordinates.longitude);
+            String result = network.execute().get();
 
             JSONObject root = new JSONObject(result);
             JSONObject currently;
@@ -61,7 +61,7 @@ public class API {
             );
             weather.id = currently.getLong("time");
         }
-        catch (JSONException | NullPointerException | InterruptedException | ExecutionException | TimeoutException e) {
+        catch (JSONException | NullPointerException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 

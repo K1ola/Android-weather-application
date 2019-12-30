@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import com.example.myapplication.model.Settings;
@@ -17,7 +16,6 @@ import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class DataViewModel extends AndroidViewModel {
     private static AppDatabase appDatabase;
@@ -26,7 +24,7 @@ public class DataViewModel extends AndroidViewModel {
     public ObservableField<Settings> settings = new ObservableField<>();
     public ObservableField<Weather> weather = new ObservableField<>();
 
-    private final ObservableField<List<Weather>> weatherList = new ObservableField<>();
+    private final ObservableField<List<Weather>> weatherListDaily = new ObservableField<>();
 
     public DataViewModel(@NonNull Application application) {
         super(application);
@@ -64,12 +62,13 @@ public class DataViewModel extends AndroidViewModel {
 //        this.weatherList.set(www);
 //    }
 
-    public void setWeathers(List<Weather> w) {
-        this.weatherList.set(w);
+    public void setWeathersDaily(List<Weather> w) {
+        this.weatherListDaily.set(w);
     }
-    public ObservableField<List<Weather>> getWeathers() {
-        setWeathers(api.get5DaysWeather("Moscow"));
-        return this.weatherList;
+    public ObservableField<List<Weather>> getWeathersDaily() {
+        setWeathersDaily(api.get5DaysWeather("Moscow"));
+        currentMeasure();
+        return this.weatherListDaily;
     }
 
 
@@ -87,6 +86,7 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<Weather> getWeather() {
         setWeather(api.getCurrentWeather("Moscow"));
+        currentMeasure();
         return this.weather;
     }
 
@@ -106,9 +106,19 @@ public class DataViewModel extends AndroidViewModel {
         if (Settings.isCelsius) {
             this.settings.get().currentTemperatureMeasure = Settings.CELSIUS;
             this.weather.get().toCelsius();
+
+            if (weatherListDaily.get() != null)
+                for (int i=0; i<5; i++) {
+                    this.weatherListDaily.get().get(i).toCelsius();
+                }
         } else {
             this.settings.get().currentTemperatureMeasure = Settings.FAHRENHEIT;
             this.weather.get().toFahrenheit();
+
+            if (weatherListDaily.get() != null)
+                for (int i=0; i<5; i++) {
+                    this.weatherListDaily.get().get(i).toFahrenheit();
+                }
         }
 
         if (Settings.isHpa) {
@@ -148,10 +158,6 @@ public class DataViewModel extends AndroidViewModel {
 //            }
 //        });
 //    }
-
-    public void SetTextColor(int color) {
-
-    }
 
     private static class getLastAsyncTaskWeather extends AsyncTask<Weather, Void, Weather> {
         private WeatherDao mAsyncTaskDao;
