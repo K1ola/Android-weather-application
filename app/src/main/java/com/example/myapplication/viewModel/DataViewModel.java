@@ -25,6 +25,7 @@ public class DataViewModel extends AndroidViewModel {
     public ObservableField<Weather> weather = new ObservableField<>();
 
     private final ObservableField<List<Weather>> weatherListDaily = new ObservableField<>();
+    private final ObservableField<List<Weather>> weatherListHourly = new ObservableField<>();
 
     public DataViewModel(@NonNull Application application) {
         super(application);
@@ -48,20 +49,6 @@ public class DataViewModel extends AndroidViewModel {
 //        setWeathers(www);
     }
 
-//    public void setWeathersObservable(List<Weather> we) {
-//        MutableLiveData<List<Weather>> data = new MutableLiveData<>();
-////        List<Weather> w = null;
-////        for (int i =0; i<5; i++) {
-////            w.add(getHourlyDataList().get(i).weather);
-////        }
-//        List<Weather> www = new ArrayList<>();
-//        for (int i =0; i<5; i++) {
-//            www.add(new Weather("10", "10", "10", "10", "10", "10", "10"));
-//        }
-//        data.setValue(www);
-//        this.weatherList.set(www);
-//    }
-
     public void setWeathersDaily(List<Weather> w) {
         this.weatherListDaily.set(w);
     }
@@ -69,6 +56,15 @@ public class DataViewModel extends AndroidViewModel {
         setWeathersDaily(api.get5DaysWeather("Moscow"));
         currentMeasure();
         return this.weatherListDaily;
+    }
+
+    public void setWeathersHourly(List<Weather> w) {
+        this.weatherListHourly.set(w);
+    }
+    public ObservableField<List<Weather>> getWeathersHourly() {
+        setWeathersHourly(api.getHourlyWeather("Moscow"));
+        currentMeasure();
+        return this.weatherListHourly;
     }
 
 
@@ -111,6 +107,10 @@ public class DataViewModel extends AndroidViewModel {
                 for (int i=0; i<5; i++) {
                     this.weatherListDaily.get().get(i).toCelsius();
                 }
+            if (weatherListHourly.get() != null)
+                for (int i=0; i<5; i++) {
+                    this.weatherListHourly.get().get(i).toCelsius();
+                }
         } else {
             this.settings.get().currentTemperatureMeasure = Settings.FAHRENHEIT;
             this.weather.get().toFahrenheit();
@@ -118,6 +118,10 @@ public class DataViewModel extends AndroidViewModel {
             if (weatherListDaily.get() != null)
                 for (int i=0; i<5; i++) {
                     this.weatherListDaily.get().get(i).toFahrenheit();
+                }
+            if (weatherListHourly.get() != null)
+                for (int i=0; i<5; i++) {
+                    this.weatherListHourly.get().get(i).toFahrenheit();
                 }
         }
 
