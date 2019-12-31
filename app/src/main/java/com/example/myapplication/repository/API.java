@@ -44,8 +44,8 @@ public class API {
         try {
             Coordinates coordinates = getCity(context, location);
             network = new Network(coordinates.latitude, coordinates.longitude);
-//            String result = network.execute().get();
-            String result = getFileWeatherContent();
+            String result = network.execute().get();
+//            String result = getFileWeatherContent();
 
             JSONObject root = new JSONObject(result);
             JSONObject currently;
@@ -69,7 +69,7 @@ public class API {
             );
             weather.weatherType = "currently";
         }
-        catch (JSONException | NullPointerException e) {
+        catch (JSONException | NullPointerException | ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -83,8 +83,8 @@ public class API {
         try {
             Coordinates coordinates = getCity(context, location);
             network = new Network(coordinates.latitude, coordinates.longitude);
-//            String result = network.execute().get();
-            String result = getFileWeatherContent();
+            String result = network.execute().get();
+//            String result = getFileWeatherContent();
 
             JSONObject root = new JSONObject(result);
             JSONObject daily;
@@ -121,7 +121,7 @@ public class API {
                 weeklyForecast.add(w);
             }
         }
-        catch (JSONException | NullPointerException e) {
+        catch (JSONException | NullPointerException | ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -135,8 +135,8 @@ public class API {
         Coordinates coordinates = getCity(context, location);
         network = new Network(coordinates.latitude, coordinates.longitude);
         try {
-//            String result = network.execute().get();
-            String result = getFileWeatherContent();
+            String result = network.execute().get();
+//            String result = getFileWeatherContent();
 
             JSONObject root = new JSONObject(result);
             JSONObject daily;
@@ -172,7 +172,7 @@ public class API {
                 weeklyForecast.add(w);
             }
         }
-        catch (JSONException | NullPointerException e) {
+        catch (JSONException | NullPointerException | ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 

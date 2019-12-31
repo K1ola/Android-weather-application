@@ -34,7 +34,7 @@ public class DetailsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         viewModel.setContext(getActivity());
-        detailsFragmentBinding.setDataViewModel(viewModel);
+        //detailsFragmentBinding.setDataViewModel(viewModel);
 //        if (!viewModel.internet) {
 //            Toast toast = Toast.makeText(getActivity(),
 //                    "Нет сети", Toast.LENGTH_LONG);

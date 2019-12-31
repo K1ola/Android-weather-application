@@ -65,7 +65,7 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<List<Weather>> getWeathersDaily() {
         setWeathersDaily(api.get5DaysWeather("Moscow"));
-        //currentMeasure();
+        currentMeasure();
         if (this.weatherListDaily.get() == null) return null;
         new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListDaily.get());
         return this.weatherListDaily;
@@ -83,7 +83,7 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<List<Weather>> getWeathersHourly() {
         setWeathersHourly(api.getHourlyWeather("Moscow"));
-        //currentMeasure();
+        currentMeasure();
         if (this.weatherListHourly.get() == null) return null;
         new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListHourly.get());
         return this.weatherListHourly;
@@ -111,7 +111,7 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<Weather> getWeather() {
         setWeather(api.getCurrentWeather("Moscow"));
-        //currentMeasure();
+        currentMeasure();
         if (this.weather.get() == null) return null;
         new insertAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weather.get());
         return this.weather;

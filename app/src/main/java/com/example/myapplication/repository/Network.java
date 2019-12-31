@@ -9,7 +9,7 @@ import com.androdocs.httprequest.HttpRequest;
 public class Network extends AsyncTask<String, Void, String> {
     private static final String BASE_URL = "https://api.forecast.io/forecast/";
 //    private static final String API_KEY = "40ed0c90cb518cef245856b4588dd08a";
-    private static final String API_KEY = "cd5dea3978885f61e24e8002197b7fa7";
+    private static final String API_KEY = "9a3ca1940406cec981fa1740cc76bd2b";
 
     // Location data
     private double latitude;
