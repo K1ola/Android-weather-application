@@ -41,6 +41,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+        viewModel.setContext(getActivity());
         mainFragmentBinding.setDataViewModel(viewModel);
     }
 

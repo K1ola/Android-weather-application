@@ -42,6 +42,54 @@
     </RelativeLayout>
 </androidx.appcompat.widget.Toolbar>
 
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/day0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="11dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:text="ПН"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/day1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="11dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:text="ВТ"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/day2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="11dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:text="СР"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/day3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="11dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:text="ЧТ"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/day4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="11dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:text="ПТ"
+        android:textSize="20sp"/>
+
+</LinearLayout>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="match_parent"

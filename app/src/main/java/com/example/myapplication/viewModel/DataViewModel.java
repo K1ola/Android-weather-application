@@ -1,25 +1,34 @@
 package com.example.myapplication.viewModel;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableField;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.room.Room;
 
+import com.example.myapplication.R;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.model.Weather;
 import com.example.myapplication.repository.API;
 import com.example.myapplication.repository.AppDatabase;
 import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
+import com.example.myapplication.view.details.DetailsFragment;
+import com.example.myapplication.view.settings.SettingsFragment;
 
 import java.util.List;
 
 public class DataViewModel extends AndroidViewModel {
     private static AppDatabase appDatabase;
     private API api;
+    private Context context;
+
+    public static int currentDay;
 
     public ObservableField<Settings> settings = new ObservableField<>();
     public ObservableField<Weather> weather = new ObservableField<>();
@@ -47,6 +56,10 @@ public class DataViewModel extends AndroidViewModel {
 //        }
 //        setWeathersObservable(www);
 //        setWeathers(www);
+    }
+
+    public void setContext(Context c) {
+        this.context = c;
     }
 
     public void setWeathersDaily(List<Weather> w) {
@@ -148,20 +161,17 @@ public class DataViewModel extends AndroidViewModel {
         return this.settings.get();
     }
 
-//    public void setOnClickItemListener(final FragmentActivity fragmentActivity) {
-//        weatherAdapter2.setItemClickCallback(new ItemClickCallback() {
-//            @Override
-//            public void onClick(HolderItem holderItem) {
-//                DetailsFragment detailsFragment = new DetailsFragment();
-//
-//                fragmentActivity.getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.container, detailsFragment, "detailsFragment")
-//                        .addToBackStack("detailsFragment")
-//                        .commit();
-//            }
-//        });
-//    }
+    public int onDayClick(int index) {
+        final DetailsFragment detailsFragment = new DetailsFragment();
+
+        ((FragmentActivity)context).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, detailsFragment)
+                .addToBackStack(null)
+                .commit();
+        this.currentDay = index;
+        return index;
+    }
 
     private static class getLastAsyncTaskWeather extends AsyncTask<Weather, Void, Weather> {
         private WeatherDao mAsyncTaskDao;
