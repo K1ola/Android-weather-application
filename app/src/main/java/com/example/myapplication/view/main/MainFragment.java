@@ -56,11 +56,11 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
         viewModel.setContext(getActivity());
         mainFragmentBinding.setDataViewModel(viewModel);
-        if (!viewModel.internet) {
-            Toast toast = Toast.makeText(getActivity(),
-                    "Нет сети", Toast.LENGTH_LONG);
-            toast.show();
-        }
+//        if (!viewModel.internet) {
+//            Toast toast = Toast.makeText(getActivity(),
+//                    "Нет сети", Toast.LENGTH_LONG);
+//            toast.show();
+//        }
     }
 
     private void openSettingsFragment() {

@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class API {
     private Network network;
@@ -123,7 +121,7 @@ public class API {
                 weeklyForecast.add(w);
             }
         }
-        catch (JSONException |  NullPointerException e) {
+        catch (JSONException | NullPointerException e) {
             e.printStackTrace();
         }
 
@@ -174,7 +172,7 @@ public class API {
                 weeklyForecast.add(w);
             }
         }
-        catch (JSONException |  NullPointerException e) {
+        catch (JSONException | NullPointerException e) {
             e.printStackTrace();
         }
 

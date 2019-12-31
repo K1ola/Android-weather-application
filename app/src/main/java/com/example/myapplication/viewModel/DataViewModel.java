@@ -55,8 +55,9 @@ public class DataViewModel extends AndroidViewModel {
 
     public void setWeathersDaily(List<Weather> w) {
         try {
-            if (w == null)
+            if (w.size() == 0)
                 w = new getLastDailyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
+            if (w.size() == 0) return;
         } catch (ExecutionException | NullPointerException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -64,15 +65,17 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<List<Weather>> getWeathersDaily() {
         setWeathersDaily(api.get5DaysWeather("Moscow"));
-        currentMeasure();
+        //currentMeasure();
+        if (this.weatherListDaily.get() == null) return null;
         new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListDaily.get());
         return this.weatherListDaily;
     }
 
     public void setWeathersHourly(List<Weather> w) {
         try {
-            if (w == null)
+            if (w.size() == 0)
                 w = new getLastHourlyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
+            if (w.size() == 0) return;
         } catch (ExecutionException | NullPointerException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -80,22 +83,14 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<List<Weather>> getWeathersHourly() {
         setWeathersHourly(api.getHourlyWeather("Moscow"));
-        currentMeasure();
+        //currentMeasure();
+        if (this.weatherListHourly.get() == null) return null;
         new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListHourly.get());
         return this.weatherListHourly;
     }
 
 
     public void setSettings(Settings settings) {
-//        try {
-//            if (settings == null)
-//                settings = new getLastAsyncTaskSettings(appDatabase.settingsDao()).execute().get();
-//                if (settings == null) {
-//                    //settings = new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND);
-//                }
-//        } catch (ExecutionException | NullPointerException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
         this.settings.set(settings);
     }
     public ObservableField<Settings> getSettings() {
@@ -116,7 +111,8 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<Weather> getWeather() {
         setWeather(api.getCurrentWeather("Moscow"));
-        currentMeasure();
+        //currentMeasure();
+        if (this.weather.get() == null) return null;
         new insertAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weather.get());
         return this.weather;
     }
