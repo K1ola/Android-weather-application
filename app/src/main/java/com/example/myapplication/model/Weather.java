@@ -2,23 +2,29 @@ package com.example.myapplication.model;
 
 import android.annotation.SuppressLint;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(indices = {@Index(value = "time", unique = false)})
 public class Weather {
-    @PrimaryKey
+//    @PrimaryKey
     public long id;
 
     public String temperature;
     public String pressure;
     public String wet;
     public String wind;
+    @PrimaryKey
+    @NonNull
     public String time;
     public String summary;
     public String icon;
     public String temperatureMin;
     public String temperatureMax;
+
+    public String weatherType;
 
     public Weather(String temperature, String pressure, String wet, String wind, String time, String summary, String icon) {
         this.temperature = temperature;

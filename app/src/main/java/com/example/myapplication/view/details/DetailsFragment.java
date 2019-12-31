@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,11 @@ public class DetailsFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         viewModel.setContext(getActivity());
         detailsFragmentBinding.setDataViewModel(viewModel);
+        if (!viewModel.internet) {
+            Toast toast = Toast.makeText(getActivity(),
+                    "Нет сети", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
         ImageButton arrow_back = view.findViewById(R.id.arrow_back_details);
         arrow_back.setOnClickListener(new View.OnClickListener() {

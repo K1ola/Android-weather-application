@@ -1,11 +1,13 @@
 package com.example.myapplication.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(indices = {@Index(value = "currentTemperatureMeasure", unique = false)})
 public class Settings {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long id;
     public final static String CELSIUS = "°C";
     public final static String FAHRENHEIT = "°F";

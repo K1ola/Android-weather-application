@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,9 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.MainFragmentBinding;
-import com.example.myapplication.model.HolderItem;
-import com.example.myapplication.model.Settings;
-import com.example.myapplication.model.Weather;
 import com.example.myapplication.view.settings.SettingsFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
@@ -54,6 +52,15 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                 openSettingsFragment();
             }
         });
+
+        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+        viewModel.setContext(getActivity());
+        mainFragmentBinding.setDataViewModel(viewModel);
+        if (!viewModel.internet) {
+            Toast toast = Toast.makeText(getActivity(),
+                    "Нет сети", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     private void openSettingsFragment() {

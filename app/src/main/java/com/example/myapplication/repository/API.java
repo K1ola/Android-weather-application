@@ -69,7 +69,7 @@ public class API {
                     currently.getString("summary"),
                     currently.getString("icon")
             );
-            weather.id = currently.getLong("time");
+            weather.weatherType = "currently";
         }
         catch (JSONException | NullPointerException e) {
             e.printStackTrace();
@@ -118,7 +118,7 @@ public class API {
                         dayObject.getString("summary"),
                         dayObject.getString("icon")
                 );
-                w.id = dayObject.getLong("time");
+                w.weatherType = "hourly";
 
                 weeklyForecast.add(w);
             }
@@ -169,7 +169,7 @@ public class API {
                         dayObject.getString("summary"),
                         dayObject.getString("icon")
                 );
-                w.id = dayObject.getLong("time");
+                w.weatherType = "daily";
 
                 weeklyForecast.add(w);
             }
