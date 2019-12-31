@@ -26,7 +26,8 @@ public class Network extends AsyncTask<String, Void, String> {
     }
 
     protected String doInBackground(String... args) {
-        String response = HttpRequest.excuteGet(BASE_URL + API_KEY + "/" + latitude + "," + longitude + "?lang=ru");
+//        String response = HttpRequest.excuteGet(BASE_URL + API_KEY + "/" + latitude + "," + longitude + "?lang=ru");
+        String response = HttpRequest.excuteGet("https://gist.githubusercontent.com/K1ola/95eb2a79916621600ff911288053287f/raw/bbe0c83d2759bd31deddbd3d5a8a9e8558752b5a/file.json");
         return response;
     }
 

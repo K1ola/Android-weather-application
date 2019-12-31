@@ -211,7 +211,10 @@
             </LinearLayout>
 
         </LinearLayout>
-
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/scrollmain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -374,6 +377,10 @@
 
             </LinearLayout>
 
+            </ScrollView>
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -530,7 +537,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
