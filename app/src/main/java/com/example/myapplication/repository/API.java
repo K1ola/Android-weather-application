@@ -69,11 +69,16 @@ public class API {
             );
             weather.weatherType = "currently";
         }
-        catch (JSONException | NullPointerException | ExecutionException | InterruptedException e) {
+        catch (JSONException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
         return weather;
+//        return null;
     }
 
     @SuppressLint("DefaultLocale")
@@ -121,11 +126,16 @@ public class API {
                 weeklyForecast.add(w);
             }
         }
-        catch (JSONException | NullPointerException | ExecutionException | InterruptedException e) {
+        catch (JSONException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
         return weeklyForecast;
+//        return null;
     }
 
     @SuppressLint("DefaultLocale")
@@ -172,11 +182,16 @@ public class API {
                 weeklyForecast.add(w);
             }
         }
-        catch (JSONException | NullPointerException | ExecutionException | InterruptedException e) {
+        catch (JSONException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
         return weeklyForecast;
+//        return null;
     }
 
     private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols(){

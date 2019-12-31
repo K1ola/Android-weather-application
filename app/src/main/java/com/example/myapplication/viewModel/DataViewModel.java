@@ -40,7 +40,7 @@ public class DataViewModel extends AndroidViewModel {
         super(application);
         if (appDatabase == null) {
             appDatabase = Room.databaseBuilder(application.getApplicationContext(),
-                    AppDatabase.class, "database").build();
+                    AppDatabase.class, "database").allowMainThreadQueries().build();
         }
         api = new API(application.getApplicationContext());
 
@@ -56,9 +56,13 @@ public class DataViewModel extends AndroidViewModel {
     public void setWeathersDaily(List<Weather> w) {
         try {
             if (w.size() == 0)
-                w = new getLastDailyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
+//                w = new getLastDailyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
+                w = appDatabase.weatherDao().getLastDaily();
             if (w.size() == 0) return;
-        } catch (ExecutionException | NullPointerException | InterruptedException e) {
+//        } catch (ExecutionException | NullPointerException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         this.weatherListDaily.set(w);
@@ -67,16 +71,18 @@ public class DataViewModel extends AndroidViewModel {
         setWeathersDaily(api.get5DaysWeather("Moscow"));
         currentMeasure();
         if (this.weatherListDaily.get() == null) return null;
-        new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListDaily.get());
+//        new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListDaily.get());
+        appDatabase.weatherDao().insertList(this.weatherListDaily.get());
         return this.weatherListDaily;
     }
 
     public void setWeathersHourly(List<Weather> w) {
         try {
             if (w.size() == 0)
-                w = new getLastHourlyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
+//                w = new getLastHourlyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
+                w = appDatabase.weatherDao().getLastHourly();
             if (w.size() == 0) return;
-        } catch (ExecutionException | NullPointerException | InterruptedException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         this.weatherListHourly.set(w);
@@ -85,7 +91,8 @@ public class DataViewModel extends AndroidViewModel {
         setWeathersHourly(api.getHourlyWeather("Moscow"));
         currentMeasure();
         if (this.weatherListHourly.get() == null) return null;
-        new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListHourly.get());
+//        new insertListAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weatherListHourly.get());
+        appDatabase.weatherDao().insertList(this.weatherListHourly.get());
         return this.weatherListHourly;
     }
 
@@ -95,7 +102,10 @@ public class DataViewModel extends AndroidViewModel {
     }
     public ObservableField<Settings> getSettings() {
         setSettings(currentMeasure());
+        //
         //new insertAsyncTaskSettings(appDatabase.settingsDao()).execute(this.settings.get());
+        //appDatabase.settingsDao().insert(this.settings.get());
+        //
         return this.settings;
     }
 
@@ -103,8 +113,9 @@ public class DataViewModel extends AndroidViewModel {
     public void setWeather(Weather weather) {
         try {
             if (weather == null)
-                weather = new getLastCurrentlyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
-        } catch (ExecutionException | NullPointerException | InterruptedException e) {
+//                weather = new getLastCurrentlyAsyncTaskWeather(appDatabase.weatherDao()).execute().get();
+                weather = appDatabase.weatherDao().getLastCurrent();
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         this.weather.set(weather);
@@ -113,25 +124,27 @@ public class DataViewModel extends AndroidViewModel {
         setWeather(api.getCurrentWeather("Moscow"));
         currentMeasure();
         if (this.weather.get() == null) return null;
-        new insertAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weather.get());
+//        new insertAsyncTaskWeather(appDatabase.weatherDao()).execute(this.weather.get());
+        appDatabase.weatherDao().insert(this.weather.get());
         return this.weather;
     }
 
     public Settings currentMeasure() {
         try {
             if (this.settings.get() == null)
-                this.settings.set(new getLastAsyncTaskSettings(appDatabase.settingsDao()).execute().get());
+//                this.settings.set(new getLastAsyncTaskSettings(appDatabase.settingsDao()).execute().get());
+                this.settings.set(appDatabase.settingsDao().getLast());
             if (this.settings.get() == null) {
-                new insertAsyncTaskSettings(appDatabase.settingsDao()).execute(new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND));
-                this.settings.set(new getLastAsyncTaskSettings(appDatabase.settingsDao()).execute().get());
-
-//                this.settings.set(new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND));
+//                new insertAsyncTaskSettings(appDatabase.settingsDao()).execute(new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND));
+//                this.settings.set(new getLastAsyncTaskSettings(appDatabase.settingsDao()).execute().get());
+                appDatabase.settingsDao().insert(new Settings(Settings.FAHRENHEIT, Settings.HPA, Settings.HOURS_PER_SECOND));
+                this.settings.set(appDatabase.settingsDao().getLast());
             }
-        } catch (ExecutionException | NullPointerException | InterruptedException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
-        if (weather.get() == null || weatherListDaily.get() == null) return null;
+        if (weather.get() == null /*|| weatherListDaily.get() == null*/) return null;
 
         if (Settings.isCelsius) {
             this.settings.get().currentTemperatureMeasure = Settings.CELSIUS;
@@ -196,102 +209,102 @@ public class DataViewModel extends AndroidViewModel {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    private static class getLastCurrentlyAsyncTaskWeather extends AsyncTask<Weather, Void, Weather> {
-        private WeatherDao mAsyncTaskDao;
-        getLastCurrentlyAsyncTaskWeather(WeatherDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Weather doInBackground(final Weather... params) {
-            return mAsyncTaskDao.getLastCurrent();
-        }
-
-        @Override
-        protected void onPostExecute(Weather result) {}
-    }
-
-    private static class getLastDailyAsyncTaskWeather extends AsyncTask<List<Weather>, Void, List<Weather>> {
-        private WeatherDao mAsyncTaskDao;
-        getLastDailyAsyncTaskWeather(WeatherDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected List<Weather> doInBackground(final List<Weather>... params) {
-            return mAsyncTaskDao.getLastDaily();
-        }
-
-        @Override
-        protected void onPostExecute(List<Weather> result) {}
-    }
-
-    private static class getLastHourlyAsyncTaskWeather extends AsyncTask<List<Weather>, Void, List<Weather>> {
-        private WeatherDao mAsyncTaskDao;
-        getLastHourlyAsyncTaskWeather(WeatherDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected List<Weather> doInBackground(final List<Weather>... params) {
-            return mAsyncTaskDao.getLastHourly();
-        }
-
-        @Override
-        protected void onPostExecute(List<Weather> result) {}
-    }
-
-    private static class insertAsyncTaskWeather extends AsyncTask<Weather, Void, Void> {
-        private WeatherDao mAsyncTaskDao;
-        insertAsyncTaskWeather(WeatherDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final Weather... params) {
-            mAsyncTaskDao.insert(params[0]);
-            return null;
-        }
-    }
-
-    private static class getLastAsyncTaskSettings extends AsyncTask<Settings, Void, Settings> {
-        private SettingsDao mAsyncTaskDao;
-        getLastAsyncTaskSettings(SettingsDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Settings doInBackground(final Settings... params) {
-            return mAsyncTaskDao.getLast();
-        }
-
-        @Override
-        protected void onPostExecute(Settings result) {}
-    }
-
-    private static class insertAsyncTaskSettings extends AsyncTask<Settings, Void, Void> {
-        private SettingsDao mAsyncTaskDao;
-        insertAsyncTaskSettings(SettingsDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final Settings... params) {
-            mAsyncTaskDao.insert(params[0]);
-            return null;
-        }
-    }
-
-    private static class insertListAsyncTaskWeather extends AsyncTask<List<Weather>, Void, Void> {
-        private WeatherDao mAsyncTaskDao;
-        insertListAsyncTaskWeather(WeatherDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final List<Weather>... params) {
-            mAsyncTaskDao.insertList(params[0]);
-            return null;
-        }
-    }
+//    private static class getLastCurrentlyAsyncTaskWeather extends AsyncTask<Weather, Void, Weather> {
+//        private WeatherDao mAsyncTaskDao;
+//        getLastCurrentlyAsyncTaskWeather(WeatherDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected Weather doInBackground(final Weather... params) {
+//            return mAsyncTaskDao.getLastCurrent();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Weather result) {}
+//    }
+//
+//    private static class getLastDailyAsyncTaskWeather extends AsyncTask<List<Weather>, Void, List<Weather>> {
+//        private WeatherDao mAsyncTaskDao;
+//        getLastDailyAsyncTaskWeather(WeatherDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected List<Weather> doInBackground(final List<Weather>... params) {
+//            return mAsyncTaskDao.getLastDaily();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<Weather> result) {}
+//    }
+//
+//    private static class getLastHourlyAsyncTaskWeather extends AsyncTask<List<Weather>, Void, List<Weather>> {
+//        private WeatherDao mAsyncTaskDao;
+//        getLastHourlyAsyncTaskWeather(WeatherDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected List<Weather> doInBackground(final List<Weather>... params) {
+//            return mAsyncTaskDao.getLastHourly();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<Weather> result) {}
+//    }
+//
+//    private static class insertAsyncTaskWeather extends AsyncTask<Weather, Void, Void> {
+//        private WeatherDao mAsyncTaskDao;
+//        insertAsyncTaskWeather(WeatherDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(final Weather... params) {
+//            mAsyncTaskDao.insert(params[0]);
+//            return null;
+//        }
+//    }
+//
+//    private static class getLastAsyncTaskSettings extends AsyncTask<Settings, Void, Settings> {
+//        private SettingsDao mAsyncTaskDao;
+//        getLastAsyncTaskSettings(SettingsDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected Settings doInBackground(final Settings... params) {
+//            return mAsyncTaskDao.getLast();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Settings result) {}
+//    }
+//
+//    private static class insertAsyncTaskSettings extends AsyncTask<Settings, Void, Void> {
+//        private SettingsDao mAsyncTaskDao;
+//        insertAsyncTaskSettings(SettingsDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(final Settings... params) {
+//            mAsyncTaskDao.insert(params[0]);
+//            return null;
+//        }
+//    }
+//
+//    private static class insertListAsyncTaskWeather extends AsyncTask<List<Weather>, Void, Void> {
+//        private WeatherDao mAsyncTaskDao;
+//        insertListAsyncTaskWeather(WeatherDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(final List<Weather>... params) {
+//            mAsyncTaskDao.insertList(params[0]);
+//            return null;
+//        }
+//    }
 }
