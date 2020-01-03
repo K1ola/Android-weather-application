@@ -1,5 +1,6 @@
 package com.example.myapplication.view.adapter;
 
+import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.BR;
 import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
+import com.example.myapplication.model.Weather;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.viewModel.DataViewModel;
 
@@ -57,14 +59,15 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
         }
 
 
-        public void bind(DataViewModel dataViewModel, Integer position) {
-            mDay.setText("13"); //mDay.setText(dataViewModel.обращение к livedata);
-
-            //binding.setVariable(BR.dataViewModel, dataViewModel);
-            //binding.setVariable(BR.position, position);
-            //binding.executePendingBindings();
+        public void bind(DataViewModel dataViewModel, int position) {
+            mDay.setText(String.valueOf(dataViewModel.get5DaysDataList().get(position).topData));
+            mTemp.setText(String.valueOf(dataViewModel.get5DaysDataList().get(position).bottomData));
         }
 
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick();
     }
 
     @Override
