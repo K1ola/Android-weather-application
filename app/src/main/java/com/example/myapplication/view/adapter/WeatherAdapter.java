@@ -60,8 +60,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
 
 
         public void bind(DataViewModel dataViewModel, int position) {
-            mDay.setText(String.valueOf(dataViewModel.get5DaysDataList().get(position).topData));
-            mTemp.setText(String.valueOf(dataViewModel.get5DaysDataList().get(position).bottomData));
+            mDay.setText(String.valueOf(dataViewModel.getHourlyDataList().get(position).topData));
+            mTemp.setText(String.valueOf(dataViewModel.getHourlyDataList().get(position).bottomData));
         }
 
     }

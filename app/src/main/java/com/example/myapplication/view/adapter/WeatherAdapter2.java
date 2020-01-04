@@ -1,7 +1,10 @@
 package com.example.myapplication.view.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.myapplication.BR;
+import com.example.myapplication.R;
 import com.example.myapplication.databinding.HolderItem2Binding;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.view.callback.ItemClickCallback;
@@ -42,19 +46,20 @@ public class WeatherAdapter2 extends RecyclerView.Adapter<WeatherAdapter2.Weathe
 
     class WeatherHolder2 extends RecyclerView.ViewHolder {
 
-        final HolderItem2Binding binding;
+        private final TextView mDay;
+        private final TextView mTemp;
+        private final ImageView mImageView;
 
-        public WeatherHolder2(HolderItem2Binding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public WeatherHolder2(@NonNull View itemView) {
+            super(itemView);
+            mDay = itemView.findViewById(R.id.top_text);
+            mTemp = itemView.findViewById(R.id.bottom_text);
+            mImageView = itemView.findViewById(R.id.image);
         }
 
         public void bind(DataViewModel dataViewModel, Integer position) {
-            binding.setViewModel(dataViewModel);
-
-            binding.setVariable(BR.dataViewModel, dataViewModel);
-            binding.setVariable(BR.position, position);
-            binding.executePendingBindings();
+            mDay.setText(String.valueOf(dataViewModel.get5DaysDataList().get(position).topData));
+            mTemp.setText(String.valueOf(dataViewModel.get5DaysDataList().get(position).bottomData));
         }
 
     }
@@ -71,12 +76,11 @@ public class WeatherAdapter2 extends RecyclerView.Adapter<WeatherAdapter2.Weathe
     @NonNull
     @Override
     public WeatherHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        HolderItem2Binding binding = DataBindingUtil.inflate(inflater, viewType, parent, false);
+        View v = LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.holder_item, parent,false);
 
-        binding.setCallback(itemClickCallback);
-
-        return new WeatherHolder2(binding);
+        return new WeatherHolder2(v);
     }
 
     @Override
