@@ -99,7 +99,416 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+<!--        Temperature hourly begin-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Утром"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_morning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(0).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_image_morning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(0).icon}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Днем"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(1).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_image_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(1).icon}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Вечером"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_evening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(2).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_image_evening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(2).icon}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Ночью"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(3).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/temperature_image_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(3).icon}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </LinearLayout>
+<!--        Temperature hourly end-->
+
+
+<!--        Wind hourly begin-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="11dp"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:text="Сила ветра"
+            android:textSize="20sp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Утром"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wind_morning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(0).wind + dataViewModel.settings.currentWindMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Днем"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wind_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(1).wind + dataViewModel.settings.currentWindMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Вечером"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wind_evening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(2).wind + dataViewModel.settings.currentWindMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Ночью"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wind_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(3).wind + dataViewModel.settings.currentWindMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--       Wind hourly end-->
+
+
+        <!--       Pressure hourly begin-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="11dp"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:text="Давление"
+            android:textSize="20sp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Утром"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/pressure_morning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(0).pressure + dataViewModel.settings.currentPressureMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Днем"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/pressure_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(1).pressure + dataViewModel.settings.currentPressureMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Вечером"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/pressure_evening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(2).pressure + dataViewModel.settings.currentPressureMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Ночью"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/pressure_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(3).pressure + dataViewModel.settings.currentPressureMeasure}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--        Pressure hourly end-->
+
+        <!--       Wet hourly begin-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="11dp"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:text="Влажность"
+            android:textSize="20sp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Утром"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wet_morning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(0).wet +'%'}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Днем"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wet_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(1).wet +'%'}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Вечером"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wet_evening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(2).wet +'%'}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Ночью"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/wet_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="11dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="@{dataViewModel.weathersHourly.get(3).wet +'%'}"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--        Wet hourly end-->
 
     </LinearLayout>
 </ScrollView>
