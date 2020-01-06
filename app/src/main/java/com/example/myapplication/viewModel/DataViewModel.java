@@ -24,7 +24,7 @@ import com.example.myapplication.repository.WeatherDao;
 import com.example.myapplication.view.adapter.WeatherAdapter;
 import com.example.myapplication.view.adapter.WeatherAdapter2;
 import com.example.myapplication.view.callback.ItemClickCallback;
-import com.example.myapplication.view.details.DetailsFragment;
+//import com.example.myapplication.view.details.DetailsFragment;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -230,7 +230,7 @@ public class DataViewModel extends AndroidViewModel {
 
         return this.settings.get();
     }
-
+/*
     public void setOnClickItemListener(final FragmentActivity fragmentActivity) {
         weatherAdapter2.setItemClickCallback(new ItemClickCallback() {
             @Override
@@ -245,6 +245,8 @@ public class DataViewModel extends AndroidViewModel {
             }
         });
     }
+
+ */
 
     public void SetTextColor(int color) {
 

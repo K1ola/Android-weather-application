@@ -28,14 +28,17 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     private DataViewModel dataViewModel;
     private List<HolderItem> items;
     private int layoutId;
+    private final OnHolderClickListener listener;
 
     @Nullable
     public ItemClickCallback itemClickCallback;
 
-    public WeatherAdapter(@LayoutRes int layoutId, DataViewModel data, @Nullable ItemClickCallback itemClickCallback) {
+    public WeatherAdapter(@LayoutRes int layoutId, DataViewModel data, /*@Nullable ItemClickCallback itemClickCallback*/
+                          final OnHolderClickListener listener) {
         this.layoutId = layoutId;
         this.dataViewModel = data;
-        this.itemClickCallback = itemClickCallback;
+        this.listener = listener;
+        //this.itemClickCallback = itemClickCallback;
     }
 
     public void setItemClickCallback(ItemClickCallback itemClickCallback) {
@@ -51,11 +54,19 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
         private final TextView mTemp;
         private final ImageView mImageView;
 
-        public WeatherHolder(@NonNull View itemView) {
+        public WeatherHolder(@NonNull View itemView, final OnHolderClickListener listener) {
             super(itemView);
+            //itemView.setOnClickListener();
             mDay = itemView.findViewById(R.id.top_text);
             mTemp = itemView.findViewById(R.id.bottom_text);
             mImageView = itemView.findViewById(R.id.image);
+
+            mImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.OnHolderClick();
+                }
+            });
         }
 
 
@@ -86,7 +97,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
                 .from(parent.getContext())
                 .inflate(R.layout.holder_item, parent,false);
 
-        return new WeatherHolder(v);
+        return new WeatherHolder(v, listener);
     }
 
     @Override
@@ -99,4 +110,9 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
         return items == null ? 0 : items.size();
     }
 
-}
+    public interface OnHolderClickListener {
+        void OnHolderClick();
+        }
+    }
+
+

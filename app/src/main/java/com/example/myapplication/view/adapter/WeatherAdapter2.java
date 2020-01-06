@@ -9,13 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.myapplication.BR;
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.HolderItem2Binding;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.view.callback.ItemClickCallback;
 import com.example.myapplication.viewModel.DataViewModel;

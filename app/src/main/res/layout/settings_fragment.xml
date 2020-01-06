@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-  <data>
-    <variable
-        name="dataViewModel"
-        type="com.example.myapplication.viewModel.DataViewModel" />
-  </data>
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       android:orientation="vertical"
@@ -61,10 +55,13 @@
           android:text="Температура"
           android:textOn="°C"
           android:textOff="°F"
-          android:checked="@={dataViewModel.settings.isCelsius}"
           android:showText="true"
           android:switchPadding="32dp"
           android:padding="4dp"/>
+          <!--
+          android:checked="@={dataViewModel.settings.isCelsius}"
+          -->
+
 
       <Switch
           android:id="@+id/switch_pressure"
@@ -76,10 +73,13 @@
           android:text="Давление"
           android:textOn="гПа"
           android:textOff="мм рт.ст."
-          android:checked="@={dataViewModel.settings.isHpa}"
           android:showText="true"
           android:switchPadding="45dp"
           android:padding="4dp"/>
+          <!--
+          android:checked="@={dataViewModel.settings.isHpa}"
+          -->
+
 
       <Switch
           android:id="@+id/switch_wind"
@@ -91,12 +91,14 @@
           android:text="Сила Ветра"
           android:textOn="м/с"
           android:textOff="км/ч"
-          android:checked="@={dataViewModel.settings.isMeters}"
           android:showText="true"
           android:switchPadding="54dp"
           android:padding="4dp"/>
+          <!--
+          android:checked="@={dataViewModel.settings.isMeters}"
+          -->
+
 
     </LinearLayout>
 
   </LinearLayout>
-</layout>

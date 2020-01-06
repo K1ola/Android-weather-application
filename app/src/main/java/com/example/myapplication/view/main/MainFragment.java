@@ -56,9 +56,9 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         recyclerViewHour.setLayoutManager(layoutManagerHour);
         recyclerViewHour.setAdapter(viewModel.weatherAdapter2);
 
-        viewModel.setOnClickItemListener(getActivity());
+        //viewModel.setOnClickItemListener(getActivity());
 
-        observeViewModel(viewModel);
+        //observeViewModel(viewModel);
 
         return view;
     }

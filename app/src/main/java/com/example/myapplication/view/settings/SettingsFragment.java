@@ -17,21 +17,18 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.SettingsFragmentBinding;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.view.main.MainFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
 public class SettingsFragment extends Fragment {
-    private SettingsFragmentBinding settingsFragmentBinding;
     private DataViewModel viewModel;
 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        settingsFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.settings_fragment, container, false);
-        final View view = settingsFragmentBinding.getRoot();
+        final View view = inflater.inflate(R.layout.main_fragment, container, false);
         setSwitchHandler(view, R.id.switch_temperature);
         setSwitchHandler(view, R.id.switch_pressure);
         setSwitchHandler(view, R.id.switch_wind);
@@ -59,8 +56,6 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-
-        settingsFragmentBinding.setDataViewModel(viewModel);
 
         observeViewModel(viewModel);
     }

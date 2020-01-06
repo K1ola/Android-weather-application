@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
-        <variable
-            name="position"
-            type="java.lang.Integer" />
-
-        <variable
-            name="viewModel"
-            type="com.example.myapplication.viewModel.DataViewModel"/>
-
-        <variable
-            name="callback"
-            type="com.example.myapplication.view.callback.ItemClickCallback" />
-    </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="64dp"
         android:layout_height="match_parent"
-        android:paddingLeft="2dp"
-        android:onClick="@{() -> callback.onClick(viewModel.getHolderItemAt2(position))}">
+        android:paddingLeft="2dp">
         <TextView
             android:id="@+id/top_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@={viewModel.getHolderItemAt2(position).topData}"
+            android:text="test"
             android:textColor="@color/colorAccent"/>
         <ImageView
             android:id="@+id/image"
@@ -39,7 +27,7 @@
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:textSize="7dp"
-            android:text="@={viewModel.getHolderItemAt2(position).bottomData}"
+            android:text="test"
             android:textColor="@color/colorAccent"/>
     </LinearLayout>
-</layout>
+</FrameLayout>

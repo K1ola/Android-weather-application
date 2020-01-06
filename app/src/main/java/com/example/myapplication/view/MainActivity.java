@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.view.callback.ItemClickCallback;
-import com.example.myapplication.view.details.DetailsFragment;
+//import com.example.myapplication.view.details.DetailsFragment;
 import com.example.myapplication.view.main.MainFragment;
 import com.facebook.stetho.Stetho;
 
-public class MainActivity extends AppCompatActivity implements ItemClickCallback  {
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickCallback
                     .commit();
         }
     }
-
+/*
     @Override
     public void onClick(HolderItem holderItem) {
         DetailsFragment detailsFragment = new DetailsFragment();
@@ -39,5 +39,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickCallback
                 .addToBackStack("detailsFragment")
                 .commit();
     }
+
+ */
 }
 
