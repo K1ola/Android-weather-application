@@ -47,6 +47,10 @@ public class DataViewModel extends AndroidViewModel {
         Weather w = api.getCurrentWeather("Moscow");
         internet = w != null;
 //        internet = false;
+
+        if (settings.get() == null) {
+            settings.set(new Settings(true, true, true));
+        }
     }
 
     public void setContext(Context c) {
@@ -146,7 +150,7 @@ public class DataViewModel extends AndroidViewModel {
 
         if (weather.get() == null /*|| weatherListDaily.get() == null*/) return null;
 
-        if (Settings.isCelsius) {
+        if (this.settings.get().isCelsius) {
             if (this.settings.get().currentTemperatureMeasure != Settings.CELSIUS) {
                 this.settings.get().currentTemperatureMeasure = Settings.CELSIUS;
                 this.weather.get().toCelsius();
@@ -176,7 +180,7 @@ public class DataViewModel extends AndroidViewModel {
             }
         }
 
-        if (Settings.isHpa) {
+        if (this.settings.get().isHpa) {
             if (this.settings.get().currentPressureMeasure != Settings.HPA) {
                 this.settings.get().currentPressureMeasure = Settings.HPA;
                 this.weather.get().toHPA();
@@ -188,7 +192,7 @@ public class DataViewModel extends AndroidViewModel {
             }
         }
 
-        if (Settings.isMeters) {
+        if (this.settings.get().isMeters) {
             if (this.settings.get().currentWindMeasure != Settings.METERS_PER_SECOND) {
                 this.settings.get().currentWindMeasure = Settings.METERS_PER_SECOND;
                 this.weather.get().toMeters();

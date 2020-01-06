@@ -22,9 +22,9 @@ public class Settings {
     public String currentPressureMeasure;
     public String currentWindMeasure;
 
-    public static boolean isCelsius;
-    public static boolean isHpa;
-    public static boolean isMeters;
+    public boolean isCelsius;
+    public boolean isHpa;
+    public boolean isMeters;
 
     public Settings() {}
 
