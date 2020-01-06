@@ -147,45 +147,57 @@ public class DataViewModel extends AndroidViewModel {
         if (weather.get() == null /*|| weatherListDaily.get() == null*/) return null;
 
         if (Settings.isCelsius) {
-            this.settings.get().currentTemperatureMeasure = Settings.CELSIUS;
-            this.weather.get().toCelsius();
+            if (this.settings.get().currentTemperatureMeasure != Settings.CELSIUS) {
+                this.settings.get().currentTemperatureMeasure = Settings.CELSIUS;
+                this.weather.get().toCelsius();
 
-            if (weatherListDaily.get() != null)
-                for (int i=0; i<5; i++) {
-                    this.weatherListDaily.get().get(i).toCelsius();
-                }
-            if (weatherListHourly.get() != null)
-                for (int i=0; i<5; i++) {
-                    this.weatherListHourly.get().get(i).toCelsius();
-                }
+                if (weatherListDaily.get() != null)
+                    for (int i = 0; i < 5; i++) {
+                        this.weatherListDaily.get().get(i).toCelsius();
+                    }
+                if (weatherListHourly.get() != null)
+                    for (int i = 0; i < 5; i++) {
+                        this.weatherListHourly.get().get(i).toCelsius();
+                    }
+            }
         } else {
-            this.settings.get().currentTemperatureMeasure = Settings.FAHRENHEIT;
-            this.weather.get().toFahrenheit();
+            if (this.settings.get().currentTemperatureMeasure != Settings.FAHRENHEIT) {
+                this.settings.get().currentTemperatureMeasure = Settings.FAHRENHEIT;
+                this.weather.get().toFahrenheit();
 
-            if (weatherListDaily.get() != null)
-                for (int i=0; i<5; i++) {
-                    this.weatherListDaily.get().get(i).toFahrenheit();
-                }
-            if (weatherListHourly.get() != null)
-                for (int i=0; i<5; i++) {
-                    this.weatherListHourly.get().get(i).toFahrenheit();
-                }
+                if (weatherListDaily.get() != null)
+                    for (int i = 0; i < 5; i++) {
+                        this.weatherListDaily.get().get(i).toFahrenheit();
+                    }
+                if (weatherListHourly.get() != null)
+                    for (int i = 0; i < 5; i++) {
+                        this.weatherListHourly.get().get(i).toFahrenheit();
+                    }
+            }
         }
 
         if (Settings.isHpa) {
-            this.settings.get().currentPressureMeasure = Settings.HPA;
-            this.weather.get().toHPA();
+            if (this.settings.get().currentPressureMeasure != Settings.HPA) {
+                this.settings.get().currentPressureMeasure = Settings.HPA;
+                this.weather.get().toHPA();
+            }
         } else {
-            this.settings.get().currentPressureMeasure = Settings.MM_HG;
-            this.weather.get().toMmHg();
+            if (this.settings.get().currentPressureMeasure != Settings.MM_HG) {
+                this.settings.get().currentPressureMeasure = Settings.MM_HG;
+                this.weather.get().toMmHg();
+            }
         }
 
         if (Settings.isMeters) {
-            this.settings.get().currentWindMeasure = Settings.METERS_PER_SECOND;
-            this.weather.get().toMeters();
+            if (this.settings.get().currentWindMeasure != Settings.METERS_PER_SECOND) {
+                this.settings.get().currentWindMeasure = Settings.METERS_PER_SECOND;
+                this.weather.get().toMeters();
+            }
         } else {
-            this.settings.get().currentWindMeasure = Settings.HOURS_PER_SECOND;
-            this.weather.get().toHours();
+                if (this.settings.get().currentWindMeasure != Settings.HOURS_PER_SECOND) {
+                    this.settings.get().currentWindMeasure = Settings.HOURS_PER_SECOND;
+                    this.weather.get().toHours();
+                }
         }
 
         setWeather(this.weather.get());

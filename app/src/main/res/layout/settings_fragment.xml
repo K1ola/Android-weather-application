@@ -61,7 +61,7 @@
           android:text="Температура"
           android:textOn="°C"
           android:textOff="°F"
-          android:checked="@={dataViewModel.settings.isCelsius}"
+          android:checked="@{dataViewModel.settings.isCelsius}"
           android:showText="true"
           android:switchPadding="32dp"
           android:padding="4dp"/>
@@ -76,7 +76,7 @@
           android:text="Давление"
           android:textOn="гПа"
           android:textOff="мм рт.ст."
-          android:checked="@={dataViewModel.settings.isHpa}"
+          android:checked="@{dataViewModel.settings.isHpa}"
           android:showText="true"
           android:switchPadding="45dp"
           android:padding="4dp"/>
@@ -91,7 +91,7 @@
           android:text="Сила Ветра"
           android:textOn="м/с"
           android:textOff="км/ч"
-          android:checked="@={dataViewModel.settings.isMeters}"
+          android:checked="@{dataViewModel.settings.isMeters}"
           android:showText="true"
           android:switchPadding="54dp"
           android:padding="4dp"/>
