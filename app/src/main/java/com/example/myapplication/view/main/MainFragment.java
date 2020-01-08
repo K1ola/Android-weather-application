@@ -23,13 +23,14 @@ import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.model.Weather;
+import com.example.myapplication.view.adapter.WeatherAdapter;
 import com.example.myapplication.view.search.SearchFragment;
 import com.example.myapplication.view.settings.SettingsFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
 import java.util.List;
 
-public class MainFragment extends Fragment implements LifecycleOwner {
+public class MainFragment extends Fragment implements WeatherAdapter.OnHolderClickListener {
     private DataViewModel viewModel;
 
     @Nullable
@@ -171,4 +172,12 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                 .commit();
     }
 
+    @Override
+    public void OnHolderClick() {
+        if (getActivity() == null || !(getActivity() instanceof WeatherAdapter.OnHolderClickListener)) {
+            return;
+        }
+
+        ((WeatherAdapter.OnHolderClickListener) getActivity()).OnHolderClick();
+    }
 }

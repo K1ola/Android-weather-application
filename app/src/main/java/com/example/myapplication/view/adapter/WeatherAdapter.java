@@ -4,17 +4,17 @@ import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.myapplication.BR;
+
 import com.example.myapplication.R;
 import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Weather;
@@ -30,20 +30,19 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     private int layoutId;
     private final OnHolderClickListener listener;
 
-    @Nullable
-    public ItemClickCallback itemClickCallback;
 
     public WeatherAdapter(@LayoutRes int layoutId, DataViewModel data, /*@Nullable ItemClickCallback itemClickCallback*/
                           final OnHolderClickListener listener) {
         this.layoutId = layoutId;
         this.dataViewModel = data;
         this.listener = listener;
-        //this.itemClickCallback = itemClickCallback;
     }
-
+/*
     public void setItemClickCallback(ItemClickCallback itemClickCallback) {
         this.itemClickCallback = itemClickCallback;
     }
+
+ */
 
     public void setHolderItems(List<HolderItem> items) {
         this.items = items;
@@ -56,7 +55,6 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
 
         public WeatherHolder(@NonNull View itemView, final OnHolderClickListener listener) {
             super(itemView);
-            //itemView.setOnClickListener();
             mDay = itemView.findViewById(R.id.top_text);
             mTemp = itemView.findViewById(R.id.bottom_text);
             mImageView = itemView.findViewById(R.id.image);
@@ -75,10 +73,6 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
             mTemp.setText(String.valueOf(dataViewModel.getHourlyDataList().get(position).bottomData));
         }
 
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick();
     }
 
     @Override

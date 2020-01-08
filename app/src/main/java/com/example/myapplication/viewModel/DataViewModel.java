@@ -24,12 +24,14 @@ import com.example.myapplication.repository.WeatherDao;
 import com.example.myapplication.view.adapter.WeatherAdapter;
 import com.example.myapplication.view.adapter.WeatherAdapter2;
 import com.example.myapplication.view.callback.ItemClickCallback;
+import com.example.myapplication.view.main.MainFragment;
 //import com.example.myapplication.view.details.DetailsFragment;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class DataViewModel extends AndroidViewModel {
+public class DataViewModel extends AndroidViewModel implements WeatherAdapter.OnHolderClickListener{
+
     private static AppDatabase appDatabase;
     private API api;
 
@@ -63,7 +65,7 @@ public class DataViewModel extends AndroidViewModel {
         WeatherDao wd = appDatabase.weatherDao();
         new insertAsyncTaskWeather(wd).execute(this.weather.get());
 
-        weatherAdapter1 = new WeatherAdapter(R.layout.holder_item, this, null);
+        weatherAdapter1 = new WeatherAdapter(R.layout.holder_item, this, this);
         weatherAdapter2 = new WeatherAdapter2(R.layout.holder_item2, this, null);
 
         settingsObservable = getSettings();
@@ -247,6 +249,12 @@ public class DataViewModel extends AndroidViewModel {
     }
 
  */
+
+    @Override
+    public void OnHolderClick() {
+        MainFragment mainFragment = new MainFragment();
+        mainFragment.OnHolderClick();
+    }
 
     public void SetTextColor(int color) {
 

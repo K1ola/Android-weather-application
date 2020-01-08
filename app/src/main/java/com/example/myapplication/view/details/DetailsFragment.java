@@ -1,5 +1,5 @@
 package com.example.myapplication.view.details;
-/*
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +31,17 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        detailsFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.details_fragment, container, false);
+        final View view = inflater.inflate(R.layout.details_fragment,container,false);
+        viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
 
-        final View view = detailsFragmentBinding.getRoot();
+        final RecyclerView recyclerViewText = view.findViewById(R.id.calendar);
+        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+
+        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewText.setLayoutManager(layoutManagerText);
+        recyclerViewText.setAdapter(viewModel.weatherAdapter1);
+
+        observeViewModel(viewModel);
 
         ImageButton arrow_back = view.findViewById(R.id.arrow_back_details);
         arrow_back.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +61,7 @@ public class DetailsFragment extends Fragment {
                 .replace(R.id.container, mainFragment)
                 .commit();
     }
-
+/*
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
@@ -73,6 +81,8 @@ public class DetailsFragment extends Fragment {
 
         observeViewModel(viewModel);
     }
+
+ */
 
     private void observeViewModel(final DataViewModel viewModel) {
         viewModel.getTodayWeatherObservable().observe(this, new Observer<Weather>() {
@@ -104,4 +114,3 @@ public class DetailsFragment extends Fragment {
         });
     }
 }
-*/
