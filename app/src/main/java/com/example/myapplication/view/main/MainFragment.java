@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.MainFragmentBinding;
+import com.example.myapplication.view.favorites.FavsFragment;
 import com.example.myapplication.view.settings.SettingsFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
@@ -53,6 +55,14 @@ public class MainFragment extends Fragment implements LifecycleOwner {
             }
         });
 
+        ImageButton searchButton = view.findViewById(R.id.favs);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSearchFragment();
+            }
+        });
+
         viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
         viewModel.setContext(getActivity());
         mainFragmentBinding.setDataViewModel(viewModel);
@@ -69,6 +79,15 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, settingsFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void openSearchFragment(){
+        final FavsFragment favsFragment = new FavsFragment();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, favsFragment)
                 .addToBackStack(null)
                 .commit();
     }
