@@ -157,8 +157,15 @@
                 android:layout_centerVertical="true"
                 android:paddingTop="14dp"
                 android:paddingBottom="14dp"
-                android:text="Тут будет лист"
+                android:text="лист"
                 android:textColor="@color/cardview_dark_background"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favs_list"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_margin="10dp" />
+<!--                app:setAdapter="@{dataViewModel.getWeatherAdapter()}"/>-->
 
         </LinearLayout>
 

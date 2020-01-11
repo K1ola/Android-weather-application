@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FavoritesFragmentBinding;
@@ -45,6 +47,15 @@ public class FavsFragment extends Fragment {
                 openSearchFragment();
             }
         });
+
+
+        ///
+        final RecyclerView recyclerView = view.findViewById(R.id.favs_list);
+        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+        layoutManagerText.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManagerText);
+        recyclerView.setAdapter(viewModel.weatherFavsAdapter);
+        ///
 
         return view;
     }

@@ -17,6 +17,7 @@ import com.example.myapplication.repository.API;
 import com.example.myapplication.repository.AppDatabase;
 import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
+import com.example.myapplication.view.adapters.WeatherFavsAdapter;
 import com.example.myapplication.view.details.DetailsFragment;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class DataViewModel extends AndroidViewModel {
     private final ObservableField<List<Weather>> weatherListHourly = new ObservableField<>();
 
     public ObservableField<List<Weather>> weatherListFavs = new ObservableField<>();
+    public WeatherFavsAdapter weatherFavsAdapter;
 
     public DataViewModel(@NonNull Application application) {
         super(application);
@@ -45,6 +47,7 @@ public class DataViewModel extends AndroidViewModel {
                     AppDatabase.class, "database").allowMainThreadQueries().build();
         }
         api = new API(application.getApplicationContext());
+        weatherFavsAdapter = new WeatherFavsAdapter();
 
         Weather w = api.getCurrentWeather("Moscow");
         internet = w != null;
@@ -53,6 +56,9 @@ public class DataViewModel extends AndroidViewModel {
         if (settings.get() == null) {
             settings.set(new Settings(true, true, true));
         }
+
+//        weatherListFavs = getWeathersDaily();
+//        weatherFavsAdapter.setData(weatherListFavs.get());
     }
 
     public void setContext(Context c) {

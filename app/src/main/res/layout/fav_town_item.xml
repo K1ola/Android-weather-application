@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="Weather"
+            type="com.example.myapplication.model.Weather" />
+        <variable
+            name="dataViewModel"
+            type="com.example.myapplication.viewModel.DataViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Weather.town}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Weather.temperature + dataViewModel.settings.currentTemperatureMeasure}" />
+
+    </LinearLayout>
+</layout>
