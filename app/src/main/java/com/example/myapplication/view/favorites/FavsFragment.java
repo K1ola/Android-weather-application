@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FavoritesFragmentBinding;
 import com.example.myapplication.view.main.MainFragment;
+import com.example.myapplication.view.search.SearchFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
 public class FavsFragment extends Fragment {
@@ -37,6 +38,14 @@ public class FavsFragment extends Fragment {
             }
         });
 
+        ImageButton searchButton = view.findViewById(R.id.search);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSearchFragment();
+            }
+        });
+
         return view;
     }
 
@@ -45,6 +54,14 @@ public class FavsFragment extends Fragment {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, mainFragment)
+                .commit();
+    }
+
+    private void openSearchFragment(){
+        final SearchFragment searchFragment = new SearchFragment();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, searchFragment)
                 .commit();
     }
 

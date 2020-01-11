@@ -38,13 +38,76 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:paddingRight="14dp"
                     android:text="Избранное"
                     android:textColor="@color/cardview_dark_background"/>
+
+                <ImageButton
+                    android:id="@+id/search"
+                    android:background="@color/cardview_light_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/search"/>
+
 
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
+<!--        Current place-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:background="@color/colorBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="Текущее место"
+                android:textColor="@color/colorWhite"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+                <TextView
+                    android:id="@+id/wet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Mocква"
+                    android:textSize="25sp"
+                    style="@style/WhiteText" />
+
+                <TextView
+                    android:id="@+id/wet_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="@{dataViewModel.weather.temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                    android:textSize="25sp"
+                    style="@style/WhiteText" />
+
+                <TextView
+                    android:id="@+id/wet_measure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dataViewModel.weather.icon}"
+                    android:textSize="25sp"
+                    style="@style/WhiteText" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

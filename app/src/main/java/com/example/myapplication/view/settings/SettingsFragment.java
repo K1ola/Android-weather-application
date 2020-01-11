@@ -84,7 +84,6 @@ public class SettingsFragment extends Fragment {
                     }
                     if (switchElemName.equals("switch_wind")) {
 //                        currentWindMeasure = isChecked;
-                        System.out.println("ffff");
                         currentSettings.isMeters = isChecked;
                     }
 
