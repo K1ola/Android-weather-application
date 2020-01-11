@@ -13,7 +13,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:onClick="@{() -> dataViewModel.openFavWeather(Weather.town)}">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,6 +25,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{Weather.temperature + dataViewModel.settings.currentTemperatureMeasure}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Weather.icon}" />
 
     </LinearLayout>
 </layout>

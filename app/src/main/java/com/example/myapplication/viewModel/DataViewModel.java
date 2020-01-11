@@ -19,6 +19,7 @@ import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
 import com.example.myapplication.view.adapters.WeatherFavsAdapter;
 import com.example.myapplication.view.details.DetailsFragment;
+import com.example.myapplication.view.main.MainFragment;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -57,8 +58,8 @@ public class DataViewModel extends AndroidViewModel {
             settings.set(new Settings(true, true, true));
         }
 
-//        weatherListFavs = getWeathersDaily();
-//        weatherFavsAdapter.setData(weatherListFavs.get());
+        weatherListFavs = getWeathersDaily();
+        weatherFavsAdapter.setData(weatherListFavs.get());
     }
 
     public void setContext(Context c) {
@@ -227,6 +228,15 @@ public class DataViewModel extends AndroidViewModel {
                 .commit();
         currentDay = index;
         return index;
+    }
+
+    public void openFavWeather(String location) {
+        final MainFragment mainFragment = new MainFragment();
+
+        ((FragmentActivity)context).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, mainFragment)
+                .commit();
     }
 
 

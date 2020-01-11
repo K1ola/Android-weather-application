@@ -24,13 +24,19 @@ public class FavsFragment extends Fragment {
     private DataViewModel viewModel;
     private FavoritesFragmentBinding favoritesFragmentBinding;
 
-    @NonNull
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
         favoritesFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.favorites_fragment, container, false);
-        final View view = favoritesFragmentBinding.getRoot();
+        return favoritesFragmentBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+        viewModel.setContext(getActivity());
+        favoritesFragmentBinding.setDataViewModel(viewModel);
 
         ImageButton arrowBack = view.findViewById(R.id.arrow_back);
         arrowBack.setOnClickListener(new View.OnClickListener() {
@@ -56,8 +62,6 @@ public class FavsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManagerText);
         recyclerView.setAdapter(viewModel.weatherFavsAdapter);
         ///
-
-        return view;
     }
 
     private void openMainFragment(){
@@ -76,10 +80,11 @@ public class FavsFragment extends Fragment {
                 .commit();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-        favoritesFragmentBinding.setDataViewModel(viewModel);
-    }
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+//        viewModel.setContext(getActivity());
+//        favoritesFragmentBinding.setDataViewModel(viewModel);
+//    }
 }

@@ -33,17 +33,16 @@ public class MainFragment extends Fragment implements LifecycleOwner {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mainFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false);
-
         return mainFragmentBinding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-        viewModel.setContext(getActivity());
-        mainFragmentBinding.setDataViewModel(viewModel);
-    }
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+//        viewModel.setContext(getActivity());
+//        mainFragmentBinding.setDataViewModel(viewModel);
+//    }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
@@ -55,11 +54,11 @@ public class MainFragment extends Fragment implements LifecycleOwner {
             }
         });
 
-        ImageButton searchButton = view.findViewById(R.id.favs);
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton favsButton = view.findViewById(R.id.favs);
+        favsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSearchFragment();
+                openFavsFragment();
             }
         });
 
@@ -83,7 +82,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                 .commit();
     }
 
-    private void openSearchFragment(){
+    private void openFavsFragment(){
         final FavsFragment favsFragment = new FavsFragment();
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
