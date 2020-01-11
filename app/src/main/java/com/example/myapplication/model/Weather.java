@@ -23,6 +23,7 @@ public class Weather {
     public String icon;
     public String temperatureMin;
     public String temperatureMax;
+    public String town;
 
     public String weatherType;
 
