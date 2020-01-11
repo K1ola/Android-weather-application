@@ -36,6 +36,8 @@ public class DataViewModel extends AndroidViewModel {
     private final ObservableField<List<Weather>> weatherListDaily = new ObservableField<>();
     private final ObservableField<List<Weather>> weatherListHourly = new ObservableField<>();
 
+    public ObservableField<List<Weather>> weatherListFavs = new ObservableField<>();
+
     public DataViewModel(@NonNull Application application) {
         super(application);
         if (appDatabase == null) {
@@ -217,7 +219,7 @@ public class DataViewModel extends AndroidViewModel {
                 .replace(R.id.container, detailsFragment)
                 .addToBackStack(null)
                 .commit();
-        this.currentDay = index;
+        currentDay = index;
         return index;
     }
 

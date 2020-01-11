@@ -4,6 +4,7 @@
         <variable
             name="dataViewModel"
             type="com.example.myapplication.viewModel.DataViewModel" />
+        <import type="android.view.View"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -78,7 +79,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                xmlns:tools="http://schemas.android.com/tools"
                 xmlns:android="http://schemas.android.com/apk/res/android">
                 <TextView
                     android:id="@+id/wet"
@@ -106,6 +106,59 @@
                     android:textSize="25sp"
                     style="@style/WhiteText" />
             </LinearLayout>
+
+        </LinearLayout>
+
+        <!--        if Favs list if empty -->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{dataViewModel.weatherListFavs.size() == 0 ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="Избранное"
+                android:textColor="@color/cardview_dark_background"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="14dp"
+                android:text="Добавьте город в избранное - вы сможете быстро смотреть, какая там погода. "
+                style="@color/cardview_dark_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Для этого у найденного города нажмите на ☆"
+                style="@color/cardview_dark_background" />
+
+        </LinearLayout>
+
+        <!--        if Favs list if not empty -->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{dataViewModel.weatherListFavs.size() == 0 ? View.GONE : View.VISIBLE}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="Тут будет лист"
+                android:textColor="@color/cardview_dark_background"/>
 
         </LinearLayout>
 
