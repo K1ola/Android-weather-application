@@ -292,6 +292,7 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void openFavWeather(String location) {
+        currentTown.set(location);
         final MainFragment mainFragment = new MainFragment();
 
         ((FragmentActivity)context).getSupportFragmentManager()
@@ -301,6 +302,7 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void openFoundTown(String location) {
+        currentTown.set(location);
         final FoundTownFragment foundTownFragment =new FoundTownFragment();
 
         ((FragmentActivity)context).getSupportFragmentManager()

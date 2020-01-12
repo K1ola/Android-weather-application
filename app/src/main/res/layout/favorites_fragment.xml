@@ -149,17 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="@{dataViewModel.weatherListFavs.size() == 0 ? View.GONE : View.VISIBLE}">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="лист"
-                android:textColor="@color/cardview_dark_background"/>
-
+            
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favs_list"
                 android:layout_width="match_parent"
