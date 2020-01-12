@@ -98,13 +98,16 @@
                     android:textSize="25sp"
                     style="@style/WhiteText" />
 
-                <TextView
-                    android:id="@+id/wet_measure"
+                <ImageView
+                    android:tint="@color/colorWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{dataViewModel.weather.icon}"
-                    android:textSize="25sp"
-                    style="@style/WhiteText" />
+                    app:imageResource="@{dataViewModel.weather.icon}"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="56dp"
+                    android:maxHeight="56dp"
+                    android:paddingEnd="11dp"
+                    android:scaleType="fitCenter"   />
             </LinearLayout>
 
         </LinearLayout>
@@ -149,7 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="@{dataViewModel.weatherListFavs.size() == 0 ? View.GONE : View.VISIBLE}">
-            
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favs_list"
                 android:layout_width="match_parent"

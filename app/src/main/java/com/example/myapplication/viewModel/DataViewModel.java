@@ -2,11 +2,14 @@ package com.example.myapplication.viewModel;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableField;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
@@ -19,6 +22,7 @@ import com.example.myapplication.repository.API;
 import com.example.myapplication.repository.AppDatabase;
 import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
+import com.example.myapplication.view.adapters.DataBindingAdapter;
 import com.example.myapplication.view.adapters.FoundTownsAdapter;
 import com.example.myapplication.view.adapters.WeatherFavsAdapter;
 import com.example.myapplication.view.details.DetailsFragment;
@@ -33,7 +37,7 @@ import java.util.concurrent.ExecutionException;
 public class DataViewModel extends AndroidViewModel {
     private static AppDatabase appDatabase;
     private API api;
-    private Context context;
+    private static Context context;
 
     public static int currentDay;
     public static boolean internet;
@@ -78,6 +82,7 @@ public class DataViewModel extends AndroidViewModel {
 
     public void setContext(Context c) {
         this.context = c;
+        DataBindingAdapter.context = c;
     }
 
 //    public Settings myGetSet() {
@@ -310,6 +315,16 @@ public class DataViewModel extends AndroidViewModel {
                 .replace(R.id.container, foundTownFragment)
                 .commit();
     }
+
+//    public static class DataBindingAdapters {
+//        @BindingAdapter("imageResource")
+//        public static void setImageResource(ImageView imageView, String resource){
+//            Resources resources = context.getResources();
+//            final int resourceId = resources.getIdentifier(resource, "drawable",
+//                    context.getPackageName());
+//            imageView.setImageResource(resourceId);
+//        }
+//    }
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

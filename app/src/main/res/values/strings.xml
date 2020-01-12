@@ -8,4 +8,5 @@
     <string name="Wind">Сила ветра: %s\u0020</string>
     <string name="Pressure">Давление: %s\u0020</string>
     <string name="Wet">Влажность: %s\u0020</string>
+    <string name="drawables">drawable/%s</string>
 </resources>

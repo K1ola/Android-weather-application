@@ -14,7 +14,7 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/dark_sky_fon_blur">
+        android:background="@drawable/partly_cloudy_night_fon">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -111,9 +111,10 @@
 
                 <ImageView
                     android:id="@+id/imageView"
+                    android:tint="@color/colorWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="90dp"
-                    android:src="@drawable/morning_sun_sunrise" />
+                    app:imageResource="@{dataViewModel.weather.icon}" />
 
             </LinearLayout>
 
@@ -253,13 +254,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(0).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersDaily.get(0).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -283,13 +286,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(1).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersDaily.get(1).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -313,13 +318,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(2).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersDaily.get(2).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -343,13 +350,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(3).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersDaily.get(3).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -373,13 +382,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(4).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersDaily.get(4).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -410,13 +421,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(0).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersHourly.get(0).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -440,13 +453,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(1).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersHourly.get(1).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -470,13 +485,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(2).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersHourly.get(2).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -500,13 +517,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(3).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersHourly.get(3).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"
@@ -530,13 +549,15 @@
                         android:textSize="14sp"
                         style="@style/WhiteText" />
 
-                    <TextView
-                        style="@style/WhiteText"
+                    <ImageView
+                        android:tint="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(4).icon}"
-                        android:textSize="14sp" />
+                        app:imageResource="@{dataViewModel.weathersHourly.get(4).icon}"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="56dp"
+                        android:maxHeight="56dp"
+                        android:scaleType="fitCenter"   />
                     <TextView
                         style="@style/WhiteText"
                         android:layout_width="wrap_content"

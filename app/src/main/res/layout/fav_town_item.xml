@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="Weather"
@@ -26,10 +26,15 @@
             android:layout_height="wrap_content"
             android:text="@{Weather.temperature + dataViewModel.settings.currentTemperatureMeasure}" />
 
-        <TextView
+        <ImageView
+            android:tint="@color/design_default_color_primary_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Weather.icon}" />
+            app:imageResource="@{Weather.icon}"
+            android:adjustViewBounds="true"
+            android:maxWidth="23dp"
+            android:maxHeight="23dp"
+            android:scaleType="fitCenter"   />
 
     </LinearLayout>
 </layout>

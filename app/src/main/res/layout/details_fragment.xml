@@ -124,14 +124,17 @@
                     android:textColor="@color/design_default_color_primary_dark"
                     android:text="@{dataViewModel.weathersHourly.get(0).temperature + dataViewModel.settings.currentTemperatureMeasure}"
                     android:textSize="20sp"/>
-                <TextView
+                <ImageView
                     android:id="@+id/temperature_image_morning"
+                    android:tint="@color/design_default_color_primary_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:imageResource="@{dataViewModel.weathersHourly.get(0).icon}"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="56dp"
+                    android:maxHeight="56dp"
                     android:paddingEnd="11dp"
-                    android:textColor="@color/design_default_color_primary_dark"
-                    android:text="@{dataViewModel.weathersHourly.get(0).icon}"
-                    android:textSize="20sp"/>
+                    android:scaleType="fitCenter"   />
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -152,14 +155,17 @@
                     android:textColor="@color/design_default_color_primary_dark"
                     android:text="@{dataViewModel.weathersHourly.get(1).temperature + dataViewModel.settings.currentTemperatureMeasure}"
                     android:textSize="20sp"/>
-                <TextView
+                <ImageView
                     android:id="@+id/temperature_image_day"
+                    android:tint="@color/design_default_color_primary_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:imageResource="@{dataViewModel.weathersHourly.get(0).icon}"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="56dp"
+                    android:maxHeight="56dp"
                     android:paddingEnd="11dp"
-                    android:textColor="@color/design_default_color_primary_dark"
-                    android:text="@{dataViewModel.weathersHourly.get(1).icon}"
-                    android:textSize="20sp"/>
+                    android:scaleType="fitCenter"   />
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -180,14 +186,17 @@
                     android:textColor="@color/design_default_color_primary_dark"
                     android:text="@{dataViewModel.weathersHourly.get(2).temperature + dataViewModel.settings.currentTemperatureMeasure}"
                     android:textSize="20sp"/>
-                <TextView
+                <ImageView
                     android:id="@+id/temperature_image_evening"
+                    android:tint="@color/design_default_color_primary_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:imageResource="@{dataViewModel.weathersHourly.get(0).icon}"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="56dp"
+                    android:maxHeight="56dp"
                     android:paddingEnd="11dp"
-                    android:textColor="@color/design_default_color_primary_dark"
-                    android:text="@{dataViewModel.weathersHourly.get(2).icon}"
-                    android:textSize="20sp"/>
+                    android:scaleType="fitCenter"   />
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -208,14 +217,17 @@
                     android:textColor="@color/design_default_color_primary_dark"
                     android:text="@{dataViewModel.weathersHourly.get(3).temperature + dataViewModel.settings.currentTemperatureMeasure}"
                     android:textSize="20sp"/>
-                <TextView
+                <ImageView
                     android:id="@+id/temperature_image_night"
+                    android:tint="@color/design_default_color_primary_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:imageResource="@{dataViewModel.weathersHourly.get(0).icon}"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="56dp"
+                    android:maxHeight="56dp"
                     android:paddingEnd="11dp"
-                    android:textColor="@color/design_default_color_primary_dark"
-                    android:text="@{dataViewModel.weathersHourly.get(3).icon}"
-                    android:textSize="20sp"/>
+                    android:scaleType="fitCenter"   />
             </LinearLayout>
         </LinearLayout>
 <!--        Temperature hourly end-->

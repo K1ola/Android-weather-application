@@ -65,7 +65,7 @@ public class API {
                     String.format("%.0f", windSpeed),
                     String.valueOf(date),
                     currently.getString("summary"),
-                    currently.getString("icon")
+                    currently.getString("icon").replaceAll("-", "_")
             );
             weather.weatherType = "currently";
             weather.town = location;
@@ -120,7 +120,7 @@ public class API {
                         String.format("%.0f", windSpeed),
                         java_date,
                         dayObject.getString("summary"),
-                        dayObject.getString("icon")
+                        dayObject.getString("icon").replaceAll("-", "_")
                 );
                 w.weatherType = "hourly";
                 w.town = location;
@@ -177,7 +177,7 @@ public class API {
                         String.format("%.0f", windSpeed),
                         java_date,
                         dayObject.getString("summary"),
-                        dayObject.getString("icon")
+                        dayObject.getString("icon").replaceAll("-", "_")
                 );
                 w.weatherType = "daily";
                 w.town = location;
