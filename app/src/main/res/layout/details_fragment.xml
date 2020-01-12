@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:foreground="?selectableItemBackground"
             android:src="@drawable/baseline_arrow_left_alt_black_18dp"/>
 
         <TextView

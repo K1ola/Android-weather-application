@@ -35,6 +35,7 @@
                     android:layout_height="match_parent">
 
                     <ImageButton
+                        android:foreground="?selectableItemBackground"
                         android:id="@+id/arrow_back"
                         android:background="@color/colorPrimary"
                         android:padding="4dp"
@@ -60,6 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:foreground="?selectableItemBackground"
                         android:layout_centerVertical="true"
                         android:scaleType="fitCenter"
                         android:background="@color/colorPrimary"
@@ -67,6 +69,7 @@
                         android:visibility="@{dataViewModel.isInFavsTowns(dataViewModel.currentTown)? View.GONE : View.VISIBLE}"
                         />
                     <ImageButton
+                        android:foreground="?selectableItemBackground"
                         android:id="@+id/favs_star_full"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
