@@ -22,6 +22,7 @@ import com.example.myapplication.repository.WeatherDao;
 import com.example.myapplication.view.adapters.FoundTownsAdapter;
 import com.example.myapplication.view.adapters.WeatherFavsAdapter;
 import com.example.myapplication.view.details.DetailsFragment;
+import com.example.myapplication.view.foundTown.FoundTownFragment;
 import com.example.myapplication.view.main.MainFragment;
 
 import java.io.IOException;
@@ -270,6 +271,15 @@ public class DataViewModel extends AndroidViewModel {
         ((FragmentActivity)context).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, mainFragment)
+                .commit();
+    }
+
+    public void openFoundTown(String location) {
+        final FoundTownFragment foundTownFragment =new FoundTownFragment();
+
+        ((FragmentActivity)context).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, foundTownFragment)
                 .commit();
     }
 

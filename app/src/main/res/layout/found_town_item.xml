@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:onClick="@{() -> dataViewModel.openFavWeather(Weather.town)}">
+        android:onClick="@{() -> dataViewModel.openFoundTown(Weather.town)}">
 
         <TextView
             android:layout_width="wrap_content"
