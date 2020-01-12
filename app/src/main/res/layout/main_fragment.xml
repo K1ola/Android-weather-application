@@ -51,7 +51,7 @@
                     android:layout_toLeftOf="@+id/main_setting"
                     android:paddingRight="110dp"
                     android:textColor="#DAEFFA"
-                    android:text="@string/town"
+                    android:text="@{dataViewModel.currentTown}"
                     android:textSize="20dp"/>
 
                 <ImageButton

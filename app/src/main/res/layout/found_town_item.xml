@@ -14,12 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:onClick="@{() -> dataViewModel.openFoundTown(Weather.town)}">
+        android:onClick="@{() -> dataViewModel.openFoundTown(dataViewModel.currentTown)}">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Weather.town}" />
+            android:text="@{Weather.fullTown}" />
 
         <TextView
             android:layout_width="wrap_content"

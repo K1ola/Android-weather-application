@@ -56,6 +56,7 @@ public class FavsFragment extends Fragment {
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
         layoutManagerText.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManagerText);
+        viewModel.weatherFavsAdapter.setData(viewModel.weatherListFavs.get(), viewModel);
         recyclerView.setAdapter(viewModel.weatherFavsAdapter);
 
         return view;
@@ -108,12 +109,4 @@ public class FavsFragment extends Fragment {
                 .replace(R.id.container, searchFragment)
                 .commit();
     }
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-//        viewModel.setContext(getActivity());
-//        favoritesFragmentBinding.setDataViewModel(viewModel);
-//    }
 }

@@ -30,13 +30,25 @@ public class FoundTownFragment extends Fragment implements LifecycleOwner {
         foundTownFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.found_town_fragment, container, false);
 
         View view = foundTownFragmentBinding.getRoot();
-        ImageView starIcon = view.findViewById(R.id.favs_star);
-        starIcon.setOnClickListener(new View.OnClickListener() {
+        final ImageView starIconEmpty = view.findViewById(R.id.favs_star_empty);
+        final ImageView starIconFull = view.findViewById(R.id.favs_star_full);
+
+        starIconEmpty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addTownToFavs("TODO");
+                addTownToFavs(viewModel.currentTown.get());
             }
         });
+        starIconFull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                starIconFull.setVisibility(View.GONE);
+                starIconEmpty.setVisibility(View.VISIBLE);
+                deleteTownFromFavs(viewModel.currentTown.get());
+            }
+        });
+
+
 
         ImageButton arrowBack = view.findViewById(R.id.arrow_back);
         arrowBack.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +71,11 @@ public class FoundTownFragment extends Fragment implements LifecycleOwner {
     }
 
     private void addTownToFavs(String location) {
+        viewModel.addToFavsTowns(location);
+    }
 
+    private void deleteTownFromFavs(String location) {
+        viewModel.deleteFromFavsTowns(location);
     }
 
     private void openSearchFragment(){

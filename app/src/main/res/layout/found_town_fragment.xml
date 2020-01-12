@@ -4,6 +4,7 @@
         <variable
             name="dataViewModel"
             type="com.example.myapplication.viewModel.DataViewModel" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -51,18 +52,31 @@
                         android:layout_toLeftOf="@+id/main_setting"
                         android:paddingRight="110dp"
                         android:textColor="#DAEFFA"
-                        android:text="@{dataViewModel.weather.town}"
+                        android:text="@{dataViewModel.currentTown}"
                         android:textSize="20dp"/>
 
                     <ImageButton
-                        android:id="@+id/favs_star"
+                        android:id="@+id/favs_star_empty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:scaleType="fitCenter"
                         android:background="@color/colorPrimary"
-                        android:src="@drawable/star_empty"/>
+                        android:src="@drawable/star_empty"
+                        android:visibility="@{dataViewModel.isInFavsTowns(dataViewModel.currentTown)? View.GONE : View.VISIBLE}"
+                        />
+                    <ImageButton
+                        android:id="@+id/favs_star_full"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitCenter"
+                        android:background="@color/colorPrimary"
+                        android:src="@drawable/star_full"
+                        android:visibility="@{dataViewModel.isInFavsTowns(dataViewModel.currentTown)? View.VISIBLE : View.GONE}"
+                        />
                 </RelativeLayout>
 
             </androidx.appcompat.widget.Toolbar>
@@ -220,10 +234,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <!--            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-            <!--                android:id="@+id/scrollmain"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content">-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -234,8 +244,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:onClick="@{() -> dataViewModel.onDayClick(0)}">
+                    android:layout_marginRight="4dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -265,8 +274,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:onClick="@{() -> dataViewModel.onDayClick(1)}">
+                    android:layout_marginRight="4dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -296,8 +304,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:onClick="@{() -> dataViewModel.onDayClick(2)}">
+                    android:layout_marginRight="4dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -327,8 +334,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:onClick="@{() -> dataViewModel.onDayClick(3)}">
+                    android:layout_marginRight="4dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -358,8 +364,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:onClick="@{() -> dataViewModel.onDayClick(4)}">
+                    android:layout_marginRight="4dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -385,10 +390,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <!--            </ScrollView>-->
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"

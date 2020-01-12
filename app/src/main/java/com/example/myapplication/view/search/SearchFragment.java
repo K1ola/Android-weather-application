@@ -62,7 +62,9 @@ public class SearchFragment extends Fragment {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                if (!TextUtils.isEmpty(viewModel.searchTown.get())) {
-                    List<Weather> w = viewModel.GetFoundTowns(s.toString());
+                    String currentTown = s.toString();
+                    viewModel.currentTown.set(currentTown);
+                    List<Weather> w = viewModel.GetFoundTowns(currentTown);
                     viewModel.foundTownsAdapter.setData(w, viewModel);
                     recyclerView.setAdapter(viewModel.foundTownsAdapter);
                 }

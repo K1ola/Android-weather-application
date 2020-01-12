@@ -24,6 +24,7 @@ public class Weather {
     public String temperatureMin;
     public String temperatureMax;
     public String town;
+    public String fullTown;
 
     public String weatherType;
 

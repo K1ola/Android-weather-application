@@ -47,7 +47,7 @@ public class DataViewModel extends AndroidViewModel {
     public ObservableField<List<Weather>> weatherListFavs = new ObservableField<>();
     public WeatherFavsAdapter weatherFavsAdapter;
 
-    public ObservableField<String> searchTown = new ObservableField<>();
+    public ObservableField<String> currentTown = new ObservableField<>();
     public FoundTownsAdapter foundTownsAdapter;
 
     public DataViewModel(@NonNull Application application) {
@@ -59,6 +59,7 @@ public class DataViewModel extends AndroidViewModel {
         api = new API(application.getApplicationContext());
         weatherFavsAdapter = new WeatherFavsAdapter();
         foundTownsAdapter = new FoundTownsAdapter();
+        currentTown.set("Moscow");
 
         Weather w = api.getCurrentWeather("Moscow");
         internet = w != null;
@@ -71,7 +72,7 @@ public class DataViewModel extends AndroidViewModel {
             settings.get().currentWindMeasure = Settings.METERS_PER_SECOND;
         }
 
-//        weatherListFavs = getWeathersDaily();
+        weatherListFavs.set(new ArrayList<Weather>());
 //        weatherFavsAdapter.setData(weatherListFavs.get(), this);
     }
 
@@ -82,6 +83,29 @@ public class DataViewModel extends AndroidViewModel {
 //    public Settings myGetSet() {
 //        return settings.get();
 //    }
+
+    public void addToFavsTowns(String location) {
+        Weather foundWeather = GetFoundTowns(location).get(0);
+        weatherListFavs.get().add(foundWeather);
+    }
+
+    public void deleteFromFavsTowns(String location) {
+        for (int i=0; i<weatherListFavs.get().size(); i++) {
+            if (weatherListFavs.get().get(i).town.toLowerCase().equals(location.toLowerCase())) {
+                weatherListFavs.get().remove(i);
+            }
+        }
+    }
+
+    public boolean isInFavsTowns(String location) {
+        for (int i=0; i<weatherListFavs.get().size(); i++) {
+            if (weatherListFavs.get().get(i).town.toLowerCase().equals(location.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Weather> GetFoundTowns(String location) {
         List<Weather> weathers = new ArrayList<>();
         if (Geocoder.isPresent()) {
@@ -90,7 +114,9 @@ public class DataViewModel extends AndroidViewModel {
                 List<Address> addresses = gc.getFromLocationName(location, 5); // get the found Address Objects
                 for (int i=0; i<addresses.size(); i++) {
                     weathers.add(api.getCurrentWeather(location));
-                    weathers.get(i).town = addresses.get(i).getAddressLine(i);
+                    currentTown.set(addresses.get(i).getFeatureName());
+                    weathers.get(i).town = addresses.get(i).getFeatureName();
+                    weathers.get(i).fullTown = addresses.get(i).getAddressLine(i);
 //                    System.out.println(name);
                 }
             } catch (IOException e) {
