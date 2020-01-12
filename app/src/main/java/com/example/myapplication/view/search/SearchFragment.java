@@ -24,6 +24,7 @@ import com.example.myapplication.model.Weather;
 import com.example.myapplication.view.favorites.FavsFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
@@ -61,12 +62,13 @@ public class SearchFragment extends Fragment {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                if (!TextUtils.isEmpty(viewModel.searchTown.get())) {
-                    List<Weather> w = viewModel.GetFoundTown(s.toString());
+                    List<Weather> w = viewModel.GetFoundTowns(s.toString());
                     viewModel.foundTownsAdapter.setData(w, viewModel);
                     recyclerView.setAdapter(viewModel.foundTownsAdapter);
                 }
         });
 
+        viewModel.foundTownsAdapter.setData(new ArrayList<Weather>(), viewModel);
         recyclerView.setAdapter(viewModel.foundTownsAdapter);
 
         return view;

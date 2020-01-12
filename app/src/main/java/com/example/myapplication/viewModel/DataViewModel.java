@@ -81,15 +81,16 @@ public class DataViewModel extends AndroidViewModel {
 //    public Settings myGetSet() {
 //        return settings.get();
 //    }
-    public List<Weather> GetFoundTown(String location) {
+    public List<Weather> GetFoundTowns(String location) {
         List<Weather> weathers = new ArrayList<>();
         if (Geocoder.isPresent()) {
             try {
                 Geocoder gc = new Geocoder(context);
-                List<Address> addresses = gc.getFromLocationName(location, 10); // get the found Address Objects
+                List<Address> addresses = gc.getFromLocationName(location, 5); // get the found Address Objects
                 for (int i=0; i<addresses.size(); i++) {
                     weathers.add(api.getCurrentWeather(location));
-                    //addresses.get(0).getFeatureName();
+                    weathers.get(i).town = addresses.get(i).getAddressLine(i);
+//                    System.out.println(name);
                 }
             } catch (IOException e) {
                 // handle the exception

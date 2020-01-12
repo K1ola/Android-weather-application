@@ -40,7 +40,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="@={dataViewModel.searchTown}"
                     android:hint="Город или район" />
 <!--                <TextView-->
 <!--                    android:layout_width="wrap_content"-->
