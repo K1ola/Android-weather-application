@@ -29,11 +29,8 @@ public class FavsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         favoritesFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.favorites_fragment, container, false);
-        return favoritesFragmentBinding.getRoot();
-    }
 
-    @Override
-    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        View view = favoritesFragmentBinding.getRoot();
         viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
         viewModel.setContext(getActivity());
         favoritesFragmentBinding.setDataViewModel(viewModel);
@@ -62,7 +59,41 @@ public class FavsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManagerText);
         recyclerView.setAdapter(viewModel.weatherFavsAdapter);
         ///
+
+        return view;
     }
+
+//    @Override
+//    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+//        viewModel.setContext(getActivity());
+//        favoritesFragmentBinding.setDataViewModel(viewModel);
+//
+//        ImageButton arrowBack = view.findViewById(R.id.arrow_back);
+//        arrowBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openMainFragment();
+//            }
+//        });
+//
+//        ImageButton searchButton = view.findViewById(R.id.search);
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openSearchFragment();
+//            }
+//        });
+//
+//
+//        ///
+//        final RecyclerView recyclerView = view.findViewById(R.id.favs_list);
+//        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+//        layoutManagerText.setOrientation(RecyclerView.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManagerText);
+//        recyclerView.setAdapter(viewModel.weatherFavsAdapter);
+//        ///
+//    }
 
     private void openMainFragment(){
         final MainFragment mainFragment = new MainFragment();

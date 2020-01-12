@@ -33,19 +33,8 @@ public class MainFragment extends Fragment implements LifecycleOwner {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mainFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false);
-        return mainFragmentBinding.getRoot();
-    }
 
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-//        viewModel.setContext(getActivity());
-//        mainFragmentBinding.setDataViewModel(viewModel);
-//    }
-
-    @Override
-    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        View view = mainFragmentBinding.getRoot();
         ImageView settingsIcon = view.findViewById(R.id.main_setting);
         settingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +59,45 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                     "Нет сети", Toast.LENGTH_LONG);
             toast.show();
         }
+
+        return view;
     }
+
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+//        viewModel.setContext(getActivity());
+//        mainFragmentBinding.setDataViewModel(viewModel);
+//    }
+
+//    @Override
+//    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+//        ImageView settingsIcon = view.findViewById(R.id.main_setting);
+//        settingsIcon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openSettingsFragment();
+//            }
+//        });
+//
+//        ImageButton favsButton = view.findViewById(R.id.favs);
+//        favsButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openFavsFragment();
+//            }
+//        });
+//
+//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+//        viewModel.setContext(getActivity());
+//        mainFragmentBinding.setDataViewModel(viewModel);
+//        if (!viewModel.internet) {
+//            Toast toast = Toast.makeText(getActivity(),
+//                    "Нет сети", Toast.LENGTH_LONG);
+//            toast.show();
+//        }
+//    }
 
     private void openSettingsFragment() {
         final SettingsFragment settingsFragment = new SettingsFragment();

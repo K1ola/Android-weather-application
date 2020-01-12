@@ -59,7 +59,7 @@ public class DataViewModel extends AndroidViewModel {
         }
 
         weatherListFavs = getWeathersDaily();
-        weatherFavsAdapter.setData(weatherListFavs.get());
+        weatherFavsAdapter.setData(weatherListFavs.get(), this);
     }
 
     public void setContext(Context c) {
