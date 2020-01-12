@@ -2,6 +2,8 @@ package com.example.myapplication.viewModel;
 
 import android.app.Application;
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -17,10 +19,13 @@ import com.example.myapplication.repository.API;
 import com.example.myapplication.repository.AppDatabase;
 import com.example.myapplication.repository.SettingsDao;
 import com.example.myapplication.repository.WeatherDao;
+import com.example.myapplication.view.adapters.FoundTownsAdapter;
 import com.example.myapplication.view.adapters.WeatherFavsAdapter;
 import com.example.myapplication.view.details.DetailsFragment;
 import com.example.myapplication.view.main.MainFragment;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -41,6 +46,9 @@ public class DataViewModel extends AndroidViewModel {
     public ObservableField<List<Weather>> weatherListFavs = new ObservableField<>();
     public WeatherFavsAdapter weatherFavsAdapter;
 
+    public ObservableField<String> searchTown = new ObservableField<>();
+    public FoundTownsAdapter foundTownsAdapter;
+
     public DataViewModel(@NonNull Application application) {
         super(application);
         if (appDatabase == null) {
@@ -49,6 +57,7 @@ public class DataViewModel extends AndroidViewModel {
         }
         api = new API(application.getApplicationContext());
         weatherFavsAdapter = new WeatherFavsAdapter();
+        foundTownsAdapter = new FoundTownsAdapter();
 
         Weather w = api.getCurrentWeather("Moscow");
         internet = w != null;
@@ -56,15 +65,39 @@ public class DataViewModel extends AndroidViewModel {
 
         if (settings.get() == null) {
             settings.set(new Settings(true, true, true));
+            settings.get().currentTemperatureMeasure = Settings.CELSIUS;
+            settings.get().currentPressureMeasure = Settings.HPA;
+            settings.get().currentWindMeasure = Settings.METERS_PER_SECOND;
         }
 
-        weatherListFavs = getWeathersDaily();
-        weatherFavsAdapter.setData(weatherListFavs.get(), this);
+//        weatherListFavs = getWeathersDaily();
+//        weatherFavsAdapter.setData(weatherListFavs.get(), this);
     }
 
     public void setContext(Context c) {
         this.context = c;
     }
+
+//    public Settings myGetSet() {
+//        return settings.get();
+//    }
+    public List<Weather> GetFoundTown(String location) {
+        List<Weather> weathers = new ArrayList<>();
+        if (Geocoder.isPresent()) {
+            try {
+                Geocoder gc = new Geocoder(context);
+                List<Address> addresses = gc.getFromLocationName(location, 10); // get the found Address Objects
+                for (int i=0; i<addresses.size(); i++) {
+                    weathers.add(api.getCurrentWeather(location));
+                    //addresses.get(0).getFeatureName();
+                }
+            } catch (IOException e) {
+                // handle the exception
+            }
+        }
+        return weathers;
+    }
+
 
     public void setWeathersDaily(List<Weather> w) {
         try {

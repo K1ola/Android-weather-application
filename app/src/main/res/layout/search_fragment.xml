@@ -33,27 +33,40 @@
                     android:layout_centerVertical="true"
                     android:src="@drawable/baseline_arrow_left_alt_black_18dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <EditText android:id="@+id/search_input"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Город или район"
-                    android:textColor="@color/cardview_dark_background"/>
+                    android:text="@={dataViewModel.searchTown}"
+                    android:hint="Город или район" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:text="Город или район"-->
+<!--                    android:textColor="@color/cardview_dark_background"/>-->
 
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="История поиска"
-            android:textColor="@color/cardview_dark_background"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:text="История поиска"-->
+<!--            android:textColor="@color/cardview_dark_background"/>-->
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/found_towns"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 </layout>

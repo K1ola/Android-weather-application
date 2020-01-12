@@ -28,13 +28,13 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        detailsFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.details_fragment, container, false);
-        final View view = detailsFragmentBinding.getRoot();
-
-        super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         viewModel.setContext(getActivity());
-        //detailsFragmentBinding.setDataViewModel(viewModel);
+
+        detailsFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.details_fragment, container, false);
+        detailsFragmentBinding.setDataViewModel(viewModel);
+        final View view = detailsFragmentBinding.getRoot();
+
         if (!viewModel.internet) {
             Toast toast = Toast.makeText(getActivity(),
                     "Нет сети", Toast.LENGTH_LONG);
@@ -64,12 +64,4 @@ public class DetailsFragment extends Fragment {
                 .replace(R.id.container, mainFragment)
                 .commit();
     }
-
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
-        viewModel.setContext(getActivity());
-        detailsFragmentBinding.setDataViewModel(viewModel);
-    }
-
 }

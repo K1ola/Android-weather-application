@@ -52,13 +52,11 @@ public class FavsFragment extends Fragment {
         });
 
 
-        ///
         final RecyclerView recyclerView = view.findViewById(R.id.favs_list);
         final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
         layoutManagerText.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManagerText);
         recyclerView.setAdapter(viewModel.weatherFavsAdapter);
-        ///
 
         return view;
     }
