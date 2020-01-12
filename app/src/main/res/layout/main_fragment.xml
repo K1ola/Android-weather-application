@@ -16,565 +16,566 @@
         android:background="@drawable/partly_cloudy_night_fon">
 
         <LinearLayout
+            android:id="@+id/mainLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:ignore="ExtraText">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@color/colorPrimary"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp">
-
-            <RelativeLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="56dp"
+                android:background="@color/colorPrimary"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp">
 
-                <ImageButton
-                    android:id="@+id/favs"
-                    android:background="@color/colorPrimary"
-                    android:foreground="?selectableItemBackground"
-                    android:padding="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/menu"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/town"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/main_setting"
-                    android:paddingRight="110dp"
-                    android:textColor="#DAEFFA"
-                    android:text="@{dataViewModel.currentTown}"
-                    android:textSize="20dp"/>
+                    <ImageButton
+                        android:id="@+id/favs"
+                        android:background="@color/colorPrimary"
+                        android:foreground="?selectableItemBackground"
+                        android:padding="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/menu"/>
 
-                <ImageButton
-                    android:id="@+id/main_setting"
-                    android:background="@color/colorPrimary"
-                    android:foreground="?selectableItemBackground"
-                    android:padding="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/setting"/>
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/town"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/main_setting"
+                        android:paddingRight="110dp"
+                        android:textColor="#DAEFFA"
+                        android:text="@{dataViewModel.currentTown}"
+                        android:textSize="20dp"/>
 
-        </androidx.appcompat.widget.Toolbar>
+                    <ImageButton
+                        android:id="@+id/main_setting"
+                        android:background="@color/colorPrimary"
+                        android:foreground="?selectableItemBackground"
+                        android:padding="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/setting"/>
+                </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="sans-serif-thin"
-                android:text="@{dataViewModel.weather.temperature}"
-                android:textSize="20sp"
-                style="@style/WhiteText" />
-
-            <TextView
-                android:id="@+id/temperature_measure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:fontFamily="sans-serif-thin"
-                android:contentDescription="Temperature"
-                android:text="@{dataViewModel.settings.currentTemperatureMeasure}"
-                android:textSize="40sp"
-                style="@style/WhiteText" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:tint="@color/colorWhite"
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
-                app:imageResource="@{dataViewModel.weather.icon}" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:text="@{dataViewModel.weather.summary}"
-                android:textSize="25sp"
-                style="@style/WhiteText" />
+            </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
+                android:id="@+id/mainLinearLayoutHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-                <TextView
-                    android:id="@+id/wet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Влажность: "
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-
-                <TextView
-                    android:id="@+id/wet_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/Wet"
-                    android:text="@{String.format(@string/Wet, dataViewModel.weather.wet)}"
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-
-                <TextView
-                    android:id="@+id/wet_measure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="%"
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-                <TextView
-                    android:id="@+id/pressure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Давление: "
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-
-                <TextView
-                    android:id="@+id/pressure_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/Pressure"
-                    android:text="@{String.format(@string/Pressure, dataViewModel.weather.pressure)}"
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-
-                <TextView
-                    android:id="@+id/pressure_measure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{dataViewModel.settings.currentPressureMeasure}"
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-                <TextView
-                    android:id="@+id/wind"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Сила ветра: "
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-
-                <TextView
-                    android:id="@+id/wind_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/Wind"
-                    android:text="@{String.format(@string/Wind, dataViewModel.weather.wind)}"
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-
-                <TextView
-                    android:id="@+id/wind_measure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{dataViewModel.settings.currentWindMeasure}"
-                    android:textSize="17sp"
-                    style="@style/WhiteText" />
-            </LinearLayout>
-
-        </LinearLayout>
-<!--            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--                android:id="@+id/scrollmain"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/temperature"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-thin"
+                    android:text="@{dataViewModel.weather.temperature}"
+                    android:textSize="20sp"
+                    style="@style/WhiteText" />
+
+                <TextView
+                    android:id="@+id/temperature_measure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="sans-serif-thin"
+                    android:contentDescription="Temperature"
+                    android:text="@{dataViewModel.settings.currentTemperatureMeasure}"
+                    android:textSize="40sp"
+                    style="@style/WhiteText" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:tint="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    app:imageResource="@{dataViewModel.weather.icon}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mainLinearLayoutCurrent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> dataViewModel.onDayClick(0)}">
+                    android:text="@{dataViewModel.weather.summary}"
+                    android:textSize="25sp"
+                    style="@style/WhiteText" />
+
+                <LinearLayout
+                    android:id="@+id/mainLinearLayoutCurrentMore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
                     <TextView
+                        android:id="@+id/wet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(0).time}"
-                        android:textSize="14sp"
+                        tools:text="Влажность: "
+                        android:textSize="17sp"
                         style="@style/WhiteText" />
 
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersDaily.get(0).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
                     <TextView
-                        style="@style/WhiteText"
+                        android:id="@+id/wet_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(0).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
+                        android:contentDescription="@string/Wet"
+                        android:text="@{String.format(@string/Wet, dataViewModel.weather.wet)}"
+                        android:textSize="17sp"
+                        style="@style/WhiteText" />
+
+                    <TextView
+                        android:id="@+id/wet_measure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textSize="17sp"
+                        style="@style/WhiteText" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> dataViewModel.onDayClick(1)}">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
                     <TextView
+                        android:id="@+id/pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(1).time}"
-                        android:textSize="14sp"
+                        tools:text="Давление: "
+                        android:textSize="17sp"
                         style="@style/WhiteText" />
 
-                    <ImageView
-                        android:tint="@color/colorWhite"
+                    <TextView
+                        android:id="@+id/pressure_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersDaily.get(1).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
+                        android:contentDescription="@string/Pressure"
+                        android:text="@{String.format(@string/Pressure, dataViewModel.weather.pressure)}"
+                        android:textSize="17sp"
+                        style="@style/WhiteText" />
 
                     <TextView
-                        style="@style/WhiteText"
+                        android:id="@+id/pressure_measure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(1).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
+                        android:text="@{dataViewModel.settings.currentPressureMeasure}"
+                        android:textSize="17sp"
+                        style="@style/WhiteText" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> dataViewModel.onDayClick(2)}">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
                     <TextView
+                        android:id="@+id/wind"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(2).time}"
-                        android:textSize="14sp"
+                        tools:text="Сила ветра: "
+                        android:textSize="17sp"
                         style="@style/WhiteText" />
 
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersDaily.get(2).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
                     <TextView
-                        style="@style/WhiteText"
+                        android:id="@+id/wind_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(2).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> dataViewModel.onDayClick(3)}">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(3).time}"
-                        android:textSize="14sp"
+                        android:contentDescription="@string/Wind"
+                        android:text="@{String.format(@string/Wind, dataViewModel.weather.wind)}"
+                        android:textSize="17sp"
                         style="@style/WhiteText" />
 
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersDaily.get(3).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
                     <TextView
-                        style="@style/WhiteText"
+                        android:id="@+id/wind_measure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(3).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> dataViewModel.onDayClick(4)}">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(4).time}"
-                        android:textSize="14sp"
+                        android:text="@{dataViewModel.settings.currentWindMeasure}"
+                        android:textSize="17sp"
                         style="@style/WhiteText" />
-
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersDaily.get(4).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
-                    <TextView
-                        style="@style/WhiteText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersDaily.get(4).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
-<!--            </ScrollView>-->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="4dp"
+                        android:foreground="?selectableItemBackground"
+                        android:onClick="@{() -> dataViewModel.onDayClick(0)}">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(0).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersDaily.get(0).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(0).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="4dp"
+                        android:foreground="?selectableItemBackground"
+                        android:onClick="@{() -> dataViewModel.onDayClick(1)}">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(1).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersDaily.get(1).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(1).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="4dp"
+                        android:foreground="?selectableItemBackground"
+                        android:onClick="@{() -> dataViewModel.onDayClick(2)}">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(2).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersDaily.get(2).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(2).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="4dp"
+                        android:foreground="?selectableItemBackground"
+                        android:onClick="@{() -> dataViewModel.onDayClick(3)}">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(3).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersDaily.get(3).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(3).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="4dp"
+                        android:foreground="?selectableItemBackground"
+                        android:onClick="@{() -> dataViewModel.onDayClick(4)}">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(4).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersDaily.get(4).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersDaily.get(4).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
 
 
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="18dp">
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(0).time}"
-                        android:textSize="14sp"
-                        style="@style/WhiteText" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="18dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(0).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
 
-                    <ImageView
-                        android:tint="@color/colorWhite"
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersHourly.get(0).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(0).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersHourly.get(0).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
-                    <TextView
-                        style="@style/WhiteText"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="18dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(1).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersHourly.get(1).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(1).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(0).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="18dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(2).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersHourly.get(2).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(2).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="18dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(3).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersHourly.get(3).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(3).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="18dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(4).time}"
+                            android:textSize="14sp"
+                            style="@style/WhiteText" />
+
+                        <ImageView
+                            android:tint="@color/colorWhite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:imageResource="@{dataViewModel.weathersHourly.get(4).icon}"
+                            android:adjustViewBounds="true"
+                            android:maxWidth="56dp"
+                            android:maxHeight="56dp"
+                            android:scaleType="fitCenter"   />
+                        <TextView
+                            style="@style/WhiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-thin"
+                            android:text="@{dataViewModel.weathersHourly.get(4).temperature + dataViewModel.settings.currentTemperatureMeasure}"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="18dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(1).time}"
-                        android:textSize="14sp"
-                        style="@style/WhiteText" />
-
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersHourly.get(1).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
-                    <TextView
-                        style="@style/WhiteText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(1).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="18dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(2).time}"
-                        android:textSize="14sp"
-                        style="@style/WhiteText" />
-
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersHourly.get(2).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
-                    <TextView
-                        style="@style/WhiteText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(2).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="18dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(3).time}"
-                        android:textSize="14sp"
-                        style="@style/WhiteText" />
-
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersHourly.get(3).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
-                    <TextView
-                        style="@style/WhiteText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(3).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="18dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(4).time}"
-                        android:textSize="14sp"
-                        style="@style/WhiteText" />
-
-                    <ImageView
-                        android:tint="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:imageResource="@{dataViewModel.weathersHourly.get(4).icon}"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="56dp"
-                        android:maxHeight="56dp"
-                        android:scaleType="fitCenter"   />
-                    <TextView
-                        style="@style/WhiteText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-thin"
-                        android:text="@{dataViewModel.weathersHourly.get(4).temperature + dataViewModel.settings.currentTemperatureMeasure}"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-            </LinearLayout>
 
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

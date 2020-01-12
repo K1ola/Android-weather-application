@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -60,44 +62,17 @@ public class MainFragment extends Fragment implements LifecycleOwner {
             toast.show();
         }
 
+        LinearLayout mainLinearLayoutCurrent = view.findViewById(R.id.mainLinearLayoutCurrent);
+        setEmptyTextIfNull(mainLinearLayoutCurrent);
+
+        LinearLayout mainLinearLayoutCurrentMore = view.findViewById(R.id.mainLinearLayoutCurrentMore);
+        setEmptyTextIfNull(mainLinearLayoutCurrentMore);
+
+        LinearLayout mainLinearLayoutHeader = view.findViewById(R.id.mainLinearLayoutHeader);
+        setEmptyTextIfNull(mainLinearLayoutHeader);
+
         return view;
     }
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-//        viewModel.setContext(getActivity());
-//        mainFragmentBinding.setDataViewModel(viewModel);
-//    }
-
-//    @Override
-//    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-//        ImageView settingsIcon = view.findViewById(R.id.main_setting);
-//        settingsIcon.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openSettingsFragment();
-//            }
-//        });
-//
-//        ImageButton favsButton = view.findViewById(R.id.favs);
-//        favsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openFavsFragment();
-//            }
-//        });
-//
-//        viewModel = ViewModelProviders.of(getActivity()).get(DataViewModel.class);
-//        viewModel.setContext(getActivity());
-//        mainFragmentBinding.setDataViewModel(viewModel);
-//        if (!viewModel.internet) {
-//            Toast toast = Toast.makeText(getActivity(),
-//                    "Нет сети", Toast.LENGTH_LONG);
-//            toast.show();
-//        }
-//    }
 
     private void openSettingsFragment() {
         final SettingsFragment settingsFragment = new SettingsFragment();
@@ -116,6 +91,31 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                 .replace(R.id.container, favsFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private void setEmptyTextIfNull(LinearLayout layout) {
+        for( int i = 0; i < layout.getChildCount(); i++ )
+            if( layout.getChildAt( i ) instanceof TextView) {
+                if ( ((TextView) layout.getChildAt( i )).getText() == null) {
+                    ((TextView) layout.getChildAt(i)).setText("");
+                }
+            }
+//        try {
+//            if (v instanceof ViewGroup) {
+//                ViewGroup vg = (ViewGroup) v;
+//                for (int i = 0; i < vg.getChildCount(); i++) {
+//                    View child = vg.getChildAt(i);
+//                    // recursively call this method
+//                    setEmptyTextIfNull(child);
+//                }
+//            } else if (v instanceof TextView) {
+//                if (((TextView) v).getText().toString().isEmpty()) {
+//                    ((TextView) v).setText("aaaa");
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

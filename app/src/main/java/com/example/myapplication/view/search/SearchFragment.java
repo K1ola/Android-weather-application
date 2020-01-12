@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,6 +73,12 @@ public class SearchFragment extends Fragment {
 
         viewModel.foundTownsAdapter.setData(new ArrayList<Weather>(), viewModel);
         recyclerView.setAdapter(viewModel.foundTownsAdapter);
+
+        if (!viewModel.internet) {
+            Toast toast = Toast.makeText(getActivity(),
+                    "Нет сети", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
         return view;
     }

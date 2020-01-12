@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,6 +59,12 @@ public class FavsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManagerText);
         viewModel.weatherFavsAdapter.setData(viewModel.weatherListFavs.get(), viewModel);
         recyclerView.setAdapter(viewModel.weatherFavsAdapter);
+
+        if (!viewModel.internet) {
+            Toast toast = Toast.makeText(getActivity(),
+                    "Нет сети", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
         return view;
     }
