@@ -36,6 +36,7 @@
                 <ImageButton
                     android:id="@+id/favs"
                     android:background="@color/colorPrimary"
+                    android:foreground="?selectableItemBackground"
                     android:padding="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,6 +58,7 @@
                 <ImageButton
                     android:id="@+id/main_setting"
                     android:background="@color/colorPrimary"
+                    android:foreground="?selectableItemBackground"
                     android:padding="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

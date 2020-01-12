@@ -13,6 +13,7 @@ public class DataBindingAdapter {
     @BindingAdapter("imageResource")
     public static void setImageResource(ImageView imageView, String resource){
         Resources resources = context.getResources();
+        if (resource == null) return;
         final int resourceId = resources.getIdentifier(resource, "drawable",
                 context.getPackageName());
         imageView.setImageResource(resourceId);
